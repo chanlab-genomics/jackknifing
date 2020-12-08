@@ -7,7 +7,7 @@ import itertools
 import os
 from pprint import pprint
 from array import array
-from random import choices
+from random import choices, randrange
 from typing import (Any, Callable, Dict, Iterable, List, Optional, Tuple, Type,
                     Union)
 
@@ -142,7 +142,7 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
     return rm_dict
 
 
-def remove_chunks(fasta_dict, seq_id, num_chunks_rm):
+def remove_chunks(fasta_dict, seq_id, chunk_size, num_chunks_rm):
     """
     Removes a prescribed number of chunks from a sequence.
 
@@ -152,7 +152,18 @@ def remove_chunks(fasta_dict, seq_id, num_chunks_rm):
     """
 
     # Convert the BioPython sequence into an array
-    seq_array = array('u', fasta_dict[seq_id].seq)
+    seq_array = fasta_dict[seq_id].seq._data
+
+    for _ in range(num_chunks_rm):
+        # Pick a starting value to remove the chunk
+        index_start = randrange(0, len(seq_array) - chunk_size)
+
+        seq_array = seq_array[:index_start] + \
+            seq_array[index_start + chunk_size:]
+
+    fasta_dict[seq_id].seq._data = seq_array
+
+    return
 
 
 def portion_remover(fasta_path: str, output_path: str = None,
@@ -202,7 +213,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
 def main():
 
     example_fasta_path = os.path.join(
-        os.getcwd(), 'fasta_files', 'example.fasta')
+        os.getcwd(), 'data', 'example.fasta')
     print(example_fasta_path)
     portion_remover(example_fasta_path)
 
