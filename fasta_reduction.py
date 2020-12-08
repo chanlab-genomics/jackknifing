@@ -47,7 +47,7 @@ def compute_fasta_stats(fasta_dict: Dict[str, SeqRecord.SeqRecord], chunk_size: 
         total_data_len += seq_len
 
         portion_dictionary[seq_id] = seq_len
-        max_dictionary[seq_id] = seq_len // chunk_size
+        max_dictionary[seq_id] = (seq_len - 1) // chunk_size
 
     # Now compute the portion of each sequence (instead of just the total
     # sequence length)
@@ -154,12 +154,20 @@ def remove_chunks(fasta_dict, seq_id, chunk_size, num_chunks_rm):
     # Convert the BioPython sequence into an array
     seq_array = fasta_dict[seq_id].seq._data
 
-    for _ in range(num_chunks_rm):
-        # Pick a starting value to remove the chunk
-        index_start = randrange(0, len(seq_array) - chunk_size)
+    if chunk_size * num_chunks_rm == len(seq_array):
 
-        seq_array = seq_array[:index_start] + \
-            seq_array[index_start + chunk_size:]
+        # The very unlikely event where the entire sequence should be removed.
+        seq_array = ""
+
+    else:
+
+        for _ in range(num_chunks_rm):
+
+            # Pick a starting value to remove the chunk
+            index_start = randrange(0, len(seq_array) - chunk_size)
+
+            seq_array = seq_array[:index_start] + \
+                seq_array[index_start + chunk_size:]
 
     fasta_dict[seq_id].seq._data = seq_array
 
@@ -194,7 +202,6 @@ def portion_remover(fasta_path: str, output_path: str = None,
     fasta_dict: Dict[str, SeqRecord.SeqRecord] = SeqIO.to_dict(
         SeqIO.parse(fasta_path, "fasta"))
 
-    """
     # Create a portion dictionary and max dictionary from the fasta dictionary
     total_data_len, portion_dictionary, max_dictionary = compute_fasta_stats(
         fasta_dict, chunk_size)
@@ -205,7 +212,16 @@ def portion_remover(fasta_path: str, output_path: str = None,
     # Create a removal dictionary delete sequences from
     rm_dict = generate_rm_dict(
         total_chunks_rm, portion_dictionary, max_dictionary)
-    """
+
+    pprint(max_dictionary)
+
+    print(fasta_dict['Snec_CCMP2469.scaffold2'].seq._data)
+    print(len(fasta_dict['Snec_CCMP2469.scaffold2'].seq._data))
+
+    remove_chunks(fasta_dict, 'Snec_CCMP2469.scaffold2', 100, 60)
+
+    print(fasta_dict['Snec_CCMP2469.scaffold2'].seq._data)
+    print(len(fasta_dict['Snec_CCMP2469.scaffold2'].seq._data))
 
     return
 
