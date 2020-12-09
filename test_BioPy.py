@@ -13,6 +13,7 @@ fasta_dict = SeqIO.to_dict(SeqIO.parse("data\example.fasta", "fasta"))
 
 # first_seq_array = array('u', fasta_dict['Snec_CCMP2469.scaffold2'].seq)
 first_seq_array = fasta_dict['Snec_CCMP2469.scaffold2'].seq._data
+print(type(first_seq_array))
 first_seq_array = first_seq_array[:100] + first_seq_array[300:]
 # print((fasta_dict['Snec_CCMP2469.scaffold2'].seq.__dict__))
 # first_seq_array = Seq.Seq(str(first_seq_array))
