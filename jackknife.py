@@ -7,6 +7,7 @@ import concurrent.futures
 import itertools
 import os
 import sys
+import argparse
 from array import array
 from concurrent import futures
 from functools import wraps
@@ -17,6 +18,11 @@ from typing import (Any, Callable, Dict, Iterable, List, Optional, Tuple, Type,
                     Union)
 
 from Bio import SeqIO, SeqRecord
+
+"""
+Example usage:
+    python jackknife.py --input_path D:\2020_SS\BioInfo\jackknifing\data\example.fasta --output_path D:\2020_SS\BioInfo\jackknifing\data\example_reduce_1.fasta
+"""
 
 
 def unpack(orig_func):
@@ -226,12 +232,11 @@ def portion_remover(fasta_path: str, output_path: str = None,
             The number of threads used to remove the data.
     """
 
-    # TODO: Maybe move this to when the cmd line arguments are being retrieved.
-    if not 0 < portion < 1:
-        raise ValueError("Portion values be a value between 0 and 1.")
+    if threads == 0:
+        threads = os.cpu_count()
 
-    if threads < -1:
-        raise ValueError("Portion values be a value between 0 and 1.")
+    if output_path is None:
+        output_path = sys.stdout
 
     # Create a lock for multi-threading later on
     mutex = Lock()
@@ -255,9 +260,6 @@ def portion_remover(fasta_path: str, output_path: str = None,
                    fasta_dict, seq_id, chunk_size, num_chunks, mutex in
                    zip(itertools.cycle([fasta_dict]), rm_dict.keys(), itertools.cycle([chunk_size]), rm_dict.values(), itertools.cycle([mutex]))]
 
-    for thread_arg in thread_args:
-        remove_chunks(thread_arg)
-
     with futures.ThreadPoolExecutor(threads) as executor:
         submitted_results = executor.map(remove_chunks, thread_args)
 
@@ -275,6 +277,22 @@ def portion_remover(fasta_path: str, output_path: str = None,
     return
 
 
+def run_jackknife(args):
+
+    if not 0 < args.portion < 1:
+        raise ValueError("Portion values be a value between 0 and 1.")
+
+    if args.threads < -1:
+        raise ValueError(
+            "The number of threads must be strictly greater than -1.")
+
+    portion_remover(args.input_path, output_path=args.output_path,
+                    portion=args.portion, chunk_size=args.chunk_size,
+                    threads=args.threads)
+
+    return
+
+
 def main():
 
     example_fasta_path = os.path.join(
@@ -285,6 +303,32 @@ def main():
 
     portion_remover(example_fasta_path,
                     output_path=example_out_path, threads=2)
+
+
+def main():
+
+    parser = argparse.ArgumentParser(description="Randomly removes a portion of "
+                                     "data from a fasta file.")
+
+    parser.add_argument('--input_path', type=str, required=True,
+                        help='The path to the fasta file that will be reduced.')
+    parser.add_argument('--output_path', type=str, required=False, default=None,
+                        help='A file path to output the contents of the reduced flatfile. '
+                        'Default output file is stdout.')
+
+    parser.add_argument('--portion', type=float, required=False, default=0.4,
+                        help='The portion of data to removed. The default is 0.4 (40\% removal).')
+    parser.add_argument('--chunk_size', type=int, required=False, default=100,
+                        help='The size of the chunks that get randomly removed from sequences.'
+                        ' Default is 100.')
+    parser.add_argument('--threads', type=int, required=False, default=1,
+                        help='The number of threads used to run the jackknife algorithm.'
+                        'If 0 threads are specified then it will default to os.cpu_count().')
+
+    args = parser.parse_args()
+    run_jackknife(args)
+
+    exit(0)
 
 
 if __name__ == '__main__':
