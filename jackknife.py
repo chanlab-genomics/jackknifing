@@ -21,7 +21,11 @@ from Bio import SeqIO, SeqRecord
 
 """
 Example usage:
+    (Windows)
     python jackknife.py --input_path D:\2020_SS\BioInfo\jackknifing\data\example.fasta --output_path D:\2020_SS\BioInfo\jackknifing\data\example_reduce_1.fasta
+
+    (Unix)
+    python3 python ./jackknife.py --input_path ./data/example.fasta --outputpath ./data/example_reduce_1.fasta
 """
 
 
@@ -173,7 +177,69 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
 
 
 @unpack
-def remove_chunks(fasta_dict, seq_id, chunk_size, num_chunks_rm, mutex):
+def remove_chunks(fasta_dict: dict, seq_id: str, chunk_size: int, num_chunks_rm: int, mutex: Lock):
+    """
+    Removes a prescribed number of chunks from a sequence.
+
+    Parameter:
+        fasta_dict:
+            The fasta file formatted as a dictionary (by BioPython).
+
+        seq_id:
+            The ID of the sequence we are removing from.
+
+        chunk_size:
+            The size of the chunk to remove.
+
+        num_chunks_rm:
+            The number of chunks to remove.
+
+        mutex:
+            A threading mutex to safely access the fasta dictionary (which
+            will be shared between multiple threads).
+    """
+
+    new_seq = ""
+
+    with mutex:
+        # Convert the BioPython sequence into an array
+        seq_array = fasta_dict[seq_id].seq._data
+
+    if chunk_size * num_chunks_rm == len(seq_array):
+
+        # The very unlikely event where the entire sequence should be removed.
+        new_seq = ""
+
+    else:
+
+        # Get a condensed list of indexes to start removal
+        rm_start_indexes = list(range(len(seq_array) // chunk_size))
+
+        # Randomly choose a subset of removal indices
+        rm_start_indexes = sorted(choices(rm_start_indexes, k=num_chunks_rm))
+
+        rm_indexes = []
+
+        for index in rm_start_indexes:
+            rm_indexes.append(index * chunk_size)
+            rm_indexes.append((index + 1) * chunk_size)
+
+        rm_indexes = [0] + rm_indexes + [len(seq_array)]
+
+        rm_indexes = zip(rm_indexes[::2], rm_indexes[1::2])
+
+        for rm_start, rm_end in rm_indexes:
+
+            new_seq += seq_array[rm_start:rm_end]
+
+    with mutex:
+        fasta_dict[seq_id].seq._data = new_seq
+
+    return
+
+
+@unpack
+def remove_chunks2(fasta_dict, seq_id, chunk_size, num_chunks_rm, mutex):
     """
     Removes a prescribed number of chunks from a sequence.
 
@@ -208,7 +274,7 @@ def remove_chunks(fasta_dict, seq_id, chunk_size, num_chunks_rm, mutex):
 
 
 def portion_remover(fasta_path: str, output_path: str = None,
-                    portion: float = 0.4, chunk_size: int = 100, threads: int = 1):
+                    portion: float = 0.4, chunk_size: int = 100, threads: int = 1, verbose: bool = True):
     """
     Randomly removes a certain portion of data from a fasta file and saves the
     result in an output path.
@@ -230,6 +296,9 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
         threads:
             The number of threads used to remove the data.
+
+        verbose:
+            If true, runs the function in verbose mode.
     """
 
     if threads == 0:
@@ -237,6 +306,15 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
     if output_path is None:
         output_path = sys.stdout
+
+    if verbose:
+        print()
+        print('Running on ' + os.path.basename(fasta_path) + ' with:')
+        print('\t' + 'output_path=' + output_path)
+        print('\t' + 'portion=' + str(portion * 100))
+        print('\t' + 'chunk_size=' + str(chunk_size))
+        print('\t' + 'threads=' + str(threads))
+        print()
 
     # Create a lock for multi-threading later on
     mutex = Lock()
@@ -260,11 +338,32 @@ def portion_remover(fasta_path: str, output_path: str = None,
                    fasta_dict, seq_id, chunk_size, num_chunks, mutex in
                    zip(itertools.cycle([fasta_dict]), rm_dict.keys(), itertools.cycle([chunk_size]), rm_dict.values(), itertools.cycle([mutex]))]
 
+    num_args: int = len(thread_args)
+    progress: int = 0
+
+    progress_intervals: list = list(range(0, 100, 10))
+
+    if verbose:
+        print('Progress: ', flush=True, end='')
+        print()
+
     with futures.ThreadPoolExecutor(threads) as executor:
         submitted_results = executor.map(remove_chunks, thread_args)
 
         for result in submitted_results:
             _ = result
+
+            if verbose:
+                progress += 1
+
+                progress_per = progress / num_args * 100
+
+                while len(progress_intervals) > 0 and progress_per > progress_intervals[0]:
+                    print(str(progress_intervals.pop(0)) +
+                          '..', flush=True, end='')
+    if verbose:
+        print('100', flush=True)
+        print()
 
     record_list = []
 
@@ -279,7 +378,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
 def run_jackknife(args):
 
-    if not 0 < args.portion < 1:
+    if not 0 < args.portion < 100:
         raise ValueError("Portion values be a value between 0 and 1.")
 
     if args.threads < -1:
@@ -287,22 +386,10 @@ def run_jackknife(args):
             "The number of threads must be strictly greater than -1.")
 
     portion_remover(args.input_path, output_path=args.output_path,
-                    portion=args.portion, chunk_size=args.chunk_size,
-                    threads=args.threads)
+                    portion=args.portion / 100, chunk_size=args.chunk_size,
+                    threads=args.threads, verbose=args.verbose)
 
     return
-
-
-def main():
-
-    example_fasta_path = os.path.join(
-        os.getcwd(), 'data', 'example.fasta')
-
-    example_out_path = os.path.join(
-        os.getcwd(), 'data', 'example_red_1.fasta')
-
-    portion_remover(example_fasta_path,
-                    output_path=example_out_path, threads=2)
 
 
 def main():
@@ -316,8 +403,11 @@ def main():
                         help='A file path to output the contents of the reduced flatfile. '
                         'Default output file is stdout.')
 
-    parser.add_argument('--portion', type=float, required=False, default=0.4,
-                        help='The portion of data to removed. The default is 0.4 (40\% removal).')
+    parser.add_argument('-v', '--verbose', action='count', default=0,
+                        help='Include to run the script in verbose mode.'
+                        ' Useful for checking progress.')
+    parser.add_argument('--portion', type=float, required=False, default=40,
+                        help='The portion of data to removed. The default is 40 (40\% removal).')
     parser.add_argument('--chunk_size', type=int, required=False, default=100,
                         help='The size of the chunks that get randomly removed from sequences.'
                         ' Default is 100.')
