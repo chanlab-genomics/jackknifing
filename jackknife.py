@@ -25,8 +25,12 @@ Example usage:
     (Windows)
     python jackknife.py --input_path D:\2020_SS\BioInfo\jackknifing\data\example.fasta --output_path D:\2020_SS\BioInfo\jackknifing\data\example_reduce_1.fasta
 
+    python jackknife.py --input_path D:\2020_SS\BioInfo\jackknifing\example_jar_data
+
     (Unix)
     python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data/example_reduce_1.fasta -v
+    
+    python3 ./jackknife.py --input_path ./data/S.necroappetens_CCMP2469.genome.fasta --output_path ./data/S.necroappetens_CCMP2469.genome_red.fasta -v --threads=1
 """
 
 
@@ -94,7 +98,55 @@ def compute_fasta_stats(fasta_dict: Dict[str, SeqRecord.SeqRecord], chunk_size: 
     return total_data_len, portion_dictionary, max_dictionary
 
 
-def create_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float]):
+def create_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float], max_dictionary: Dict[str, int]):
+    """
+    Creates a dictionary that specifies how many chunks are to be removed from
+    each sequence. The dictionary returned by this function will not
+    nesseccarily be within the constraints of the max_dictionary.
+
+    Parameters:
+        total_chunks_rm:
+            The total number of chunks that need to be removed from the fasta
+            file.
+
+        portion_dictionary:
+            A dictionary indicating what portion of the data each sequence
+            takes up.
+
+        max_dictionary:
+            A dictionary that indicates the maximum number of chunks that
+            can be removed from each sequence.
+
+    Return:
+        A randomly generated dictionary that specifies how many chunks are to
+        be removed from each sequence.
+    """
+
+    # Create a list for our dictionary keys and weights
+    dict_keys = list(portion_dictionary.keys())
+    weights = list(portion_dictionary.values())
+
+    rm_dict = dict(zip(dict_keys, itertools.cycle([0])))
+
+    for dict_key in dict_keys:
+
+        if rm_dict[dict_key] >= max_dictionary[dict_key]:
+            dict_keys.pop(dict_keys.index(dict_key))
+
+    for _ in range(total_chunks_rm):
+
+        rand_key = choices(population=dict_keys,
+                           weights=weights, k=1)[0]
+
+        rm_dict[rand_key] += 1
+
+        if rm_dict[rand_key] >= max_dictionary[rand_key]:
+            dict_keys.pop(dict_keys.index(rand_key))
+
+    return rm_dict
+
+
+def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float], max_dictionary: Dict[str, int]):
     """
     Creates a dictionary that specifies how many chunks are to be removed from
     each sequence. The dictionary returned by this function will not
@@ -162,7 +214,7 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
     """
 
     rm_dict = create_rm_dict(
-        total_chunks_rm, portion_dictionary)
+        total_chunks_rm, portion_dictionary, max_dictionary)
 
     # Check that this newly generated removal dictionary is within the bounds
     # of the max dictionary. Sometimes the removal dictionary will not be
@@ -172,7 +224,7 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
 
     while any(rm_val > max_val for rm_val, max_val in zip(rm_dict.values(), max_dictionary.values())):
         rm_dict = create_rm_dict(
-            total_chunks_rm, portion_dictionary)
+            total_chunks_rm, portion_dictionary, max_dictionary)
 
     return rm_dict
 
@@ -320,6 +372,9 @@ def portion_remover(fasta_path: str, output_path: str = None,
     # Create a lock for multi-threading later on
     mutex = Lock()
 
+    if verbose:
+        print('Reading Data...')
+
     # Open the fasta file as a dictionary
     fasta_dict: Dict[str, SeqRecord.SeqRecord] = SeqIO.to_dict(
         SeqIO.parse(fasta_path, "fasta"))
@@ -331,9 +386,16 @@ def portion_remover(fasta_path: str, output_path: str = None,
     # Calculate the number of chunks to remove
     total_chunks_rm = int(total_data_len * portion) // chunk_size
 
+    if verbose:
+        print('Creating remove dictionary...')
+
     # Create a removal dictionary delete sequences from
     rm_dict = generate_rm_dict(
         total_chunks_rm, portion_dictionary, max_dictionary)
+
+    if verbose:
+        print('Created remove dictionary')
+        print()
 
     thread_args = [(fasta_dict, seq_id, chunk_size, num_chunks, mutex) for
                    fasta_dict, seq_id, chunk_size, num_chunks, mutex in
@@ -380,7 +442,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
 def run_jackknife(args):
 
     if not 0 < args.portion < 100:
-        raise ValueError("Portion values be a value between 0 and 1.")
+        raise ValueError("Portion values be a value between 0 and 100.")
 
     if args.threads < -1:
         raise ValueError(
