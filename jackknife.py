@@ -98,7 +98,8 @@ def compute_fasta_stats(fasta_dict: Dict[str, SeqRecord.SeqRecord], chunk_size: 
     return total_data_len, portion_dictionary, max_dictionary
 
 
-def create_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float], max_dictionary: Dict[str, int]):
+def create_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
+                   max_dictionary: Dict[str, int], verbose: bool):
     """
     Creates a dictionary that specifies how many chunks are to be removed from
     each sequence. The dictionary returned by this function will not
@@ -117,6 +118,103 @@ def create_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float], m
             A dictionary that indicates the maximum number of chunks that
             can be removed from each sequence.
 
+        verbose:
+            If true, runs the function in verbose mode.
+
+    Return:
+        A randomly generated dictionary that specifies how many chunks are to
+        be removed from each sequence.
+    """
+
+    # Create a list for our dictionary keys and weights
+    dict_keys: list = list(portion_dictionary.keys())
+    # Creating a set will make it faster to search
+    dict_keys_set: set = set(dict_keys)
+    weights: list = list(portion_dictionary.values())
+
+    rm_dict = dict(zip(dict_keys, itertools.cycle([0])))
+
+    for dict_key in dict_keys:
+
+        if rm_dict[dict_key] >= max_dictionary[dict_key]:
+
+            dict_index = dict_keys.index(dict_key)
+
+            dict_keys.pop(dict_index)
+            weights.pop(dict_index)
+            dict_keys_set.remove(dict_key)
+
+    num_args: int = total_chunks_rm
+    progress: int = 0
+
+    progress_intervals: list = list(range(0, 100, 1))
+
+    total_chunks_rm_count = total_chunks_rm
+
+    while total_chunks_rm_count > 0:
+
+        rand_keys = choices(population=dict_keys,
+                            weights=weights, k=(total_chunks_rm_count // 3) + 1)
+
+        for rand_key in rand_keys:
+
+            dict_index = 0
+
+            if (rand_key in dict_keys_set) or (total_chunks_rm_count == 0):
+                dict_index = dict_keys.index(
+                    rand_key)
+            else:
+                continue
+
+            rm_dict[rand_key] += 1
+
+            if rm_dict[rand_key] >= max_dictionary[rand_key]:
+
+                dict_keys.pop(dict_index)
+                weights.pop(dict_index)
+                dict_keys_set.remove(rand_key)
+
+            progress += 1
+            total_chunks_rm_count -= 1
+
+            if verbose:
+
+                progress_per = progress / num_args * 100
+
+                while len(progress_intervals) > 0 and progress_per > progress_intervals[0]:
+                    print(str(progress_intervals.pop(0)) +
+                          '..', flush=True, end='')
+
+    if verbose:
+        print('100', flush=True)
+        print()
+
+    return rm_dict
+
+
+def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float],
+                    max_dictionary: Dict[str, int], verbose: bool):
+    """
+    Creates a dictionary that specifies how many chunks are to be removed from
+    each sequence. The dictionary returned by this function will not
+    nesseccarily be within the constraints of the max_dictionary.
+
+    Parameters:
+        total_chunks_rm:
+            The total number of chunks that need to be removed from the fasta
+            file.
+
+        portion_dictionary:
+            A dictionary indicating what portion of the data each sequence
+            takes up.
+
+        max_dictionary:
+            A dictionary that indicates the maximum number of chunks that
+            can be removed from each sequence.
+
+        verbose:
+            If true, runs the function in verbose mode.
+
     Return:
         A randomly generated dictionary that specifies how many chunks are to
         be removed from each sequence.
@@ -133,6 +231,11 @@ def create_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float], m
         if rm_dict[dict_key] >= max_dictionary[dict_key]:
             dict_keys.pop(dict_keys.index(dict_key))
 
+    num_args: int = total_chunks_rm
+    progress: int = 0
+
+    progress_intervals: list = list(range(0, 100, 1))
+
     for _ in range(total_chunks_rm):
 
         rand_key = choices(population=dict_keys,
@@ -141,12 +244,31 @@ def create_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float], m
         rm_dict[rand_key] += 1
 
         if rm_dict[rand_key] >= max_dictionary[rand_key]:
-            dict_keys.pop(dict_keys.index(rand_key))
+
+            dict_index = dict_keys.index(rand_key)
+
+            dict_keys.pop(dict_index)
+            weights.pop(dict_index)
+
+        progress += 1
+
+        if verbose:
+            progress += 1
+
+            progress_per = progress / num_args * 100
+
+            while len(progress_intervals) > 0 and progress_per > progress_intervals[0]:
+                print(str(progress_intervals.pop(0)) +
+                      '..', flush=True, end='')
+    if verbose:
+        print('100', flush=True)
+        print()
 
     return rm_dict
 
 
-def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float], max_dictionary: Dict[str, int]):
+def create_rm_dict3(total_chunks_rm: int, portion_dictionary: Dict[str, float],
+                    max_dictionary: Dict[str, int], verbose: bool):
     """
     Creates a dictionary that specifies how many chunks are to be removed from
     each sequence. The dictionary returned by this function will not
@@ -189,7 +311,7 @@ def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float], 
 
 
 def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
-                     max_dictionary: Dict[str, int]):
+                     max_dictionary: Dict[str, int], verbose: bool):
     """
     Creates a dictionary that specifies how many chunks are to be removed from
     each sequence. The dictionary returned by this function will be within the
@@ -214,7 +336,7 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
     """
 
     rm_dict = create_rm_dict(
-        total_chunks_rm, portion_dictionary, max_dictionary)
+        total_chunks_rm, portion_dictionary, max_dictionary, verbose)
 
     # Check that this newly generated removal dictionary is within the bounds
     # of the max dictionary. Sometimes the removal dictionary will not be
@@ -223,8 +345,12 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
     # removal since such dictionaires probabilistically unlikely.
 
     while any(rm_val > max_val for rm_val, max_val in zip(rm_dict.values(), max_dictionary.values())):
+
+        if verbose:
+            print("\nRestartign rm dict creation.\n")
+
         rm_dict = create_rm_dict(
-            total_chunks_rm, portion_dictionary, max_dictionary)
+            total_chunks_rm, portion_dictionary, max_dictionary, verbose)
 
     return rm_dict
 
@@ -391,7 +517,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
     # Create a removal dictionary delete sequences from
     rm_dict = generate_rm_dict(
-        total_chunks_rm, portion_dictionary, max_dictionary)
+        total_chunks_rm, portion_dictionary, max_dictionary, verbose)
 
     if verbose:
         print('Created remove dictionary')
@@ -411,7 +537,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
         print()
 
     with futures.ThreadPoolExecutor(threads) as executor:
-        submitted_results = executor.map(remove_chunks, thread_args)
+        submitted_results = executor.map(remove_chunks2, thread_args)
 
         for result in submitted_results:
             _ = result
