@@ -197,7 +197,7 @@ def create_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
 
 @unpack
 def add_to_rm_dict(rm_dict, rand_keys, dict_keys, dict_keys_set, weights,
-                   max_dictionary, rm_dict_mutex, key_mutex):
+                   max_dictionary, rm_dict_mutex):
 
     total_rm = 0
 
@@ -214,9 +214,7 @@ def add_to_rm_dict(rm_dict, rand_keys, dict_keys, dict_keys_set, weights,
         with rm_dict_mutex:
             rm_dict[rand_key] += 1
 
-        if rm_dict[rand_key] >= max_dictionary[rand_key]:
-
-            with key_mutex:
+            if rm_dict[rand_key] >= max_dictionary[rand_key]:
                 dict_keys.pop(dict_index)
                 weights.pop(dict_index)
                 dict_keys_set.remove(rand_key)
@@ -227,7 +225,7 @@ def add_to_rm_dict(rm_dict, rand_keys, dict_keys, dict_keys_set, weights,
 
 
 def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float],
-                    max_dictionary: Dict[str, int], verbose: bool, threads: int=2):
+                    max_dictionary: Dict[str, int], verbose: bool, threads: int = 2):
     """
     Creates a dictionary that specifies how many chunks are to be removed from
     each sequence. The dictionary returned by this function will not
@@ -265,10 +263,6 @@ def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float],
     # Create a lock for modifying the rm_dict values
     rm_dict_mutex = Lock()
 
-    # Create a lock for modifying sets and lists that keep track of maxed out
-    # results
-    key_mutex = Lock()
-
     for dict_key in dict_keys:
 
         if rm_dict[dict_key] >= max_dictionary[dict_key]:
@@ -295,8 +289,8 @@ def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float],
                                      weights=weights, k=(total_chunks_rm_count // 10) + 1), dtype=str)
         rand_keys = np.array_split(rand_keys, threads)
 
-        thread_args = [(rm_dict, dict_keys, dict_keys_set, weights, max_dictionary, rm_dict_mutex, key_mutex) for
-                       rm_dict, dict_keys, dict_keys_set, weights, max_dictionary, rm_dict_mutex, key_mutex in
+        thread_args = [(rm_dict, rand_keys, dict_keys, dict_keys_set, weights, max_dictionary, rm_dict_mutex) for
+                       rm_dict, rand_keys, dict_keys, dict_keys_set, weights, max_dictionary, rm_dict_mutex in
                        zip(
                            itertools.cycle([rm_dict]),
                            rand_keys,
@@ -304,8 +298,7 @@ def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float],
                            itertools.cycle([dict_keys_set]),
                            itertools.cycle([weights]),
                            itertools.cycle([max_dictionary]),
-                           itertools.cycle([rm_dict_mutex]),
-                           itertools.cycle([key_mutex]),
+                           itertools.cycle([rm_dict_mutex])
         )]
 
         with futures.ThreadPoolExecutor(threads) as executor:
@@ -333,7 +326,7 @@ def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float],
 
 
 def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
-                     max_dictionary: Dict[str, int], verbose: bool):
+                     max_dictionary: Dict[str, int], verbose: bool, threads: int = 2):
     """
     Creates a dictionary that specifies how many chunks are to be removed from
     each sequence. The dictionary returned by this function will be within the
@@ -357,8 +350,8 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
         be removed from each sequence.
     """
 
-    rm_dict = create_rm_dict(
-        total_chunks_rm, portion_dictionary, max_dictionary, verbose)
+    rm_dict = create_rm_dict2(
+        total_chunks_rm, portion_dictionary, max_dictionary, verbose, threads=threads)
 
     # Check that this newly generated removal dictionary is within the bounds
     # of the max dictionary. Sometimes the removal dictionary will not be
@@ -371,8 +364,8 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
         if verbose:
             print("\nRestartign rm dict creation.\n")
 
-        rm_dict = create_rm_dict(
-            total_chunks_rm, portion_dictionary, max_dictionary, verbose)
+        rm_dict = create_rm_dict2(
+            total_chunks_rm, portion_dictionary, max_dictionary, verbose, threads=threads)
 
     return rm_dict
 
@@ -490,7 +483,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
     # Create a removal dictionary delete sequences from
     rm_dict = generate_rm_dict(
-        total_chunks_rm, portion_dictionary, max_dictionary, verbose)
+        total_chunks_rm, portion_dictionary, max_dictionary, verbose, threads=threads)
 
     if verbose:
         print('Created remove dictionary')
@@ -560,6 +553,9 @@ def run_jackknife(args):
 
         if output_path_dir is None:
             output_path_dir = args.input_path
+
+        if not os.path.exists(output_path_dir):
+            os.makedirs(output_path_dir)
 
         # Get all the fasta files from the folder
         fasta_files: List[str] = glob(os.path.join(args.input_path, "*.fasta"))
