@@ -258,6 +258,7 @@ hs_err_pid*
 
 
 ### vscode ###
+.vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
