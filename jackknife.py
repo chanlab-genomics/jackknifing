@@ -30,6 +30,8 @@ Example usage:
 
     (Unix)
     python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data/example_reduce_1.fasta -v
+
+    python3 ./jackknife.py --input_path ./data/example_jar_data --output_path ./data/example_jar_data_out --portion=50
     
     python3 ./jackknife.py --input_path ./data/S.necroappetens_CCMP2469.genome.fasta --output_path ./data/S.necroappetens_CCMP2469.genome_red.fasta -v --threads=1
 """
