@@ -435,7 +435,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
     num_args: int = len(thread_args)
     progress: int = 0
 
-    progress_intervals: list = list(range(0, 100, 1))
+    progress_intervals: list = list(range(0, 100, 10))
 
     if verbose:
         print('Progress: ', flush=True, end='')
@@ -536,7 +536,9 @@ def main():
 
     parser.add_argument('-v', '--verbose', action='count', default=0,
                         help='Include to run the script in verbose mode.'
-                        ' Useful for checking progress.')
+                        ' Useful for checking progress. WARN: This may cause '
+                        'the program to run slower, only reccomended for '
+                        'debugging purposes.')
     parser.add_argument('--portion', type=float, required=False, default=40,
                         help='The portion of data to removed. The default is a 40 percent reduction.')
     parser.add_argument('--chunk_size', type=int, required=False, default=100,
