@@ -3,22 +3,18 @@
 __author__ = 'Michael Ciccotosto-Camp'
 __version__ = ''
 
-import concurrent.futures
+import argparse
 import itertools
 import os
 import sys
-import argparse
-import numpy as np
-from time import perf_counter
 from concurrent import futures
-from glob import glob
 from functools import wraps
-from threading import Lock
-from pprint import pprint
+from glob import glob
 from random import choices, randrange
-from typing import (Any, Callable, Dict, Iterable, List, Optional, Tuple, Type,
-                    Union, Set)
+from threading import Lock
+from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 
+import numpy as np
 from Bio import SeqIO, SeqRecord
 
 """
@@ -37,13 +33,13 @@ Example usage:
 """
 
 
-def unpack(orig_func):
+def unpack(target_func: Callable):
     """
     A wrapper to automatically unpack arguments into a target function.
     """
 
-    @wraps(orig_func)
-    def wrapper(args=None, kwargs=None):
+    @wraps(target_func)
+    def wrapper(args: Optional[tuple] = None, kwargs: Optional[dict] = None):
 
         if args is None:
             args = tuple()
@@ -51,7 +47,7 @@ def unpack(orig_func):
         if kwargs is None:
             kwargs = dict()
 
-        return orig_func(*args, **kwargs)
+        return target_func(*args, **kwargs)
 
     return wrapper
 
@@ -231,13 +227,13 @@ def create_rm_dict2(total_chunks_rm: int, portion_dictionary: Dict[str, float],
         thread_args = [(rm_dict, rand_keys, dict_keys, dict_keys_set, weights, max_dictionary, rm_dict_mutex) for
                        rm_dict, rand_keys, dict_keys, dict_keys_set, weights, max_dictionary, rm_dict_mutex in
                        zip(
-                           itertools.cycle([rm_dict]),
+                           itertools.repeat(rm_dict),
                            rand_keys,
-                           itertools.cycle([dict_keys]),
-                           itertools.cycle([dict_keys_set]),
-                           itertools.cycle([weights]),
-                           itertools.cycle([max_dictionary]),
-                           itertools.cycle([rm_dict_mutex])
+                           itertools.repeat(dict_keys),
+                           itertools.repeat(dict_keys_set),
+                           itertools.repeat(weights),
+                           itertools.repeat(max_dictionary),
+                           itertools.repeat(rm_dict_mutex)
         )]
 
         with futures.ThreadPoolExecutor(threads) as executor:
@@ -430,7 +426,13 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
     thread_args = [(fasta_dict, seq_id, chunk_size, num_chunks, mutex) for
                    fasta_dict, seq_id, chunk_size, num_chunks, mutex in
-                   zip(itertools.cycle([fasta_dict]), rm_dict.keys(), itertools.cycle([chunk_size]), rm_dict.values(), itertools.cycle([mutex]))]
+                   zip(
+                       itertools.repeat(fasta_dict),
+                       rm_dict.keys(),
+                       itertools.repeat(chunk_size),
+                       rm_dict.values(),
+                       itertools.repeat(mutex)
+    )]
 
     num_args: int = len(thread_args)
     progress: int = 0
@@ -500,7 +502,8 @@ def run_jackknife(args):
         fasta_ext = ('fasta', 'fnn', 'fna', 'faa', 'fas', 'frn')
 
         # Get all the fasta files from the folder
-        fasta_files: List[str] = itertools.chain.from_iterable(glob(os.path.join(args.input_path, "*." + ext)) for ext in fasta_ext)
+        fasta_files: List[str] = itertools.chain.from_iterable(
+            glob(os.path.join(args.input_path, "*." + ext)) for ext in fasta_ext)
 
         prefix: str = "_" + str(int(args.portion))
 
