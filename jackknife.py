@@ -403,35 +403,38 @@ def portion_remover(fasta_path: str, output_path: str = None,
         print('Reading Data...')
 
     # Open the fasta file as a dictionary
-    fasta_dict: Dict[str, SeqRecord.SeqRecord] = SeqIO.to_dict(
-        SeqIO.parse(fasta_path, "fasta"))
+    fasta_list: List[SeqRecord.SeqRecord] = SeqIO.parse(fasta_path, "fasta")
 
-    # Create a portion dictionary and max dictionary from the fasta dictionary
-    total_data_len, portion_dictionary, max_dictionary = compute_fasta_stats(
-        fasta_dict, chunk_size)
+    # Get the header for the fasta file
+    header = str(fasta_list[0].id)
 
-    # Calculate the number of chunks to remove
-    total_chunks_rm = int(total_data_len * portion) // chunk_size
+    # Concatenate all the genes into a single string
+    full_str = ''.join(seq_rec.seq._data for seq_rec in fasta_list)
 
-    if verbose:
-        print('Creating remove dictionary...')
+    # We don't need the biopython parser, remove it from memory
+    del fasta_list
 
-    # Create a removal dictionary delete sequences from
-    rm_dict = generate_rm_dict(
-        total_chunks_rm, portion_dictionary, max_dictionary, verbose, threads=threads)
+    # Split the string into approximately 'num_threads' equal components.
+    # Each component will then be reduced by a separate thread.
+    str_chunks = [full_str[index:index+threads]
+                  for index in range(0, len(full_str), threads)]
 
-    if verbose:
-        print('Created remove dictionary')
-        print()
+    # We don't need the full string anymore, remove it from memory
+    del full_str
 
-    thread_args = [(fasta_dict, seq_id, chunk_size, num_chunks, mutex) for
-                   fasta_dict, seq_id, chunk_size, num_chunks, mutex in
+    # A list to keep all the reduced chunks, the first position of the tuple
+    # will denote the position of the chunk in the final output with 0 being
+    # the first chunk.
+    reduced_chunks: List[Tuple[int, str]] = []
+
+    thread_args = [(str_chunk, chunk_size, portion) for
+                   str_chunk, chunk_size, portion in
                    zip(
-                       itertools.repeat(fasta_dict),
-                       rm_dict.keys(),
+                       str_chunks,
                        itertools.repeat(chunk_size),
-                       rm_dict.values(),
-                       itertools.repeat(mutex)
+                       itertools.repeat(portion),
+                       itertools.repeat(portion),
+                       itertools.repeat(mutex),
     )]
 
     num_args: int = len(thread_args)
@@ -485,43 +488,33 @@ def run_jackknife(args):
     # respective output files
     to_complete: List[Tuple[str, str]] = []
 
-    if os.path.isfile(args.input_path):
-        to_complete.append((args.input_path, args.output_path))
+    output_path_dir = args.output_path
 
-    elif os.path.isdir(args.input_path):
+    if output_path_dir is None:
+        output_path_dir = args.input_path
 
-        output_path_dir = args.output_path
+    if not os.path.exists(output_path_dir):
+        os.makedirs(output_path_dir)
+    elif os.path.exists(output_path_dir) and not os.path.isdir(output_path_dir):
+        raise IOError("Output folder must be a directory.")
 
-        if output_path_dir is None:
-            output_path_dir = args.input_path
+    prefix: str = "_" + str(int(args.portion))
 
-        if not os.path.exists(output_path_dir):
-            os.makedirs(output_path_dir)
+    print(args.input_paths)
 
-        # A list of all valid fasta file extension names
-        fasta_ext = ('fasta', 'fnn', 'fna', 'faa', 'fas', 'frn')
+    for file_path in args.input_paths:
+        path_base: str = os.path.basename(file_path)
+        index: int = path_base.rfind(".")
+        path_base = path_base[:index] + prefix + path_base[index:]
 
-        # Get all the fasta files from the folder
-        fasta_files: List[str] = itertools.chain.from_iterable(
-            glob(os.path.join(args.input_path, "*." + ext)) for ext in fasta_ext)
-
-        prefix: str = "_" + str(int(args.portion))
-
-        for file_path in fasta_files:
-
-            path_base: str = os.path.basename(file_path)
-            index: int = path_base.rfind(".")
-            path_base = path_base[:index] + prefix + path_base[index:]
-
-            to_complete.append((file_path, os.path.join(
-                output_path_dir, path_base)))
+        to_complete.append((file_path, os.path.join(
+            output_path_dir, path_base)))
 
     for path_in, path_out in to_complete:
 
         portion_remover(path_in, output_path=path_out,
                         portion=args.portion / 100, chunk_size=args.chunk_size,
                         threads=args.threads, verbose=args.verbose)
-
     return
 
 
@@ -530,7 +523,7 @@ def main():
     parser = argparse.ArgumentParser(description="Randomly removes a portion of "
                                      "data from a fasta file.")
 
-    parser.add_argument('--input_paths', type=argparse.FileType('r'), , nargs='+', required=True,
+    parser.add_argument('--input_paths', type=str, nargs='+', required=True,
                         help='A list of fasta files to perform the jacknifing process')
     parser.add_argument('--output_path', type=str, required=False, default=None,
                         help='A folder to write the reduced fasta files.')
