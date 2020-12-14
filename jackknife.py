@@ -306,49 +306,52 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
 
 
 @unpack
-def remove_chunks(fasta_dict: dict, seq_id: str, chunk_size: int, num_chunks_rm: int, mutex: Lock):
+def remove_chunks(str_portion: str, chunk_size: int, portion: float, reduced_portions: list, count: int, mutex: Lock):
     """
     Removes a prescribed number of chunks from a sequence.
 
     Parameter:
-        fasta_dict:
-            The fasta file formatted as a dictionary (by BioPython).
-
-        seq_id:
-            The ID of the sequence we are removing from.
+        str_portion:
+            The portion of the chunk that needs to be reduced by this thread.
 
         chunk_size:
-            The size of the chunk to remove.
+            The size of the chunk that need to be removed.
 
-        num_chunks_rm:
-            The number of chunks to remove.
+        portion:
+            The amount of data (as a decimal) to be removed from str_portion.
+
+        reduced_portions:
+            A list that will hold all the reduced chunks.
+
+        count:
+            The position of this portion in the final string.
 
         mutex:
             A threading mutex to safely access the fasta dictionary (which
             will be shared between multiple threads).
     """
 
-    with mutex:
-        # Convert the BioPython sequence into an array
-        seq_array = fasta_dict[seq_id].seq._data
+    # Find the number of chunkds that need to be removed from this string
+    # portion
+    num_chunks_rm = int(len(str_portion) * portion) // chunk_size
 
-    if chunk_size * num_chunks_rm == len(seq_array):
+    if chunk_size * num_chunks_rm == len(str_portion):
 
         # The very unlikely event where the entire sequence should be removed.
-        seq_array = ""
+        str_portion = ""
 
     else:
 
         for _ in range(num_chunks_rm):
 
             # Pick a starting value to remove the chunk
-            index_start = randrange(0, len(seq_array) - chunk_size)
+            index_start = randrange(0, len(str_portion) - chunk_size)
 
-            seq_array = seq_array[:index_start] + \
-                seq_array[index_start + chunk_size:]
+            str_portion = str_portion[:index_start] + \
+                str_portion[index_start + chunk_size:]
 
     with mutex:
-        fasta_dict[seq_id].seq._data = seq_array
+        reduced_portions.append((count, str_portion))
 
     return
 
@@ -416,8 +419,8 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
     # Split the string into approximately 'num_threads' equal components.
     # Each component will then be reduced by a separate thread.
-    str_chunks = [full_str[index:index+threads]
-                  for index in range(0, len(full_str), threads)]
+    str_portion = [full_str[index:index+threads]
+                   for index in range(0, len(full_str), threads)]
 
     # We don't need the full string anymore, remove it from memory
     del full_str
@@ -425,26 +428,18 @@ def portion_remover(fasta_path: str, output_path: str = None,
     # A list to keep all the reduced chunks, the first position of the tuple
     # will denote the position of the chunk in the final output with 0 being
     # the first chunk.
-    reduced_chunks: List[Tuple[int, str]] = []
+    reduced_portions: List[Tuple[int, str]] = []
 
-    thread_args = [(str_chunk, chunk_size, portion) for
-                   str_chunk, chunk_size, portion in
+    thread_args = [(str_portion, chunk_size, portion, reduced_portions, count, mutex) for
+                   str_portion, chunk_size, portion, reduced_portions, count, mutex in
                    zip(
-                       str_chunks,
+                       str_portion,
                        itertools.repeat(chunk_size),
                        itertools.repeat(portion),
-                       itertools.repeat(portion),
+                       itertools.repeat(reduced_portions),
+                       itertools.count(0),
                        itertools.repeat(mutex),
     )]
-
-    num_args: int = len(thread_args)
-    progress: int = 0
-
-    progress_intervals: list = list(range(0, 100, 10))
-
-    if verbose:
-        print('Progress: ', flush=True, end='')
-        print()
 
     with futures.ThreadPoolExecutor(threads) as executor:
         submitted_results = executor.map(remove_chunks, thread_args)
@@ -452,25 +447,18 @@ def portion_remover(fasta_path: str, output_path: str = None,
         for result in submitted_results:
             _ = result
 
-            if verbose:
-                progress += 1
+    #   Sort the resulting reduced_portions list
+    reduced_portions = sorted(reduced_portions, key=lambda tup: tup[0])
 
-                progress_per = progress / num_args * 100
+    # Open the output path
+    with open(output_path, 'w') as output_file:
 
-                while len(progress_intervals) > 0 and progress_per > progress_intervals[0]:
-                    print(str(progress_intervals.pop(0)) +
-                          '..', flush=True, end='')
-    if verbose:
-        print('100', flush=True)
-        print()
+        # Write the header
+        print(header, file=output_file, flush=True)
 
-    record_list = []
-
-    for rec_id, rec_val in zip(fasta_dict.keys(), fasta_dict.values()):
-        rec_val.id = rec_id
-        record_list.append(rec_val)
-
-    SeqIO.write(record_list, output_path, 'fasta')
+        # Write each of the reduce portions to the output file
+        for _, str_portion in reduced_portions:
+            print(str_portion, file=output_file, flush=True)
 
     return
 
