@@ -527,16 +527,10 @@ def main():
     parser = argparse.ArgumentParser(description="Randomly removes a portion of "
                                      "data from a fasta file.")
 
-    parser.add_argument('--input_path', type=str, required=True,
-                        help='Option 1) The path to the fasta file that will be reduced.\n\n'
-                        'Option 2) A path to a folder containing several fasta files '
-                        'where every fasta file will be jackknifed. '
-                        'The resulting files will have will have the portion of '
-                        'data that was removed printed at the end of the file name.')
+    parser.add_argument('--input_paths', type=argparse.FileType('r'), , nargs='+', required=True,
+                        help='A list of fasta files to perform the jacknifing process')
     parser.add_argument('--output_path', type=str, required=False, default=None,
-                        help='A file path to output the contents of the reduced flatfile. '
-                        'Default output for single files is stdout. '
-                        'Default output for folders is the same folder as the input.')
+                        help='A folder to write the reduced fasta files.')
 
     parser.add_argument('-v', '--verbose', action='count', default=0,
                         help='Include to run the script in verbose mode.'
