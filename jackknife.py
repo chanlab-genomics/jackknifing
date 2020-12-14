@@ -29,9 +29,9 @@ Example usage:
     python jackknife.py --input_path D:\2020_SS\BioInfo\jackknifing\example_jar_data --output_path D:\2020_SS\BioInfo\jackknifing\example_out --portion=50
 
     (Unix)
-    python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data/example_reduce_1.fasta -v
+    python3 ./jackknife.py --input_path ./example_jar_data --output_path ./example_jar_data_out --portion=50
 
-    python3 ./jackknife.py --input_path ./data/example_jar_data --output_path ./data/example_jar_data_out --portion=50
+    python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data/example_reduce_1.fasta -v
     
     python3 ./jackknife.py --input_path ./data/S.necroappetens_CCMP2469.genome.fasta --output_path ./data/S.necroappetens_CCMP2469.genome_red.fasta -v --threads=1
 """
@@ -301,7 +301,7 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
     while any(rm_val > max_val for rm_val, max_val in zip(rm_dict.values(), max_dictionary.values())):
 
         if verbose:
-            print("\nRestartign rm dict creation.\n")
+            print("\nRestarting rm dict creation.\n")
 
         rm_dict = create_rm_dict2(
             total_chunks_rm, portion_dictionary, max_dictionary, verbose, threads=threads)
@@ -496,15 +496,18 @@ def run_jackknife(args):
         if not os.path.exists(output_path_dir):
             os.makedirs(output_path_dir)
 
+        # A list of all valid fasta file extension names
+        fasta_ext = ('fasta', 'fnn', 'fna', 'faa', 'fas', 'frn')
+
         # Get all the fasta files from the folder
-        fasta_files: List[str] = glob(os.path.join(args.input_path, "*.fasta"))
+        fasta_files: List[str] = itertools.chain.from_iterable(glob(os.path.join(args.input_path, "*." + ext)) for ext in fasta_ext)
 
         prefix: str = "_" + str(int(args.portion))
 
         for file_path in fasta_files:
 
             path_base: str = os.path.basename(file_path)
-            index: int = path_base.find(".fasta")
+            index: int = path_base.rfind(".")
             path_base = path_base[:index] + prefix + path_base[index:]
 
             to_complete.append((file_path, os.path.join(
@@ -527,23 +530,23 @@ def main():
     parser.add_argument('--input_path', type=str, required=True,
                         help='Option 1) The path to the fasta file that will be reduced.\n\n'
                         'Option 2) A path to a folder containing several fasta files '
-                        'where every fasta file will have the jackknife algorithm '
-                        'applied to it. The resulting files will have a similar name.')
+                        'where every fasta file will be jackknifed. '
+                        'The resulting files will have will have the portion of '
+                        'data that was removed printed at the end of the file name.')
     parser.add_argument('--output_path', type=str, required=False, default=None,
                         help='A file path to output the contents of the reduced flatfile. '
                         'Default output for single files is stdout. '
-                        'Default output for folders is the same folder.')
+                        'Default output for folders is the same folder as the input.')
 
     parser.add_argument('-v', '--verbose', action='count', default=0,
                         help='Include to run the script in verbose mode.'
                         ' Useful for checking progress. WARN: This may cause '
-                        'the program to run slower, only reccomended for '
-                        'debugging purposes.')
+                        'the program to run slower.')
     parser.add_argument('--portion', type=float, required=False, default=40,
-                        help='The portion of data to removed. The default is a 40 percent reduction.')
+                        help='The portion of data to be removed. The default is a 40 percent reduction.')
     parser.add_argument('--chunk_size', type=int, required=False, default=100,
                         help='The size of the chunks that get randomly removed from sequences.'
-                        ' Default is 100.')
+                        ' Default is a chunk size of 100.')
     parser.add_argument('--threads', type=int, required=False, default=1,
                         help='The number of threads used to run the jackknife algorithm. '
                         'If 0 threads are specified then it will default to os.cpu_count().')
