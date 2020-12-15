@@ -25,6 +25,8 @@ Example usage:
     python jackknife.py --input_path D:\2020_SS\BioInfo\jackknifing\example_jar_data --output_path D:\2020_SS\BioInfo\jackknifing\example_out --portion=50
 
     (Unix)
+    python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./example_out --portion=50
+
     python3 ./jackknife.py --input_path ./example_jar_data --output_path ./example_jar_data_out --portion=50
 
     python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data/example_reduce_1.fasta -v
@@ -331,7 +333,7 @@ def remove_chunks(str_portion: str, chunk_size: int, portion: float, reduced_por
             will be shared between multiple threads).
     """
 
-    # Find the number of chunkds that need to be removed from this string
+    # Find the number of chunks that need to be removed from this string
     # portion
     num_chunks_rm = int(len(str_portion) * portion) // chunk_size
 
@@ -406,7 +408,8 @@ def portion_remover(fasta_path: str, output_path: str = None,
         print('Reading Data...')
 
     # Open the fasta file as a dictionary
-    fasta_list: List[SeqRecord.SeqRecord] = SeqIO.parse(fasta_path, "fasta")
+    fasta_list: List[SeqRecord.SeqRecord] = list(
+        SeqIO.parse(fasta_path, "fasta"))
 
     # Get the header for the fasta file
     header = str(fasta_list[0].id)
@@ -419,9 +422,9 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
     # Split the string into approximately 'num_threads' equal components.
     # Each component will then be reduced by a separate thread.
-    str_portion = [full_str[index:index+threads]
-                   for index in range(0, len(full_str), threads)]
-
+    str_portion = [full_str[index:index+len(full_str) // threads]
+                   for index in range(0, len(full_str), len(full_str) // threads)]
+    # print("Orig len: ", len(str_portion[0]))
     # We don't need the full string anymore, remove it from memory
     del full_str
 
@@ -450,6 +453,8 @@ def portion_remover(fasta_path: str, output_path: str = None,
     #   Sort the resulting reduced_portions list
     reduced_portions = sorted(reduced_portions, key=lambda tup: tup[0])
 
+    # print("Red len: ", len(reduced_portions[0][1]))
+
     # Open the output path
     with open(output_path, 'w') as output_file:
 
@@ -458,7 +463,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
         # Write each of the reduce portions to the output file
         for _, str_portion in reduced_portions:
-            print(str_portion, file=output_file, flush=True)
+            print(str_portion, file=output_file, flush=True, end="")
 
     return
 
@@ -487,8 +492,6 @@ def run_jackknife(args):
         raise IOError("Output folder must be a directory.")
 
     prefix: str = "_" + str(int(args.portion))
-
-    print(args.input_paths)
 
     for file_path in args.input_paths:
         path_base: str = os.path.basename(file_path)
