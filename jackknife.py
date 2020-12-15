@@ -25,7 +25,7 @@ Example usage:
     python jackknife.py --input_path D:\2020_SS\BioInfo\jackknifing\example_jar_data --output_path D:\2020_SS\BioInfo\jackknifing\example_out --portion=50
 
     (Unix)
-    python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./example_out --portion=50
+    python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data --portion=40
 
     python3 ./jackknife.py --input_path ./example_jar_data --output_path ./example_jar_data_out --portion=50
 

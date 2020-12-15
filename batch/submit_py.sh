@@ -2,7 +2,7 @@
 #
 #PBS -N jn_py
 #-#PBS -l nodes=1
-#PBS -l select=1:ncpus=8:mem=70GB
+#PBS -l select=1:ncpus=8:mem=50GB
 #PBS -l walltime=00:30:00
 
 #PBS -j oe
@@ -35,7 +35,7 @@ cd $PBS_O_WORKDIR
 pwd
 
 module load python
-time python3 /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/jackknife.py --input_path /30days/s4430291/Slin_CCMP2456_py --output_path /30days/s4430291/Slin_CCMP2456_py_out --portion=40 --chunk_size=100 --threads=8
+time python3 /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/jackknife.py --input_path /30days/s4430291/Slin_CCMP2456_py/S.linucheae_CCMP2456.genome.fasta --output_path /30days/s4430291/Slin_CCMP2456_py_out --portion=40 --chunk_size=100 --threads=8
 
 echo "time finished "$DATE
 
