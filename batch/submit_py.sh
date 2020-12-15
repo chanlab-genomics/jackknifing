@@ -6,7 +6,7 @@
 #PBS -l walltime=00:30:00
 
 #PBS -j oe
-#PBS -o /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/example_out/jn_py_out.txt
+#PBS -o /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/example_out/jn_py_bio.txt
 
 #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
 #USE the groups command to find out your exact group name. 
