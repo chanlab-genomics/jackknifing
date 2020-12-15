@@ -26,10 +26,6 @@ Example usage:
 
     (Unix)
     python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./example_out --portion=50
-
-    python3 ./jackknife.py --input_path ./example_jar_data --output_path ./example_jar_data_out --portion=50
-
-    python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data/example_reduce_1.fasta -v
     
     python3 ./jackknife.py --input_path ./data/S.necroappetens_CCMP2469.genome.fasta --output_path ./data -v --threads=1
 """
@@ -577,11 +573,6 @@ def portion_remover2(fasta_path: str, output_path: str = None,
     # Open the fasta file as a dictionary
     fasta_dict: Dict[str, SeqRecord.SeqRecord] = SeqIO.to_dict(
         SeqIO.parse(fasta_path, "fasta"))
-
-    # A list to keep all the reduced chunks, the first position of the tuple
-    # will denote the position of the chunk in the final output with 0 being
-    # the first chunk.
-    reduced_portions: List[Tuple[int, bytes]] = []
 
     thread_args = [(fasta_dict, chunk_size, portion, seq_id, mutex) for
                    fasta_dict, chunk_size, portion, seq_id, mutex in
