@@ -308,7 +308,7 @@ def generate_rm_dict(total_chunks_rm: int, portion_dictionary: Dict[str, float],
 
 
 @unpack
-def remove_chunks(str_portion: str, chunk_size: int, portion: float, reduced_portions: list, count: int, mutex: Lock):
+def remove_chunks(str_portion: bytes, chunk_size: int, portion: float, reduced_portions: list, count: int, mutex: Lock):
     """
     Removes a prescribed number of chunks from a sequence.
 
@@ -422,8 +422,8 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
     # Split the string into approximately 'num_threads' equal components.
     # Each component will then be reduced by a separate thread.
-    str_portion = [full_str[index:index+len(full_str) // threads]
-                   for index in range(0, len(full_str), len(full_str) // threads)]
+    str_portion: List[bytes] = [bytes(full_str[index:index+len(full_str) // threads], 'ASCII')
+                                for index in range(0, len(full_str), len(full_str) // threads)]
     # print("Orig len: ", len(str_portion[0]))
     # We don't need the full string anymore, remove it from memory
     del full_str
@@ -431,7 +431,7 @@ def portion_remover(fasta_path: str, output_path: str = None,
     # A list to keep all the reduced chunks, the first position of the tuple
     # will denote the position of the chunk in the final output with 0 being
     # the first chunk.
-    reduced_portions: List[Tuple[int, str]] = []
+    reduced_portions: List[Tuple[int, bytes]] = []
 
     thread_args = [(str_portion, chunk_size, portion, reduced_portions, count, mutex) for
                    str_portion, chunk_size, portion, reduced_portions, count, mutex in
@@ -463,7 +463,9 @@ def portion_remover(fasta_path: str, output_path: str = None,
 
         # Write each of the reduce portions to the output file
         for _, str_portion in reduced_portions:
-            print(str_portion, file=output_file, flush=True, end="")
+            output_file.buffer.write(str_portion)
+
+        output_file.flush()
 
     return
 
