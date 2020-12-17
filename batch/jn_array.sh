@@ -1,12 +1,15 @@
 #!/bin/bash
 #
-#PBS -N jn_py
+#PBS -N jn_array
 #-#PBS -l nodes=1
-#PBS -l select=1:ncpus=8:mem=50GB
-#PBS -l walltime=00:30:00
+#PBS -l select=1:ncpus=6:mem=30GB
+#PBS -l walltime=00:20:00
+
+# Make this a job array
+#PBS -J 0-196
 
 #PBS -j oe
-#PBS -o /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/example_out/jn_py_bio.txt
+#PBS -o /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/example_out/array_out/array_jn.txt
 
 #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
 #USE the groups command to find out your exact group name. 
@@ -34,9 +37,13 @@ export TIMEFORMAT="%E sec"
 cd $PBS_O_WORKDIR
 pwd
 
+# Make a array of folders of the target directory
+ARRAY_TARGET=(/30days/s4430291/Genomes_for_AFphylogeny/*)
+
+# Specify the output directory
+OUTPUT_DIR=/30days/s4430291/Genomes_for_AFphylogeny_red_40
+
 module load python
-time python3 /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/jackknife.py --input_path /30days/s4430291/Slin_CCMP2456_py/S.linucheae_CCMP2456.genome.fasta --output_path /30days/s4430291/Slin_CCMP2456_py_out --portion=40 --chunk_size=100 --threads=8
+python3 /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/jackknife.py --input_path ${ARRAY_TARGET[$PBS_ARRAY_INDEX]} --output_path $OUTPUT_DIR --portion=40 --chunk_size=100 --threads=8
 
 echo "time finished "$DATE
-
-#Refer to the table of job environment variables section of the RCC PBS Pro User Guide

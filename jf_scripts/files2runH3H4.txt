@@ -1,0 +1,10 @@
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/AEG_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/AEH_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/AFD_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/AFR_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/AGM_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/AHC_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/APG_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/APH_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/BE001_40.fna
+/30days/s4430291/Genomes_for_AFphylogeny_red_40/BE002_40.fna
