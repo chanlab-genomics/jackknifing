@@ -26,12 +26,10 @@ Example usage:
 
     (Unix)
     python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data --portion=40
-
-    python3 ./jackknife.py --input_path ./example_jar_data --output_path ./example_jar_data_out --portion=50
-
-    python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./data/example_reduce_1.fasta -v
     
-    python3 ./jackknife.py --input_path ./data/S.necroappetens_CCMP2469.genome.fasta --output_path ./data/S.necroappetens_CCMP2469.genome_red.fasta -v --threads=1
+    python3 ./jackknife.py --input_path ./data/example.fasta --output_path ./example_out --portion=50
+    
+    python3 ./jackknife.py --input_path ./data/S.necroappetens_CCMP2469.genome.fasta --output_path ./data -v --threads=1
 """
 
 
@@ -358,6 +356,61 @@ def remove_chunks(str_portion: bytes, chunk_size: int, portion: float, reduced_p
     return
 
 
+@unpack
+def remove_chunks2(fasta_dict, chunk_size, portion, seq_id, mutex):
+    """
+    Removes a prescribed number of chunks from a sequence.
+
+    Parameter:
+        str_portion:
+            The portion of the chunk that needs to be reduced by this thread.
+
+        chunk_size:
+            The size of the chunk that need to be removed.
+
+        portion:
+            The amount of data (as a decimal) to be removed from str_portion.
+
+        reduced_portions:
+            A list that will hold all the reduced chunks.
+
+        count:
+            The position of this portion in the final string.
+
+        mutex:
+            A threading mutex to safely access the fasta dictionary (which
+            will be shared between multiple threads).
+    """
+
+    with mutex:
+        # Convert the BioPython sequence into an array
+        seq_array = fasta_dict[seq_id].seq._data
+
+    # Find the number of chunks that need to be removed from this string
+    # portion
+    num_chunks_rm = int(len(seq_array) * portion) // chunk_size
+
+    if chunk_size * num_chunks_rm == len(seq_array):
+
+        # The very unlikely event where the entire sequence should be removed.
+        seq_array = ""
+
+    else:
+
+        for _ in range(num_chunks_rm):
+
+            # Pick a starting value to remove the chunk
+            index_start = randrange(0, len(seq_array) - chunk_size)
+
+            seq_array = seq_array[:index_start] + \
+                seq_array[index_start + chunk_size:]
+
+    with mutex:
+        fasta_dict[seq_id].seq._data = seq_array
+
+    return
+
+
 def portion_remover(fasta_path: str, output_path: str = None,
                     portion: float = 0.4, chunk_size: int = 100, threads: int = 1, verbose: bool = True):
     """
@@ -470,6 +523,108 @@ def portion_remover(fasta_path: str, output_path: str = None,
     return
 
 
+def portion_remover2(fasta_path: str, output_path: str = None,
+                     portion: float = 0.4, chunk_size: int = 100, threads: int = 1, verbose: bool = True):
+    """
+    Randomly removes a certain portion of data from a fasta file and saves the
+    result in an output path.
+
+    Parameters:
+        fasta_path:
+            A path to the fasta file to remove data.
+
+        output_path:
+            The output path to save the resulting data. If no path in
+            specified than the output will be directed to stdout.
+
+        portion:
+            The portion of data to remove. The default is a 40% reduction
+            (meaning 60% of the data will remain).
+
+        chunk_size:
+            The chunk size of the data to remove.
+
+        threads:
+            The number of threads used to remove the data.
+
+        verbose:
+            If true, runs the function in verbose mode.
+    """
+
+    if threads == 0:
+        threads = os.cpu_count()
+
+    if output_path is None:
+        output_path = sys.stdout
+
+    if verbose:
+        print()
+        print('Running on ' + os.path.basename(fasta_path) + ' with:')
+        print('\t' + 'output_path=' + output_path)
+        print('\t' + 'portion=' + str(portion * 100))
+        print('\t' + 'chunk_size=' + str(chunk_size))
+        print('\t' + 'threads=' + str(threads))
+        print()
+
+    # Create a lock for multi-threading later on
+    mutex = Lock()
+
+    if verbose:
+        print('Reading Data...')
+
+    # Open the fasta file as a dictionary
+    fasta_dict: Dict[str, SeqRecord.SeqRecord] = SeqIO.to_dict(
+        SeqIO.parse(fasta_path, "fasta"))
+
+    thread_args = [(fasta_dict, chunk_size, portion, seq_id, mutex) for
+                   fasta_dict, chunk_size, portion, seq_id, mutex in
+                   zip(
+        itertools.repeat(fasta_dict),
+        itertools.repeat(chunk_size),
+        itertools.repeat(portion),
+        fasta_dict.keys(),
+        itertools.repeat(mutex),
+    )]
+
+    num_args: int = len(thread_args)
+    progress: int = 0
+
+    progress_intervals: list = list(range(0, 100, 10))
+
+    if verbose:
+        print('Progress: ', flush=True, end='')
+        print()
+
+    with futures.ThreadPoolExecutor(threads) as executor:
+        submitted_results = executor.map(remove_chunks2, thread_args)
+
+        for result in submitted_results:
+            _ = result
+
+            if verbose:
+                progress += 1
+
+                progress_per = progress / num_args * 100
+
+                while len(progress_intervals) > 0 and progress_per > progress_intervals[0]:
+                    print(str(progress_intervals.pop(0)) +
+                          '..', flush=True, end='')
+
+    if verbose:
+        print('100', flush=True)
+        print()
+
+    record_list = []
+
+    for rec_id, rec_val in zip(fasta_dict.keys(), fasta_dict.values()):
+        rec_val.id = rec_id
+        record_list.append(rec_val)
+
+    SeqIO.write(record_list, output_path, 'fasta')
+
+    return
+
+
 def run_jackknife(args):
 
     if not 0 < args.portion < 100:
@@ -505,9 +660,9 @@ def run_jackknife(args):
 
     for path_in, path_out in to_complete:
 
-        portion_remover(path_in, output_path=path_out,
-                        portion=args.portion / 100, chunk_size=args.chunk_size,
-                        threads=args.threads, verbose=args.verbose)
+        portion_remover2(path_in, output_path=path_out,
+                         portion=args.portion / 100, chunk_size=args.chunk_size,
+                         threads=args.threads, verbose=args.verbose)
     return
 
 
