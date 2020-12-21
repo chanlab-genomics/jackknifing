@@ -1,0 +1,42 @@
+########################### Execution Started #############################
+JobId:507809.awonmgr2
+UserName:s4430291
+GroupName:qris-uq
+ExecutionHost:aw122
+###############################################################################
+(B[mtime started  21/12/2020 11:40
+------------------------------------------------------
+Job is running on the following nodes aw122.local
+------------------------------------------------------
+PBS: qsub is running on awoonga1.local
+PBS: originating queue is workq
+PBS: executing queue is Short
+PBS: working directory is /gpfs1/homes/s4430291/chanlab-genomics/jackknifing
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 507809.awonmgr2
+PBS: job name is d2s_24
+PBS: node file is /var/spool/pbs/aux/507809.awonmgr2
+PBS: current home directory is /home/s4430291
+PBS: PATH = /gpfs1/sw7/Licensed/Intel/2018_2/bin:/gpfs1/sw7/Licensed/Intel/2018_2/debugger_2018/gdb/intel64/bin:/opt/python/bin:/gpfs1/homes/s4430291/.vscode-server/bin/ea3859d4ba2f3e577a159bc91e3074c5d85c0523/bin:/home/s4430291/.vscode-server/bin/ea3859d4ba2f3e577a159bc91e3074c5d85c0523/bin:/usr/local/bin:/usr/bin:/opt/ganglia/bin:/opt/ganglia/sbin:/usr/java/latest/bin:/opt/pbs/bin:/opt/rocks/bin:/opt/rocks/sbin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin:/home/s4430291/.local/bin:/home/s4430291/bin:/opt/pbs/bin:/home/s4430291/.local/bin:/home/s4430291/bin
+------------------------------------------------------
+/gpfs1/homes/s4430291/chanlab-genomics/jackknifing
+#INFO :: 2020-12-21 11:40:58,932 :: k-mer:21
+#INFO :: 2020-12-21 11:42:11,853 :: kmerset1 VS. kmerset2 d2Score:1508952.683
+#INFO :: 2020-12-21 11:42:11,854 :: k-mer:21
+#INFO :: 2020-12-21 11:43:35,927 :: kmerset1 VS. kmerset1 d2Score:1508952.683
+#INFO :: 2020-12-21 11:43:35,928 :: k-mer:21
+#INFO :: 2020-12-21 11:45:04,130 :: kmerset2 VS. kmerset2 d2Score:1508952.683
+#INFO :: 2020-12-21 11:45:04,131 :: D2S_distance:0.956666951255
+time finished 21/12/2020 11:40
+########################### Job Execution History #############################
+JobId:507809.awonmgr2
+UserName:s4430291
+GroupName:qris-uq
+JobName:d2s_24
+SessionId:13408
+ResourcesRequested:mem=3gb,ncpus=2,place=free,walltime=00:10:00
+ResourcesUsed:cpupercent=88,cput=00:04:06,mem=11804kb,ncpus=2,vmem=384488kb,walltime=00:04:07
+QueueUsed:Short
+AccountString:NCMAS-d85
+ExitStatus:0
+###############################################################################

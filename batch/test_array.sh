@@ -1,15 +1,15 @@
 #!/bin/bash
 #
-#PBS -N jn_array
+#PBS -N test_array
 #-#PBS -l nodes=1
-#PBS -l select=1:ncpus=6:mem=30GB
-#PBS -l walltime=00:20:00
+#PBS -l select=1:ncpus=1:mem=1GB
+#PBS -l walltime=00:00:10
 
 # Make this a job array
-#PBS -J 0-10
+#PBS -J 0-5
 
 #PBS -j oe
-#PBS -o /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/example_out/array_out/array_jn_${PBS_ARRAY_INDEX}.txt
+
 
 #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
 #USE the groups command to find out your exact group name. 
@@ -34,21 +34,9 @@ echo PBS: PATH = $PBS_O_PATH
 echo ------------------------------------------------------
 export TIMEFORMAT="%E sec"
 
-cd $PBS_O_WORKDIR
+cd /home/s4430291/chanlab-genomics/jackknifing/example_out/tmp
 pwd
 
-# Make a array of folders of the target directory
-ARRAY_TARGET=(/30days/s4430291/Genomes_for_AFphylogeny/*)
-
-# Specify the output directory
-OUTPUT_DIR=/30days/s4430291/Genomes_for_AFphylogeny_red_40_2
-
-if [ ! -d $OUTPUT_DIR ] 
-then
-    mkdir $OUTPUT_DIR
-fi
-
-module load python
-python3 /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/jackknife.py --input_path ${ARRAY_TARGET[$PBS_ARRAY_INDEX]} --output_path $OUTPUT_DIR --portion=40 --chunk_size=100 --threads=$NCPUS
+echo arrary num: $PBS_ARRAY_INDEX
 
 echo "time finished "$DATE
