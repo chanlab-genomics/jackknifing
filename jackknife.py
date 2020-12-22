@@ -648,12 +648,8 @@ def run_jackknife(args):
     elif os.path.exists(output_path_dir) and not os.path.isdir(output_path_dir):
         raise IOError("Output folder must be a directory.")
 
-    prefix: str = "_" + str(int(args.portion))
-
     for file_path in args.input_paths:
         path_base: str = os.path.basename(file_path)
-        index: int = path_base.rfind(".")
-        path_base = path_base[:index] + prefix + path_base[index:]
 
         to_complete.append((file_path, os.path.join(
             output_path_dir, path_base)))

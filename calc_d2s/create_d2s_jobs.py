@@ -14,12 +14,13 @@ import argparse
 from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 from glob import glob
 from pprint import pprint
+from datetime import timedelta
 
 """
 Example Usage:
     (Unix)
 python3 calc_d2s/create_d2s_jobs.py --data_input_path /30days/s4430291/Genomes_for_AFphylogeny_red_40 --data_output_path /30days/s4430291/Genomes_for_AFphylogeny_red_40_1_D2S --temp True
-python3 calc_d2s/create_d2s_jobs.py --data_input_path /30days/s4430291/Genomes_for_AFphylogeny --data_output_path /30days/s4430291/Genomes_for_AFphylogeny_1_D2S --temp True --submit True
+python3 calc_d2s/create_d2s_jobs.py --data_input_path /30days/s4430291/Genomes_for_AFphylogeny --data_output_path /30days/s4430291/Genomes_for_AFphylogeny_D2S --temp F --submit F
 """
 
 if sys.platform.startswith('win32'):
@@ -30,9 +31,9 @@ elif sys.platform.startswith('linux'):
     ROOT_DIR = os.path.join(
         '/', 'home', 's4430291', 'chanlab-genomics', 'jackknifing')
 
-
-JOB_TIME = "00:10:00"
-JOB_MEM = "3GB"
+# Job time in minutes to run each python script
+JOB_TIME = 8
+JOB_MEM = "5GB"
 JOB_NODES = 1
 JOB_NTASKS_PER_NODE = 1
 JOB_CPUS_PER_TASK = 2
@@ -76,7 +77,7 @@ cd $PBS_O_WORKDIR
 pwd
 
 module load python
-python{py_ver_short} -W ignore {python_filepath!r} {param_str}
+{d2s_cmd}
 
 echo "time finished "$DATE
 """
@@ -105,7 +106,8 @@ def convert_bool_arg(arg_in):
 class JobCreator:
     "Creates (and possibly runs) job scripts for creating annotated images."
 
-    def __init__(self, slurm_dir: str, data_input_path: str, data_output_path: str, submit: bool = False, temp: bool = False, dry_run: bool = False):
+    def __init__(self, slurm_dir: str, data_input_path: str, data_output_path: str,
+                 groups: int = 50, submit: bool = False, temp: bool = False, dry_run: bool = False):
         """
         Initializes a job creator.
 
@@ -129,6 +131,9 @@ class JobCreator:
         self.slurm_dir = slurm_dir
         self.data_input_path = data_input_path
         self.data_output_path = data_output_path
+
+        # How many distance calculations should be run in a single batch script
+        self.groups = groups
 
         if not os.path.exists(self.data_output_path):
             os.makedirs(self.data_output_path)
@@ -224,14 +229,32 @@ class JobCreator:
         Creates a job files for each tile within the project folder.
         """
 
-        for param_id, job_arg in enumerate(self.job_args, 0):
+        # Create a list of all the commands that need to be run to compute the
+        # distances
+        d2s_cmds = [' '.join(f'--{param_name} {param_value}' for param_name, param_value in job_arg.items())
+                    for job_arg in self.job_args]
+        d2s_cmds = [
+            "python{py_ver_short} -W ignore {python_filepath!r} {param_str}".format(
+                py_ver_short=PYTHON_VERSION.rsplit(".", maxsplit=1)[0],
+                python_filepath=os.path.join(
+                    ROOT_DIR, "calc_d2s", "Calculate_D2S.py"),
+                param_str=param_str) for param_str in d2s_cmds
+        ]
+
+        d2s_cmds = [d2s_cmds[i:i + self.groups]
+                    for i in range(0, len(d2s_cmds), self.groups)]
+
+        for param_id, d2s_cmd in enumerate(d2s_cmds, 0):
+
+            # Create a timedelta object to format the amount of time we
+            # for this job
+            job_time: timedelta = timedelta(minutes=JOB_TIME * len(d2s_cmd))
 
             # Create a string of all the parameter names with their
             # corresponding parameter values.
-            param_str = ' '.join(
-                f'--{param_name} {param_value}' for param_name, param_value in job_arg.items())
+            d2s_cmd: str = '\n'.join(d2s_cmd)
 
-            file_name = f"d2s_{param_id}"
+            file_name: str = f"d2s_{param_id}"
 
             stdout_path = os.path.join(
                 self.slurm_out, f"{file_name}_out.txt")
@@ -239,14 +262,11 @@ class JobCreator:
                 self.slurm_err, f"{file_name}_err.txt")
 
             FORMATTED_TEMPLATE = JOB_TEMPLATE.format(
-                py_ver_short=PYTHON_VERSION.rsplit(".", maxsplit=1)[0],
                 file_name=file_name,
-                python_filepath=os.path.join(
-                    ROOT_DIR, "calc_d2s", "Calculate_D2S.py"),
                 stdout_file=stdout_path,
                 stderr_file=stderr_path,
-                param_str=param_str,
-                job_time=JOB_TIME,
+                d2s_cmd=d2s_cmd,
+                job_time=str(job_time),
                 job_mem=JOB_MEM,
                 job_nodes=JOB_NODES,
                 job_ntasks_per_node=JOB_NTASKS_PER_NODE,
@@ -307,6 +327,8 @@ def main():
                         help='A full path to the nkc.gz and CharFreq files.')
     parser.add_argument('--data_output_path', type=str, required=True,
                         help='An output folder for the d2s script.')
+    parser.add_argument('--group', type=int, required=False, default=175,
+                        help='Indicates how many distance calculations are run in a single batch script.')
 
     parser.add_argument('-s', '--submit', type=convert_bool_arg, default=False, const=True, nargs='?',
                         help='If True the created jobs will be immediately submitted.')
@@ -318,7 +340,7 @@ def main():
     args = parser.parse_args()
 
     JobCreator(args.slurm_dir, args.data_input_path, args.data_output_path,
-               submit=args.submit, temp=args.temp, dry_run=args.dry_run)
+               groups=args.group, submit=args.submit, temp=args.temp, dry_run=args.dry_run)
 
 
 if __name__ == "__main__":
