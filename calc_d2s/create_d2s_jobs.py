@@ -32,7 +32,7 @@ elif sys.platform.startswith('linux'):
         '/', 'home', 's4430291', 'chanlab-genomics', 'jackknifing')
 
 # Job time in minutes to run each python script
-JOB_TIME = 8
+JOB_TIME = 13
 JOB_MEM = "5GB"
 JOB_NODES = 1
 JOB_NTASKS_PER_NODE = 1
@@ -327,7 +327,7 @@ def main():
                         help='A full path to the nkc.gz and CharFreq files.')
     parser.add_argument('--data_output_path', type=str, required=True,
                         help='An output folder for the d2s script.')
-    parser.add_argument('--group', type=int, required=False, default=175,
+    parser.add_argument('--group', type=int, required=False, default=2000,
                         help='Indicates how many distance calculations are run in a single batch script.')
 
     parser.add_argument('-s', '--submit', type=convert_bool_arg, default=False, const=True, nargs='?',
