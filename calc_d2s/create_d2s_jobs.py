@@ -79,6 +79,7 @@ pwd
 module load python
 {d2s_cmd}
 
+DATE=$(date +"%d/%m/%Y %H:%M")
 echo "time finished "$DATE
 """
 
