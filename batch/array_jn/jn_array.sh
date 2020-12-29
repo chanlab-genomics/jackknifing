@@ -1,15 +1,13 @@
 #!/bin/bash
 #
-#PBS -N jn_array
 #-#PBS -l nodes=1
 #PBS -l select=1:ncpus=6:mem=30GB
 #PBS -l walltime=00:20:00
 
 # Make this a job array
-#PBS -J 0-10
+#PBS -J 0-196
 
 #PBS -j oe
-#PBS -o /gpfs1/homes/s4430291/chanlab-genomics/jackknifing/example_out/array_out/array_jn_${PBS_ARRAY_INDEX}.txt
 
 #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
 #USE the groups command to find out your exact group name. 
@@ -41,7 +39,8 @@ pwd
 ARRAY_TARGET=(/30days/s4430291/Genomes_for_AFphylogeny/*)
 
 # Specify the output directory
-OUTPUT_DIR=/30days/s4430291/Genomes_for_AFphylogeny_red_40_2
+OUTPUT_DIR=/30days/s4430291/Genomes_for_AFphylogeny_red_40_$1
+echo OUTPUT_DIR: $OUTPUT_DIR
 
 if [ ! -d $OUTPUT_DIR ] 
 then

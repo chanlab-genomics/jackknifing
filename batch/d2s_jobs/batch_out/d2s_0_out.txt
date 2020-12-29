@@ -1,0 +1,1591 @@
+########################### Execution Started #############################
+JobId:508079.awonmgr2
+UserName:s4430291
+GroupName:qris-uq
+ExecutionHost:aw134
+###############################################################################
+(B[mtime started  22/12/2020 11:29
+------------------------------------------------------
+Job is running on the following nodes aw134.local
+------------------------------------------------------
+PBS: qsub is running on awoonga1.local
+PBS: originating queue is workq
+PBS: executing queue is Short
+PBS: working directory is /home/s4430291/chanlab-genomics/jackknifing
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 508079.awonmgr2
+PBS: job name is d2s_0
+PBS: node file is /var/spool/pbs/aux/508079.awonmgr2
+PBS: current home directory is /home/s4430291
+PBS: PATH = /gpfs1/sw7/Licensed/Intel/2018_2/bin:/gpfs1/sw7/Licensed/Intel/2018_2/debugger_2018/gdb/intel64/bin:/opt/python/bin:/gpfs1/homes/s4430291/.vscode-server/bin/ea3859d4ba2f3e577a159bc91e3074c5d85c0523/bin:/home/s4430291/.vscode-server/bin/ea3859d4ba2f3e577a159bc91e3074c5d85c0523/bin:/usr/local/bin:/usr/bin:/opt/ganglia/bin:/opt/ganglia/sbin:/usr/java/latest/bin:/opt/pbs/bin:/opt/rocks/bin:/opt/rocks/sbin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin:/home/s4430291/.local/bin:/home/s4430291/bin:/opt/pbs/bin:/home/s4430291/.local/bin:/home/s4430291/bin
+------------------------------------------------------
+/home/s4430291/chanlab-genomics/jackknifing
+#INFO :: 2020-12-22 11:29:34,457 :: k-mer:21
+#INFO :: 2020-12-22 11:31:49,511 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:32:27,308 :: kmerset1 VS. kmerset2 d2Score:6784165.15761
+#INFO :: 2020-12-22 11:32:27,309 :: k-mer:21
+#INFO :: 2020-12-22 11:35:07,630 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:35:25,242 :: kmerset1 VS. kmerset1 d2Score:6784165.15761
+#INFO :: 2020-12-22 11:35:25,243 :: k-mer:21
+#INFO :: 2020-12-22 11:38:03,799 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:38:23,479 :: kmerset2 VS. kmerset2 d2Score:6784165.15761
+#INFO :: 2020-12-22 11:38:23,479 :: D2S_distance:0.158479478906
+#INFO :: 2020-12-22 11:38:23,586 :: k-mer:21
+#INFO :: 2020-12-22 11:40:44,173 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:41:17,175 :: kmerset1 VS. kmerset2 d2Score:7225430.4848
+#INFO :: 2020-12-22 11:41:17,176 :: k-mer:21
+#INFO :: 2020-12-22 11:43:55,646 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:44:13,502 :: kmerset1 VS. kmerset1 d2Score:7225430.4848
+#INFO :: 2020-12-22 11:44:13,516 :: k-mer:21
+#INFO :: 2020-12-22 11:46:52,523 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:47:13,874 :: kmerset2 VS. kmerset2 d2Score:7225430.4848
+#INFO :: 2020-12-22 11:47:13,874 :: D2S_distance:0.103710653663
+#INFO :: 2020-12-22 11:47:14,138 :: k-mer:21
+#INFO :: 2020-12-22 11:49:42,759 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:50:12,948 :: kmerset1 VS. kmerset2 d2Score:7362663.39069
+#INFO :: 2020-12-22 11:50:12,972 :: k-mer:21
+#INFO :: 2020-12-22 11:52:54,899 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:53:12,933 :: kmerset1 VS. kmerset1 d2Score:7362663.39069
+#INFO :: 2020-12-22 11:53:12,980 :: k-mer:21
+#INFO :: 2020-12-22 11:55:53,678 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:56:13,605 :: kmerset2 VS. kmerset2 d2Score:7362663.39069
+#INFO :: 2020-12-22 11:56:13,606 :: D2S_distance:0.0788618259553
+#INFO :: 2020-12-22 11:56:13,734 :: k-mer:21
+#INFO :: 2020-12-22 11:58:37,839 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 11:59:09,781 :: kmerset1 VS. kmerset2 d2Score:7180208.33742
+#INFO :: 2020-12-22 11:59:09,782 :: k-mer:21
+#INFO :: 2020-12-22 12:01:50,309 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:02:08,463 :: kmerset1 VS. kmerset1 d2Score:7180208.33742
+#INFO :: 2020-12-22 12:02:08,463 :: k-mer:21
+#INFO :: 2020-12-22 12:04:49,319 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:05:08,608 :: kmerset2 VS. kmerset2 d2Score:7180208.33742
+#INFO :: 2020-12-22 12:05:08,608 :: D2S_distance:0.101761336446
+#INFO :: 2020-12-22 12:05:08,921 :: k-mer:21
+#INFO :: 2020-12-22 12:07:29,909 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:08:00,670 :: kmerset1 VS. kmerset2 d2Score:7162194.66957
+#INFO :: 2020-12-22 12:08:00,673 :: k-mer:21
+#INFO :: 2020-12-22 12:10:37,703 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:10:55,100 :: kmerset1 VS. kmerset1 d2Score:7162194.66957
+#INFO :: 2020-12-22 12:10:55,125 :: k-mer:21
+#INFO :: 2020-12-22 12:13:33,171 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:13:50,636 :: kmerset2 VS. kmerset2 d2Score:7162194.66957
+#INFO :: 2020-12-22 12:13:50,636 :: D2S_distance:0.100590838171
+#INFO :: 2020-12-22 12:13:50,735 :: k-mer:21
+#INFO :: 2020-12-22 12:16:17,247 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:16:45,645 :: kmerset1 VS. kmerset2 d2Score:7426811.58107
+#INFO :: 2020-12-22 12:16:45,646 :: k-mer:21
+#INFO :: 2020-12-22 12:19:21,421 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:19:38,932 :: kmerset1 VS. kmerset1 d2Score:7426811.58107
+#INFO :: 2020-12-22 12:19:38,953 :: k-mer:21
+#INFO :: 2020-12-22 12:22:16,046 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:22:36,109 :: kmerset2 VS. kmerset2 d2Score:7426811.58107
+#INFO :: 2020-12-22 12:22:36,109 :: D2S_distance:0.0719949690285
+#INFO :: 2020-12-22 12:22:36,201 :: k-mer:21
+#INFO :: 2020-12-22 12:25:00,596 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:25:30,085 :: kmerset1 VS. kmerset2 d2Score:7364902.08624
+#INFO :: 2020-12-22 12:25:30,087 :: k-mer:21
+#INFO :: 2020-12-22 12:28:07,386 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:28:25,399 :: kmerset1 VS. kmerset1 d2Score:7364902.08624
+#INFO :: 2020-12-22 12:28:25,460 :: k-mer:21
+#INFO :: 2020-12-22 12:31:05,406 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:31:25,508 :: kmerset2 VS. kmerset2 d2Score:7364902.08624
+#INFO :: 2020-12-22 12:31:25,508 :: D2S_distance:0.0805236468203
+#INFO :: 2020-12-22 12:31:25,795 :: k-mer:21
+#INFO :: 2020-12-22 12:33:46,008 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:34:19,402 :: kmerset1 VS. kmerset2 d2Score:7096748.05878
+#INFO :: 2020-12-22 12:34:19,403 :: k-mer:21
+#INFO :: 2020-12-22 12:36:56,399 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:37:14,085 :: kmerset1 VS. kmerset1 d2Score:7096748.05878
+#INFO :: 2020-12-22 12:37:14,097 :: k-mer:21
+#INFO :: 2020-12-22 12:39:50,974 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:40:10,285 :: kmerset2 VS. kmerset2 d2Score:7096748.05878
+#INFO :: 2020-12-22 12:40:10,285 :: D2S_distance:0.11464407535
+#INFO :: 2020-12-22 12:40:10,401 :: k-mer:21
+#INFO :: 2020-12-22 12:42:31,871 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:43:01,595 :: kmerset1 VS. kmerset2 d2Score:7160635.34082
+#INFO :: 2020-12-22 12:43:01,595 :: k-mer:21
+#INFO :: 2020-12-22 12:45:38,963 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:45:56,779 :: kmerset1 VS. kmerset1 d2Score:7160635.34082
+#INFO :: 2020-12-22 12:45:56,794 :: k-mer:21
+#INFO :: 2020-12-22 12:48:33,803 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:48:50,769 :: kmerset2 VS. kmerset2 d2Score:7160635.34082
+#INFO :: 2020-12-22 12:48:50,769 :: D2S_distance:0.0979235770462
+#INFO :: 2020-12-22 12:48:50,889 :: k-mer:21
+#INFO :: 2020-12-22 12:51:11,304 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:51:41,775 :: kmerset1 VS. kmerset2 d2Score:7186129.99936
+#INFO :: 2020-12-22 12:51:41,776 :: k-mer:21
+#INFO :: 2020-12-22 12:54:17,851 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:54:35,329 :: kmerset1 VS. kmerset1 d2Score:7186129.99936
+#INFO :: 2020-12-22 12:54:35,341 :: k-mer:21
+#INFO :: 2020-12-22 12:57:12,683 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 12:57:30,855 :: kmerset2 VS. kmerset2 d2Score:7186129.99936
+#INFO :: 2020-12-22 12:57:30,855 :: D2S_distance:0.0995132948469
+#INFO :: 2020-12-22 12:57:31,045 :: k-mer:21
+#INFO :: 2020-12-22 12:59:37,909 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:00:01,769 :: kmerset1 VS. kmerset2 d2Score:6112430.51036
+#INFO :: 2020-12-22 13:00:01,769 :: k-mer:21
+#INFO :: 2020-12-22 13:02:40,926 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:02:58,857 :: kmerset1 VS. kmerset1 d2Score:6112430.51036
+#INFO :: 2020-12-22 13:02:58,869 :: k-mer:21
+#INFO :: 2020-12-22 13:05:21,030 :: kmerset2 VS. kmerset2 d2Score:6112430.51036
+#INFO :: 2020-12-22 13:05:21,030 :: D2S_distance:0.267315938946
+#INFO :: 2020-12-22 13:05:21,176 :: k-mer:21
+#INFO :: 2020-12-22 13:07:24,065 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:07:47,403 :: kmerset1 VS. kmerset2 d2Score:5995983.79442
+#INFO :: 2020-12-22 13:07:47,404 :: k-mer:21
+#INFO :: 2020-12-22 13:10:19,846 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:10:37,436 :: kmerset1 VS. kmerset1 d2Score:5995983.79442
+#INFO :: 2020-12-22 13:10:37,478 :: k-mer:21
+#INFO :: 2020-12-22 13:12:56,640 :: kmerset2 VS. kmerset2 d2Score:5995983.79442
+#INFO :: 2020-12-22 13:12:56,640 :: D2S_distance:0.260712367186
+#INFO :: 2020-12-22 13:12:56,853 :: k-mer:21
+#INFO :: 2020-12-22 13:15:19,492 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:15:50,011 :: kmerset1 VS. kmerset2 d2Score:7194454.82035
+#INFO :: 2020-12-22 13:15:50,012 :: k-mer:21
+#INFO :: 2020-12-22 13:18:27,687 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:18:45,369 :: kmerset1 VS. kmerset1 d2Score:7194454.82035
+#INFO :: 2020-12-22 13:18:45,389 :: k-mer:21
+#INFO :: 2020-12-22 13:21:23,066 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:21:41,019 :: kmerset2 VS. kmerset2 d2Score:7194454.82035
+#INFO :: 2020-12-22 13:21:41,019 :: D2S_distance:0.0979085745594
+#INFO :: 2020-12-22 13:21:41,117 :: k-mer:21
+#INFO :: 2020-12-22 13:24:02,114 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:24:32,481 :: kmerset1 VS. kmerset2 d2Score:7198390.59489
+#INFO :: 2020-12-22 13:24:32,486 :: k-mer:21
+#INFO :: 2020-12-22 13:27:11,303 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:27:29,197 :: kmerset1 VS. kmerset1 d2Score:7198390.59489
+#INFO :: 2020-12-22 13:27:29,216 :: k-mer:21
+#INFO :: 2020-12-22 13:30:08,753 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:30:26,615 :: kmerset2 VS. kmerset2 d2Score:7198390.59489
+#INFO :: 2020-12-22 13:30:26,616 :: D2S_distance:0.0971023737409
+#INFO :: 2020-12-22 13:30:26,729 :: k-mer:21
+#INFO :: 2020-12-22 13:32:47,838 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:33:17,678 :: kmerset1 VS. kmerset2 d2Score:7187150.55787
+#INFO :: 2020-12-22 13:33:17,679 :: k-mer:21
+#INFO :: 2020-12-22 13:35:53,484 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:36:10,964 :: kmerset1 VS. kmerset1 d2Score:7187150.55787
+#INFO :: 2020-12-22 13:36:10,964 :: k-mer:21
+#INFO :: 2020-12-22 13:38:46,498 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:39:03,737 :: kmerset2 VS. kmerset2 d2Score:7187150.55787
+#INFO :: 2020-12-22 13:39:03,737 :: D2S_distance:0.0966553817566
+#INFO :: 2020-12-22 13:39:03,833 :: k-mer:21
+#INFO :: 2020-12-22 13:41:27,020 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:41:58,922 :: kmerset1 VS. kmerset2 d2Score:7292784.90674
+#INFO :: 2020-12-22 13:41:58,922 :: k-mer:21
+#INFO :: 2020-12-22 13:44:36,219 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:44:53,835 :: kmerset1 VS. kmerset1 d2Score:7292784.90674
+#INFO :: 2020-12-22 13:44:53,835 :: k-mer:21
+#INFO :: 2020-12-22 13:47:31,986 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:47:53,506 :: kmerset2 VS. kmerset2 d2Score:7292784.90674
+#INFO :: 2020-12-22 13:47:53,506 :: D2S_distance:0.0963750564858
+#INFO :: 2020-12-22 13:47:53,600 :: k-mer:21
+#INFO :: 2020-12-22 13:50:02,956 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:50:27,239 :: kmerset1 VS. kmerset2 d2Score:6101393.0443
+#INFO :: 2020-12-22 13:50:27,240 :: k-mer:21
+#INFO :: 2020-12-22 13:53:07,807 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:53:25,641 :: kmerset1 VS. kmerset1 d2Score:6101393.0443
+#INFO :: 2020-12-22 13:53:25,689 :: k-mer:21
+#INFO :: 2020-12-22 13:55:53,432 :: kmerset2 VS. kmerset2 d2Score:6101393.0443
+#INFO :: 2020-12-22 13:55:53,432 :: D2S_distance:0.176221082739
+#INFO :: 2020-12-22 13:55:53,719 :: k-mer:21
+#INFO :: 2020-12-22 13:58:16,112 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 13:58:46,645 :: kmerset1 VS. kmerset2 d2Score:7160618.85401
+#INFO :: 2020-12-22 13:58:46,645 :: k-mer:21
+#INFO :: 2020-12-22 14:01:25,143 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:01:42,976 :: kmerset1 VS. kmerset1 d2Score:7160618.85401
+#INFO :: 2020-12-22 14:01:42,976 :: k-mer:21
+#INFO :: 2020-12-22 14:04:21,441 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:04:38,976 :: kmerset2 VS. kmerset2 d2Score:7160618.85401
+#INFO :: 2020-12-22 14:04:38,977 :: D2S_distance:0.0982479112415
+#INFO :: 2020-12-22 14:04:39,082 :: k-mer:21
+#INFO :: 2020-12-22 14:07:00,907 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:07:31,609 :: kmerset1 VS. kmerset2 d2Score:7168170.85036
+#INFO :: 2020-12-22 14:07:31,641 :: k-mer:21
+#INFO :: 2020-12-22 14:10:10,282 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:10:28,217 :: kmerset1 VS. kmerset1 d2Score:7168170.85036
+#INFO :: 2020-12-22 14:10:28,284 :: k-mer:21
+#INFO :: 2020-12-22 14:13:06,986 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:13:25,057 :: kmerset2 VS. kmerset2 d2Score:7168170.85036
+#INFO :: 2020-12-22 14:13:25,057 :: D2S_distance:0.100384671696
+#INFO :: 2020-12-22 14:13:25,235 :: k-mer:21
+#INFO :: 2020-12-22 14:15:44,294 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:16:15,012 :: kmerset1 VS. kmerset2 d2Score:7174230.96294
+#INFO :: 2020-12-22 14:16:15,013 :: k-mer:21
+#INFO :: 2020-12-22 14:18:52,556 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:19:10,694 :: kmerset1 VS. kmerset1 d2Score:7174230.96294
+#INFO :: 2020-12-22 14:19:10,745 :: k-mer:21
+#INFO :: 2020-12-22 14:21:52,375 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:22:11,376 :: kmerset2 VS. kmerset2 d2Score:7174230.96294
+#INFO :: 2020-12-22 14:22:11,377 :: D2S_distance:0.0995127339951
+#INFO :: 2020-12-22 14:22:11,602 :: k-mer:21
+#INFO :: 2020-12-22 14:24:38,546 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:25:09,326 :: kmerset1 VS. kmerset2 d2Score:7212578.41639
+#INFO :: 2020-12-22 14:25:09,345 :: k-mer:21
+#INFO :: 2020-12-22 14:27:48,541 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:28:06,667 :: kmerset1 VS. kmerset1 d2Score:7212578.41639
+#INFO :: 2020-12-22 14:28:06,678 :: k-mer:21
+#INFO :: 2020-12-22 14:30:44,408 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:31:02,597 :: kmerset2 VS. kmerset2 d2Score:7212578.41639
+#INFO :: 2020-12-22 14:31:02,598 :: D2S_distance:0.0971280427195
+#INFO :: 2020-12-22 14:31:02,776 :: k-mer:21
+#INFO :: 2020-12-22 14:33:11,445 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:33:36,305 :: kmerset1 VS. kmerset2 d2Score:6215834.71044
+#INFO :: 2020-12-22 14:33:36,317 :: k-mer:21
+#INFO :: 2020-12-22 14:36:13,070 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:36:30,467 :: kmerset1 VS. kmerset1 d2Score:6215834.71044
+#INFO :: 2020-12-22 14:36:30,477 :: k-mer:21
+#INFO :: 2020-12-22 14:38:55,162 :: kmerset2 VS. kmerset2 d2Score:6215834.71044
+#INFO :: 2020-12-22 14:38:55,162 :: D2S_distance:0.231902857425
+#INFO :: 2020-12-22 14:38:55,298 :: k-mer:21
+#INFO :: 2020-12-22 14:41:06,306 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:41:43,564 :: kmerset1 VS. kmerset2 d2Score:6683225.65862
+#INFO :: 2020-12-22 14:41:43,565 :: k-mer:21
+#INFO :: 2020-12-22 14:44:21,317 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:44:38,863 :: kmerset1 VS. kmerset1 d2Score:6683225.65862
+#INFO :: 2020-12-22 14:44:38,906 :: k-mer:21
+#INFO :: 2020-12-22 14:47:16,418 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:47:33,973 :: kmerset2 VS. kmerset2 d2Score:6683225.65862
+#INFO :: 2020-12-22 14:47:33,973 :: D2S_distance:0.167713118989
+#INFO :: 2020-12-22 14:47:34,124 :: k-mer:21
+#INFO :: 2020-12-22 14:49:57,013 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:50:27,392 :: kmerset1 VS. kmerset2 d2Score:7189112.97323
+#INFO :: 2020-12-22 14:50:27,393 :: k-mer:21
+#INFO :: 2020-12-22 14:53:05,410 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:53:23,112 :: kmerset1 VS. kmerset1 d2Score:7189112.97323
+#INFO :: 2020-12-22 14:53:23,131 :: k-mer:21
+#INFO :: 2020-12-22 14:56:00,752 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:56:18,379 :: kmerset2 VS. kmerset2 d2Score:7189112.97323
+#INFO :: 2020-12-22 14:56:18,379 :: D2S_distance:0.0973781396667
+#INFO :: 2020-12-22 14:56:18,543 :: k-mer:21
+#INFO :: 2020-12-22 14:58:23,872 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 14:58:47,709 :: kmerset1 VS. kmerset2 d2Score:6105084.70084
+#INFO :: 2020-12-22 14:58:47,711 :: k-mer:21
+#INFO :: 2020-12-22 15:01:22,475 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:01:40,461 :: kmerset1 VS. kmerset1 d2Score:6105084.70084
+#INFO :: 2020-12-22 15:01:40,486 :: k-mer:21
+#INFO :: 2020-12-22 15:04:04,633 :: kmerset2 VS. kmerset2 d2Score:6105084.70084
+#INFO :: 2020-12-22 15:04:04,633 :: D2S_distance:0.240334701138
+#INFO :: 2020-12-22 15:04:04,748 :: k-mer:21
+#INFO :: 2020-12-22 15:06:23,423 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:06:48,253 :: kmerset1 VS. kmerset2 d2Score:6764569.56638
+#INFO :: 2020-12-22 15:06:48,253 :: k-mer:21
+#INFO :: 2020-12-22 15:09:26,516 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:09:44,261 :: kmerset1 VS. kmerset1 d2Score:6764569.56638
+#INFO :: 2020-12-22 15:09:44,292 :: k-mer:21
+#INFO :: 2020-12-22 15:12:18,400 :: kmerset2 VS. kmerset2 d2Score:6764569.56638
+#INFO :: 2020-12-22 15:12:18,400 :: D2S_distance:0.19162496063
+#INFO :: 2020-12-22 15:12:18,529 :: k-mer:21
+#INFO :: 2020-12-22 15:14:41,452 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:15:11,878 :: kmerset1 VS. kmerset2 d2Score:7209994.32217
+#INFO :: 2020-12-22 15:15:11,878 :: k-mer:21
+#INFO :: 2020-12-22 15:17:48,768 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:18:06,437 :: kmerset1 VS. kmerset1 d2Score:7209994.32217
+#INFO :: 2020-12-22 15:18:06,454 :: k-mer:21
+#INFO :: 2020-12-22 15:20:44,462 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:21:02,806 :: kmerset2 VS. kmerset2 d2Score:7209994.32217
+#INFO :: 2020-12-22 15:21:02,806 :: D2S_distance:0.097060696552
+#INFO :: 2020-12-22 15:21:02,923 :: k-mer:21
+#INFO :: 2020-12-22 15:23:15,593 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:23:53,946 :: kmerset1 VS. kmerset2 d2Score:6729841.26293
+#INFO :: 2020-12-22 15:23:53,947 :: k-mer:21
+#INFO :: 2020-12-22 15:26:31,664 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:26:49,271 :: kmerset1 VS. kmerset1 d2Score:6729841.26293
+#INFO :: 2020-12-22 15:26:49,282 :: k-mer:21
+#INFO :: 2020-12-22 15:29:27,320 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:29:46,920 :: kmerset2 VS. kmerset2 d2Score:6729841.26293
+#INFO :: 2020-12-22 15:29:46,920 :: D2S_distance:0.166334850519
+#INFO :: 2020-12-22 15:29:47,022 :: k-mer:21
+#INFO :: 2020-12-22 15:32:10,255 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:32:42,293 :: kmerset1 VS. kmerset2 d2Score:7192658.07535
+#INFO :: 2020-12-22 15:32:42,293 :: k-mer:21
+#INFO :: 2020-12-22 15:35:21,675 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:35:39,545 :: kmerset1 VS. kmerset1 d2Score:7192658.07535
+#INFO :: 2020-12-22 15:35:39,554 :: k-mer:21
+#INFO :: 2020-12-22 15:38:18,243 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:38:37,988 :: kmerset2 VS. kmerset2 d2Score:7192658.07535
+#INFO :: 2020-12-22 15:38:37,988 :: D2S_distance:0.103230206301
+#INFO :: 2020-12-22 15:38:38,098 :: k-mer:21
+#INFO :: 2020-12-22 15:40:49,103 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:41:14,482 :: kmerset1 VS. kmerset2 d2Score:6611631.73788
+#INFO :: 2020-12-22 15:41:14,483 :: k-mer:21
+#INFO :: 2020-12-22 15:43:50,391 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:44:07,947 :: kmerset1 VS. kmerset1 d2Score:6611631.73788
+#INFO :: 2020-12-22 15:44:07,980 :: k-mer:21
+#INFO :: 2020-12-22 15:46:38,718 :: kmerset2 VS. kmerset2 d2Score:6611631.73788
+#INFO :: 2020-12-22 15:46:38,718 :: D2S_distance:0.232046150827
+#INFO :: 2020-12-22 15:46:38,832 :: k-mer:21
+#INFO :: 2020-12-22 15:48:40,535 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:49:03,455 :: kmerset1 VS. kmerset2 d2Score:5773086.36361
+#INFO :: 2020-12-22 15:49:03,455 :: k-mer:21
+#INFO :: 2020-12-22 15:51:40,244 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:51:58,179 :: kmerset1 VS. kmerset1 d2Score:5773086.36361
+#INFO :: 2020-12-22 15:51:58,209 :: k-mer:21
+#INFO :: 2020-12-22 15:54:10,136 :: kmerset2 VS. kmerset2 d2Score:5773086.36361
+#INFO :: 2020-12-22 15:54:10,136 :: D2S_distance:0.306722655254
+#INFO :: 2020-12-22 15:54:10,275 :: k-mer:21
+#INFO :: 2020-12-22 15:56:35,906 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 15:57:07,517 :: kmerset1 VS. kmerset2 d2Score:7172784.77591
+#INFO :: 2020-12-22 15:57:07,517 :: k-mer:21
+#INFO :: 2020-12-22 15:59:55,123 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:00:13,507 :: kmerset1 VS. kmerset1 d2Score:7172784.77591
+#INFO :: 2020-12-22 16:00:13,545 :: k-mer:21
+#INFO :: 2020-12-22 16:02:57,623 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:03:16,155 :: kmerset2 VS. kmerset2 d2Score:7172784.77591
+#INFO :: 2020-12-22 16:03:16,155 :: D2S_distance:0.101410548463
+#INFO :: 2020-12-22 16:03:16,400 :: k-mer:21
+#INFO :: 2020-12-22 16:05:23,697 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:05:48,008 :: kmerset1 VS. kmerset2 d2Score:5955084.34418
+#INFO :: 2020-12-22 16:05:48,046 :: k-mer:21
+#INFO :: 2020-12-22 16:08:28,798 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:08:46,589 :: kmerset1 VS. kmerset1 d2Score:5955084.34418
+#INFO :: 2020-12-22 16:08:46,629 :: k-mer:21
+#INFO :: 2020-12-22 16:11:07,022 :: kmerset2 VS. kmerset2 d2Score:5955084.34418
+#INFO :: 2020-12-22 16:11:07,022 :: D2S_distance:0.25837997963
+#INFO :: 2020-12-22 16:11:07,229 :: k-mer:21
+#INFO :: 2020-12-22 16:13:33,007 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:14:04,320 :: kmerset1 VS. kmerset2 d2Score:7209967.63712
+#INFO :: 2020-12-22 16:14:04,320 :: k-mer:21
+#INFO :: 2020-12-22 16:16:46,105 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:17:04,076 :: kmerset1 VS. kmerset1 d2Score:7209967.63712
+#INFO :: 2020-12-22 16:17:04,124 :: k-mer:21
+#INFO :: 2020-12-22 16:19:44,281 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:20:02,738 :: kmerset2 VS. kmerset2 d2Score:7209967.63712
+#INFO :: 2020-12-22 16:20:02,738 :: D2S_distance:0.0974611605052
+#INFO :: 2020-12-22 16:20:02,879 :: k-mer:21
+#INFO :: 2020-12-22 16:22:30,560 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:22:59,659 :: kmerset1 VS. kmerset2 d2Score:7446256.72697
+#INFO :: 2020-12-22 16:22:59,660 :: k-mer:21
+#INFO :: 2020-12-22 16:25:39,098 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:25:57,007 :: kmerset1 VS. kmerset1 d2Score:7446256.72697
+#INFO :: 2020-12-22 16:25:57,034 :: k-mer:21
+#INFO :: 2020-12-22 16:28:36,473 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:28:57,431 :: kmerset2 VS. kmerset2 d2Score:7446256.72697
+#INFO :: 2020-12-22 16:28:57,431 :: D2S_distance:0.0724357370783
+#INFO :: 2020-12-22 16:28:57,609 :: k-mer:21
+#INFO :: 2020-12-22 16:31:18,716 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:31:49,189 :: kmerset1 VS. kmerset2 d2Score:7208436.80617
+#INFO :: 2020-12-22 16:31:49,190 :: k-mer:21
+#INFO :: 2020-12-22 16:34:25,816 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:34:43,363 :: kmerset1 VS. kmerset1 d2Score:7208436.80617
+#INFO :: 2020-12-22 16:34:43,378 :: k-mer:21
+#INFO :: 2020-12-22 16:37:19,584 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:37:37,632 :: kmerset2 VS. kmerset2 d2Score:7208436.80617
+#INFO :: 2020-12-22 16:37:37,632 :: D2S_distance:0.0985641018939
+#INFO :: 2020-12-22 16:37:37,742 :: k-mer:21
+#INFO :: 2020-12-22 16:39:58,972 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:40:32,512 :: kmerset1 VS. kmerset2 d2Score:7233185.37005
+#INFO :: 2020-12-22 16:40:32,513 :: k-mer:21
+#INFO :: 2020-12-22 16:43:09,630 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:43:27,260 :: kmerset1 VS. kmerset1 d2Score:7233185.37005
+#INFO :: 2020-12-22 16:43:27,315 :: k-mer:21
+#INFO :: 2020-12-22 16:46:07,918 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:46:29,074 :: kmerset2 VS. kmerset2 d2Score:7233185.37005
+#INFO :: 2020-12-22 16:46:29,074 :: D2S_distance:0.101402080733
+#INFO :: 2020-12-22 16:46:29,294 :: k-mer:21
+#INFO :: 2020-12-22 16:48:58,005 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:49:27,079 :: kmerset1 VS. kmerset2 d2Score:7386419.47324
+#INFO :: 2020-12-22 16:49:27,100 :: k-mer:21
+#INFO :: 2020-12-22 16:52:05,134 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:52:22,397 :: kmerset1 VS. kmerset1 d2Score:7386419.47324
+#INFO :: 2020-12-22 16:52:22,457 :: k-mer:21
+#INFO :: 2020-12-22 16:54:56,658 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:55:15,725 :: kmerset2 VS. kmerset2 d2Score:7386419.47324
+#INFO :: 2020-12-22 16:55:15,725 :: D2S_distance:0.0723735856425
+#INFO :: 2020-12-22 16:55:15,891 :: k-mer:21
+#INFO :: 2020-12-22 16:57:35,347 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 16:58:05,889 :: kmerset1 VS. kmerset2 d2Score:7180191.63004
+#INFO :: 2020-12-22 16:58:05,890 :: k-mer:21
+#INFO :: 2020-12-22 17:00:41,628 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:00:59,451 :: kmerset1 VS. kmerset1 d2Score:7180191.63004
+#INFO :: 2020-12-22 17:00:59,478 :: k-mer:21
+#INFO :: 2020-12-22 17:03:37,856 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:03:56,182 :: kmerset2 VS. kmerset2 d2Score:7180191.63004
+#INFO :: 2020-12-22 17:03:56,182 :: D2S_distance:0.10003170719
+#INFO :: 2020-12-22 17:03:56,319 :: k-mer:21
+#INFO :: 2020-12-22 17:06:17,204 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:06:47,956 :: kmerset1 VS. kmerset2 d2Score:7166730.5829
+#INFO :: 2020-12-22 17:06:47,957 :: k-mer:21
+#INFO :: 2020-12-22 17:09:25,960 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:09:43,407 :: kmerset1 VS. kmerset1 d2Score:7166730.5829
+#INFO :: 2020-12-22 17:09:43,458 :: k-mer:21
+#INFO :: 2020-12-22 17:12:20,371 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:12:39,194 :: kmerset2 VS. kmerset2 d2Score:7166730.5829
+#INFO :: 2020-12-22 17:12:39,194 :: D2S_distance:0.102652488598
+#INFO :: 2020-12-22 17:12:39,338 :: k-mer:21
+#INFO :: 2020-12-22 17:15:00,114 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:15:30,191 :: kmerset1 VS. kmerset2 d2Score:7164386.72707
+#INFO :: 2020-12-22 17:15:30,192 :: k-mer:21
+#INFO :: 2020-12-22 17:18:06,240 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:18:23,726 :: kmerset1 VS. kmerset1 d2Score:7164386.72707
+#INFO :: 2020-12-22 17:18:23,780 :: k-mer:21
+#INFO :: 2020-12-22 17:20:58,783 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:21:15,811 :: kmerset2 VS. kmerset2 d2Score:7164386.72707
+#INFO :: 2020-12-22 17:21:15,811 :: D2S_distance:0.0994930975479
+#INFO :: 2020-12-22 17:21:15,942 :: k-mer:21
+#INFO :: 2020-12-22 17:23:38,385 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:24:09,335 :: kmerset1 VS. kmerset2 d2Score:7146663.39008
+#INFO :: 2020-12-22 17:24:09,336 :: k-mer:21
+#INFO :: 2020-12-22 17:26:48,201 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:27:06,092 :: kmerset1 VS. kmerset1 d2Score:7146663.39008
+#INFO :: 2020-12-22 17:27:06,129 :: k-mer:21
+#INFO :: 2020-12-22 17:29:45,089 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:30:02,579 :: kmerset2 VS. kmerset2 d2Score:7146663.39008
+#INFO :: 2020-12-22 17:30:02,580 :: D2S_distance:0.102800567262
+#INFO :: 2020-12-22 17:30:02,733 :: k-mer:21
+#INFO :: 2020-12-22 17:32:34,155 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:32:58,370 :: kmerset1 VS. kmerset2 d2Score:7701013.15995
+#INFO :: 2020-12-22 17:32:58,370 :: k-mer:21
+#INFO :: 2020-12-22 17:35:39,134 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:35:56,849 :: kmerset1 VS. kmerset1 d2Score:7701013.15995
+#INFO :: 2020-12-22 17:35:56,871 :: k-mer:21
+#INFO :: 2020-12-22 17:38:36,320 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:38:57,271 :: kmerset2 VS. kmerset2 d2Score:7701013.15995
+#INFO :: 2020-12-22 17:38:57,271 :: D2S_distance:0.0347772917035
+#INFO :: 2020-12-22 17:38:57,459 :: k-mer:21
+#INFO :: 2020-12-22 17:41:18,515 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:41:48,951 :: kmerset1 VS. kmerset2 d2Score:7267100.58188
+#INFO :: 2020-12-22 17:41:48,956 :: k-mer:21
+#INFO :: 2020-12-22 17:44:28,543 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:44:47,218 :: kmerset1 VS. kmerset1 d2Score:7267100.58188
+#INFO :: 2020-12-22 17:44:47,249 :: k-mer:21
+#INFO :: 2020-12-22 17:47:28,758 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:47:49,066 :: kmerset2 VS. kmerset2 d2Score:7267100.58188
+#INFO :: 2020-12-22 17:47:49,066 :: D2S_distance:0.093993329988
+#INFO :: 2020-12-22 17:47:49,326 :: k-mer:21
+#INFO :: 2020-12-22 17:50:16,823 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:50:46,202 :: kmerset1 VS. kmerset2 d2Score:7399653.12544
+#INFO :: 2020-12-22 17:50:46,232 :: k-mer:21
+#INFO :: 2020-12-22 17:53:25,693 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:53:43,531 :: kmerset1 VS. kmerset1 d2Score:7399653.12544
+#INFO :: 2020-12-22 17:53:43,564 :: k-mer:21
+#INFO :: 2020-12-22 17:56:23,753 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:56:44,126 :: kmerset2 VS. kmerset2 d2Score:7399653.12544
+#INFO :: 2020-12-22 17:56:44,127 :: D2S_distance:0.0751402230657
+#INFO :: 2020-12-22 17:56:44,247 :: k-mer:21
+#INFO :: 2020-12-22 17:58:53,763 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 17:59:31,309 :: kmerset1 VS. kmerset2 d2Score:6654884.19155
+#INFO :: 2020-12-22 17:59:31,329 :: k-mer:21
+#INFO :: 2020-12-22 18:02:08,158 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:02:25,655 :: kmerset1 VS. kmerset1 d2Score:6654884.19155
+#INFO :: 2020-12-22 18:02:25,678 :: k-mer:21
+#INFO :: 2020-12-22 18:05:01,701 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:05:19,400 :: kmerset2 VS. kmerset2 d2Score:6654884.19155
+#INFO :: 2020-12-22 18:05:19,400 :: D2S_distance:0.172675408333
+#INFO :: 2020-12-22 18:05:19,513 :: k-mer:21
+#INFO :: 2020-12-22 18:07:46,775 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:08:16,113 :: kmerset1 VS. kmerset2 d2Score:7413600.95604
+#INFO :: 2020-12-22 18:08:16,114 :: k-mer:21
+#INFO :: 2020-12-22 18:10:52,849 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:11:10,428 :: kmerset1 VS. kmerset1 d2Score:7413600.95604
+#INFO :: 2020-12-22 18:11:10,458 :: k-mer:21
+#INFO :: 2020-12-22 18:13:46,813 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:14:06,666 :: kmerset2 VS. kmerset2 d2Score:7413600.95604
+#INFO :: 2020-12-22 18:14:06,667 :: D2S_distance:0.0712794777654
+#INFO :: 2020-12-22 18:14:06,844 :: k-mer:21
+#INFO :: 2020-12-22 18:16:28,831 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:16:58,841 :: kmerset1 VS. kmerset2 d2Score:7206846.43419
+#INFO :: 2020-12-22 18:16:58,842 :: k-mer:21
+#INFO :: 2020-12-22 18:19:34,968 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:19:52,520 :: kmerset1 VS. kmerset1 d2Score:7206846.43419
+#INFO :: 2020-12-22 18:19:52,565 :: k-mer:21
+#INFO :: 2020-12-22 18:22:33,080 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:22:51,386 :: kmerset2 VS. kmerset2 d2Score:7206846.43419
+#INFO :: 2020-12-22 18:22:51,387 :: D2S_distance:0.0973826404634
+#INFO :: 2020-12-22 18:22:51,600 :: k-mer:21
+#INFO :: 2020-12-22 18:25:17,173 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:25:49,730 :: kmerset1 VS. kmerset2 d2Score:7271896.64189
+#INFO :: 2020-12-22 18:25:49,731 :: k-mer:21
+#INFO :: 2020-12-22 18:28:27,878 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:28:45,566 :: kmerset1 VS. kmerset1 d2Score:7271896.64189
+#INFO :: 2020-12-22 18:28:45,584 :: k-mer:21
+#INFO :: 2020-12-22 18:31:23,454 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:31:44,492 :: kmerset2 VS. kmerset2 d2Score:7271896.64189
+#INFO :: 2020-12-22 18:31:44,493 :: D2S_distance:0.101811103695
+#INFO :: 2020-12-22 18:31:44,576 :: k-mer:21
+#INFO :: 2020-12-22 18:34:11,176 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:34:40,317 :: kmerset1 VS. kmerset2 d2Score:7389340.48566
+#INFO :: 2020-12-22 18:34:40,318 :: k-mer:21
+#INFO :: 2020-12-22 18:37:18,994 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:37:37,012 :: kmerset1 VS. kmerset1 d2Score:7389340.48566
+#INFO :: 2020-12-22 18:37:37,035 :: k-mer:21
+#INFO :: 2020-12-22 18:40:14,620 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:40:33,969 :: kmerset2 VS. kmerset2 d2Score:7389340.48566
+#INFO :: 2020-12-22 18:40:33,969 :: D2S_distance:0.0731916856014
+#INFO :: 2020-12-22 18:40:34,129 :: k-mer:21
+#INFO :: 2020-12-22 18:42:57,907 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:43:30,042 :: kmerset1 VS. kmerset2 d2Score:7094217.56489
+#INFO :: 2020-12-22 18:43:30,043 :: k-mer:21
+#INFO :: 2020-12-22 18:46:11,390 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:46:29,530 :: kmerset1 VS. kmerset1 d2Score:7094217.56489
+#INFO :: 2020-12-22 18:46:29,530 :: k-mer:21
+#INFO :: 2020-12-22 18:49:11,052 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:49:28,746 :: kmerset2 VS. kmerset2 d2Score:7094217.56489
+#INFO :: 2020-12-22 18:49:28,746 :: D2S_distance:0.107565182233
+#INFO :: 2020-12-22 18:49:28,844 :: k-mer:21
+#INFO :: 2020-12-22 18:51:52,914 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:52:21,936 :: kmerset1 VS. kmerset2 d2Score:7453391.56228
+#INFO :: 2020-12-22 18:52:21,937 :: k-mer:21
+#INFO :: 2020-12-22 18:54:57,215 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:55:14,563 :: kmerset1 VS. kmerset1 d2Score:7453391.56228
+#INFO :: 2020-12-22 18:55:14,612 :: k-mer:21
+#INFO :: 2020-12-22 18:57:49,009 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 18:58:09,945 :: kmerset2 VS. kmerset2 d2Score:7453391.56228
+#INFO :: 2020-12-22 18:58:09,945 :: D2S_distance:0.0740977590919
+#INFO :: 2020-12-22 18:58:10,193 :: k-mer:21
+#INFO :: 2020-12-22 19:00:42,364 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:01:11,696 :: kmerset1 VS. kmerset2 d2Score:7439773.13662
+#INFO :: 2020-12-22 19:01:11,697 :: k-mer:21
+#INFO :: 2020-12-22 19:03:52,074 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:04:09,952 :: kmerset1 VS. kmerset1 d2Score:7439773.13662
+#INFO :: 2020-12-22 19:04:09,991 :: k-mer:21
+#INFO :: 2020-12-22 19:06:49,938 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:07:10,475 :: kmerset2 VS. kmerset2 d2Score:7439773.13662
+#INFO :: 2020-12-22 19:07:10,475 :: D2S_distance:0.0692827667605
+#INFO :: 2020-12-22 19:07:10,562 :: k-mer:21
+#INFO :: 2020-12-22 19:09:31,998 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:10:06,082 :: kmerset1 VS. kmerset2 d2Score:7233102.49431
+#INFO :: 2020-12-22 19:10:06,083 :: k-mer:21
+#INFO :: 2020-12-22 19:12:46,731 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:13:04,977 :: kmerset1 VS. kmerset1 d2Score:7233102.49431
+#INFO :: 2020-12-22 19:13:05,006 :: k-mer:21
+#INFO :: 2020-12-22 19:15:45,423 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:16:07,972 :: kmerset2 VS. kmerset2 d2Score:7233102.49431
+#INFO :: 2020-12-22 19:16:07,972 :: D2S_distance:0.10595873023
+#INFO :: 2020-12-22 19:16:08,185 :: k-mer:21
+#INFO :: 2020-12-22 19:18:36,444 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:19:04,079 :: kmerset1 VS. kmerset2 d2Score:7388512.46835
+#INFO :: 2020-12-22 19:19:04,079 :: k-mer:21
+#INFO :: 2020-12-22 19:21:43,062 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:22:00,892 :: kmerset1 VS. kmerset1 d2Score:7388512.46835
+#INFO :: 2020-12-22 19:22:00,906 :: k-mer:21
+#INFO :: 2020-12-22 19:24:40,177 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:24:58,364 :: kmerset2 VS. kmerset2 d2Score:7388512.46835
+#INFO :: 2020-12-22 19:24:58,364 :: D2S_distance:0.0683350181544
+#INFO :: 2020-12-22 19:24:58,474 :: k-mer:21
+#INFO :: 2020-12-22 19:27:13,346 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:27:52,121 :: kmerset1 VS. kmerset2 d2Score:6696130.59523
+#INFO :: 2020-12-22 19:27:52,139 :: k-mer:21
+#INFO :: 2020-12-22 19:30:32,861 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:30:50,977 :: kmerset1 VS. kmerset1 d2Score:6696130.59523
+#INFO :: 2020-12-22 19:30:51,000 :: k-mer:21
+#INFO :: 2020-12-22 19:33:33,056 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:33:52,019 :: kmerset2 VS. kmerset2 d2Score:6696130.59523
+#INFO :: 2020-12-22 19:33:52,019 :: D2S_distance:0.168701008981
+#INFO :: 2020-12-22 19:33:52,157 :: k-mer:21
+#INFO :: 2020-12-22 19:35:56,877 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:36:20,436 :: kmerset1 VS. kmerset2 d2Score:5986951.84504
+#INFO :: 2020-12-22 19:36:20,437 :: k-mer:21
+#INFO :: 2020-12-22 19:38:56,623 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:39:14,217 :: kmerset1 VS. kmerset1 d2Score:5986951.84504
+#INFO :: 2020-12-22 19:39:14,271 :: k-mer:21
+#INFO :: 2020-12-22 19:41:31,152 :: kmerset2 VS. kmerset2 d2Score:5986951.84504
+#INFO :: 2020-12-22 19:41:31,153 :: D2S_distance:0.271301300315
+#INFO :: 2020-12-22 19:41:31,332 :: k-mer:21
+#INFO :: 2020-12-22 19:43:42,745 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:44:06,590 :: kmerset1 VS. kmerset2 d2Score:6517211.91177
+#INFO :: 2020-12-22 19:44:06,591 :: k-mer:21
+#INFO :: 2020-12-22 19:46:41,052 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:46:58,617 :: kmerset1 VS. kmerset1 d2Score:6517211.91177
+#INFO :: 2020-12-22 19:46:58,642 :: k-mer:21
+#INFO :: 2020-12-22 19:49:30,280 :: kmerset2 VS. kmerset2 d2Score:6517211.91177
+#INFO :: 2020-12-22 19:49:30,280 :: D2S_distance:0.187907276077
+#INFO :: 2020-12-22 19:49:30,526 :: k-mer:21
+#INFO :: 2020-12-22 19:51:55,152 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:52:25,848 :: kmerset1 VS. kmerset2 d2Score:7173810.44049
+#INFO :: 2020-12-22 19:52:25,849 :: k-mer:21
+#INFO :: 2020-12-22 19:55:03,976 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:55:21,291 :: kmerset1 VS. kmerset1 d2Score:7173810.44049
+#INFO :: 2020-12-22 19:55:21,318 :: k-mer:21
+#INFO :: 2020-12-22 19:58:00,773 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 19:58:19,219 :: kmerset2 VS. kmerset2 d2Score:7173810.44049
+#INFO :: 2020-12-22 19:58:19,220 :: D2S_distance:0.101725373505
+#INFO :: 2020-12-22 19:58:19,495 :: k-mer:21
+#INFO :: 2020-12-22 20:00:39,722 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:01:09,797 :: kmerset1 VS. kmerset2 d2Score:7214621.05826
+#INFO :: 2020-12-22 20:01:09,870 :: k-mer:21
+#INFO :: 2020-12-22 20:03:44,737 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:04:02,194 :: kmerset1 VS. kmerset1 d2Score:7214621.05826
+#INFO :: 2020-12-22 20:04:02,213 :: k-mer:21
+#INFO :: 2020-12-22 20:06:37,341 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:06:55,352 :: kmerset2 VS. kmerset2 d2Score:7214621.05826
+#INFO :: 2020-12-22 20:06:55,352 :: D2S_distance:0.0972454074035
+#INFO :: 2020-12-22 20:06:55,894 :: k-mer:21
+#INFO :: 2020-12-22 20:09:19,712 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:09:49,910 :: kmerset1 VS. kmerset2 d2Score:7156003.74657
+#INFO :: 2020-12-22 20:09:49,911 :: k-mer:21
+#INFO :: 2020-12-22 20:12:29,489 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:12:47,240 :: kmerset1 VS. kmerset1 d2Score:7156003.74657
+#INFO :: 2020-12-22 20:12:47,271 :: k-mer:21
+#INFO :: 2020-12-22 20:15:26,063 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:15:42,628 :: kmerset2 VS. kmerset2 d2Score:7156003.74657
+#INFO :: 2020-12-22 20:15:42,629 :: D2S_distance:0.0968948584738
+#INFO :: 2020-12-22 20:15:42,791 :: k-mer:21
+#INFO :: 2020-12-22 20:18:05,182 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:18:37,087 :: kmerset1 VS. kmerset2 d2Score:7259682.76067
+#INFO :: 2020-12-22 20:18:37,087 :: k-mer:21
+#INFO :: 2020-12-22 20:21:12,855 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:21:30,288 :: kmerset1 VS. kmerset1 d2Score:7259682.76067
+#INFO :: 2020-12-22 20:21:30,302 :: k-mer:21
+#INFO :: 2020-12-22 20:24:06,157 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:24:27,258 :: kmerset2 VS. kmerset2 d2Score:7259682.76067
+#INFO :: 2020-12-22 20:24:27,258 :: D2S_distance:0.0987777849226
+#INFO :: 2020-12-22 20:24:27,457 :: k-mer:21
+#INFO :: 2020-12-22 20:26:46,979 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:27:12,270 :: kmerset1 VS. kmerset2 d2Score:6777110.07252
+#INFO :: 2020-12-22 20:27:12,271 :: k-mer:21
+#INFO :: 2020-12-22 20:29:52,441 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:30:10,371 :: kmerset1 VS. kmerset1 d2Score:6777110.07252
+#INFO :: 2020-12-22 20:30:10,442 :: k-mer:21
+#INFO :: 2020-12-22 20:32:48,223 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:32:51,050 :: kmerset2 VS. kmerset2 d2Score:6777110.07252
+#INFO :: 2020-12-22 20:32:51,050 :: D2S_distance:0.113816762147
+#INFO :: 2020-12-22 20:32:51,187 :: k-mer:21
+#INFO :: 2020-12-22 20:35:09,140 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:35:39,041 :: kmerset1 VS. kmerset2 d2Score:7170182.94043
+#INFO :: 2020-12-22 20:35:39,042 :: k-mer:21
+#INFO :: 2020-12-22 20:38:12,054 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:38:29,787 :: kmerset1 VS. kmerset1 d2Score:7170182.94043
+#INFO :: 2020-12-22 20:38:29,829 :: k-mer:21
+#INFO :: 2020-12-22 20:41:06,805 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:41:24,072 :: kmerset2 VS. kmerset2 d2Score:7170182.94043
+#INFO :: 2020-12-22 20:41:24,072 :: D2S_distance:0.0995906436948
+#INFO :: 2020-12-22 20:41:24,300 :: k-mer:21
+#INFO :: 2020-12-22 20:43:44,819 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:44:15,061 :: kmerset1 VS. kmerset2 d2Score:7212340.03144
+#INFO :: 2020-12-22 20:44:15,061 :: k-mer:21
+#INFO :: 2020-12-22 20:46:49,681 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:47:07,122 :: kmerset1 VS. kmerset1 d2Score:7212340.03144
+#INFO :: 2020-12-22 20:47:07,164 :: k-mer:21
+#INFO :: 2020-12-22 20:49:43,324 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:50:01,427 :: kmerset2 VS. kmerset2 d2Score:7212340.03144
+#INFO :: 2020-12-22 20:50:01,427 :: D2S_distance:0.0963001827195
+#INFO :: 2020-12-22 20:50:01,560 :: k-mer:21
+#INFO :: 2020-12-22 20:52:32,854 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:52:57,750 :: kmerset1 VS. kmerset2 d2Score:7566643.21321
+#INFO :: 2020-12-22 20:52:57,751 :: k-mer:21
+#INFO :: 2020-12-22 20:55:36,232 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:55:54,175 :: kmerset1 VS. kmerset1 d2Score:7566643.21321
+#INFO :: 2020-12-22 20:55:54,222 :: k-mer:21
+#INFO :: 2020-12-22 20:58:32,651 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 20:58:51,210 :: kmerset2 VS. kmerset2 d2Score:7566643.21321
+#INFO :: 2020-12-22 20:58:51,210 :: D2S_distance:0.0459934137615
+#INFO :: 2020-12-22 20:58:51,354 :: k-mer:21
+#INFO :: 2020-12-22 21:01:16,103 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:01:43,671 :: kmerset1 VS. kmerset2 d2Score:7428218.64382
+#INFO :: 2020-12-22 21:01:43,671 :: k-mer:21
+#INFO :: 2020-12-22 21:04:19,895 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:04:37,429 :: kmerset1 VS. kmerset1 d2Score:7428218.64382
+#INFO :: 2020-12-22 21:04:37,456 :: k-mer:21
+#INFO :: 2020-12-22 21:07:15,753 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:07:35,519 :: kmerset2 VS. kmerset2 d2Score:7428218.64382
+#INFO :: 2020-12-22 21:07:35,519 :: D2S_distance:0.0669043333033
+#INFO :: 2020-12-22 21:07:35,804 :: k-mer:21
+#INFO :: 2020-12-22 21:10:11,035 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:10:32,677 :: kmerset1 VS. kmerset2 d2Score:7665744.25758
+#INFO :: 2020-12-22 21:10:32,678 :: k-mer:21
+#INFO :: 2020-12-22 21:13:07,975 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:13:26,109 :: kmerset1 VS. kmerset1 d2Score:7665744.25758
+#INFO :: 2020-12-22 21:13:26,127 :: k-mer:21
+#INFO :: 2020-12-22 21:16:04,050 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:16:21,874 :: kmerset2 VS. kmerset2 d2Score:7665744.25758
+#INFO :: 2020-12-22 21:16:21,874 :: D2S_distance:0.0293948089846
+#INFO :: 2020-12-22 21:16:22,156 :: k-mer:21
+#INFO :: 2020-12-22 21:18:46,947 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:19:17,238 :: kmerset1 VS. kmerset2 d2Score:7305557.74302
+#INFO :: 2020-12-22 21:19:17,281 :: k-mer:21
+#INFO :: 2020-12-22 21:21:53,636 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:22:11,267 :: kmerset1 VS. kmerset1 d2Score:7305557.74302
+#INFO :: 2020-12-22 21:22:11,286 :: k-mer:21
+#INFO :: 2020-12-22 21:24:48,150 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:25:08,132 :: kmerset2 VS. kmerset2 d2Score:7305557.74302
+#INFO :: 2020-12-22 21:25:08,133 :: D2S_distance:0.0891018668949
+#INFO :: 2020-12-22 21:25:08,221 :: k-mer:21
+#INFO :: 2020-12-22 21:27:31,453 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:28:01,896 :: kmerset1 VS. kmerset2 d2Score:7192289.40564
+#INFO :: 2020-12-22 21:28:01,897 :: k-mer:21
+#INFO :: 2020-12-22 21:30:40,142 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:30:58,047 :: kmerset1 VS. kmerset1 d2Score:7192289.40564
+#INFO :: 2020-12-22 21:30:58,063 :: k-mer:21
+#INFO :: 2020-12-22 21:33:36,455 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:33:55,307 :: kmerset2 VS. kmerset2 d2Score:7192289.40564
+#INFO :: 2020-12-22 21:33:55,307 :: D2S_distance:0.0963620762668
+#INFO :: 2020-12-22 21:33:55,513 :: k-mer:21
+#INFO :: 2020-12-22 21:36:24,812 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:36:56,968 :: kmerset1 VS. kmerset2 d2Score:7191928.55473
+#INFO :: 2020-12-22 21:36:57,018 :: k-mer:21
+#INFO :: 2020-12-22 21:39:39,701 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:39:57,845 :: kmerset1 VS. kmerset1 d2Score:7191928.55473
+#INFO :: 2020-12-22 21:39:57,907 :: k-mer:21
+#INFO :: 2020-12-22 21:42:39,998 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:42:58,870 :: kmerset2 VS. kmerset2 d2Score:7191928.55473
+#INFO :: 2020-12-22 21:42:58,871 :: D2S_distance:0.098967292003
+#INFO :: 2020-12-22 21:42:59,022 :: k-mer:21
+#INFO :: 2020-12-22 21:45:24,969 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:45:58,648 :: kmerset1 VS. kmerset2 d2Score:7346630.72476
+#INFO :: 2020-12-22 21:45:58,741 :: k-mer:21
+#INFO :: 2020-12-22 21:48:41,157 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:48:59,071 :: kmerset1 VS. kmerset1 d2Score:7346630.72476
+#INFO :: 2020-12-22 21:48:59,122 :: k-mer:21
+#INFO :: 2020-12-22 21:51:38,672 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:52:01,449 :: kmerset2 VS. kmerset2 d2Score:7346630.72476
+#INFO :: 2020-12-22 21:52:01,450 :: D2S_distance:0.100526067293
+#INFO :: 2020-12-22 21:52:01,639 :: k-mer:21
+#INFO :: 2020-12-22 21:54:03,840 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:54:27,512 :: kmerset1 VS. kmerset2 d2Score:5728865.14037
+#INFO :: 2020-12-22 21:54:27,513 :: k-mer:21
+#INFO :: 2020-12-22 21:57:00,249 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 21:57:17,577 :: kmerset1 VS. kmerset1 d2Score:5728865.14037
+#INFO :: 2020-12-22 21:57:17,590 :: k-mer:21
+#INFO :: 2020-12-22 21:59:33,826 :: kmerset2 VS. kmerset2 d2Score:5728865.14037
+#INFO :: 2020-12-22 21:59:33,827 :: D2S_distance:0.211657160248
+#INFO :: 2020-12-22 21:59:33,959 :: k-mer:21
+#INFO :: 2020-12-22 22:01:41,856 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:02:05,452 :: kmerset1 VS. kmerset2 d2Score:5800680.47911
+#INFO :: 2020-12-22 22:02:05,452 :: k-mer:21
+#INFO :: 2020-12-22 22:04:43,154 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:05:00,879 :: kmerset1 VS. kmerset1 d2Score:5800680.47911
+#INFO :: 2020-12-22 22:05:00,904 :: k-mer:21
+#INFO :: 2020-12-22 22:07:21,231 :: kmerset2 VS. kmerset2 d2Score:5800680.47911
+#INFO :: 2020-12-22 22:07:21,231 :: D2S_distance:0.203273882341
+#INFO :: 2020-12-22 22:07:21,365 :: k-mer:21
+#INFO :: 2020-12-22 22:09:33,842 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:09:57,995 :: kmerset1 VS. kmerset2 d2Score:6574804.85971
+#INFO :: 2020-12-22 22:09:57,995 :: k-mer:21
+#INFO :: 2020-12-22 22:12:33,982 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:12:51,454 :: kmerset1 VS. kmerset1 d2Score:6574804.85971
+#INFO :: 2020-12-22 22:12:51,473 :: k-mer:21
+#INFO :: 2020-12-22 22:15:22,321 :: kmerset2 VS. kmerset2 d2Score:6574804.85971
+#INFO :: 2020-12-22 22:15:22,321 :: D2S_distance:0.185506122792
+#INFO :: 2020-12-22 22:15:22,425 :: k-mer:21
+#INFO :: 2020-12-22 22:17:42,384 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:18:12,219 :: kmerset1 VS. kmerset2 d2Score:7191739.1746
+#INFO :: 2020-12-22 22:18:12,220 :: k-mer:21
+#INFO :: 2020-12-22 22:20:47,676 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:21:05,175 :: kmerset1 VS. kmerset1 d2Score:7191739.1746
+#INFO :: 2020-12-22 22:21:05,231 :: k-mer:21
+#INFO :: 2020-12-22 22:23:40,486 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:23:57,920 :: kmerset2 VS. kmerset2 d2Score:7191739.1746
+#INFO :: 2020-12-22 22:23:57,920 :: D2S_distance:0.0952321423357
+#INFO :: 2020-12-22 22:23:58,111 :: k-mer:21
+#INFO :: 2020-12-22 22:26:19,907 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:26:51,454 :: kmerset1 VS. kmerset2 d2Score:7072420.43438
+#INFO :: 2020-12-22 22:26:51,494 :: k-mer:21
+#INFO :: 2020-12-22 22:29:31,298 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:29:49,098 :: kmerset1 VS. kmerset1 d2Score:7072420.43438
+#INFO :: 2020-12-22 22:29:49,123 :: k-mer:21
+#INFO :: 2020-12-22 22:32:28,094 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:32:44,563 :: kmerset2 VS. kmerset2 d2Score:7072420.43438
+#INFO :: 2020-12-22 22:32:44,564 :: D2S_distance:0.108120039154
+#INFO :: 2020-12-22 22:32:44,638 :: k-mer:21
+#INFO :: 2020-12-22 22:35:08,125 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:35:38,606 :: kmerset1 VS. kmerset2 d2Score:7219665.07462
+#INFO :: 2020-12-22 22:35:38,608 :: k-mer:21
+#INFO :: 2020-12-22 22:38:18,822 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:38:36,987 :: kmerset1 VS. kmerset1 d2Score:7219665.07462
+#INFO :: 2020-12-22 22:38:37,024 :: k-mer:21
+#INFO :: 2020-12-22 22:41:17,773 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:41:36,128 :: kmerset2 VS. kmerset2 d2Score:7219665.07462
+#INFO :: 2020-12-22 22:41:36,128 :: D2S_distance:0.0971576192627
+#INFO :: 2020-12-22 22:41:36,336 :: k-mer:21
+#INFO :: 2020-12-22 22:43:58,663 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:44:29,465 :: kmerset1 VS. kmerset2 d2Score:7130035.05077
+#INFO :: 2020-12-22 22:44:29,466 :: k-mer:21
+#INFO :: 2020-12-22 22:47:07,703 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:47:25,360 :: kmerset1 VS. kmerset1 d2Score:7130035.05077
+#INFO :: 2020-12-22 22:47:25,404 :: k-mer:21
+#INFO :: 2020-12-22 22:50:07,007 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:50:24,678 :: kmerset2 VS. kmerset2 d2Score:7130035.05077
+#INFO :: 2020-12-22 22:50:24,678 :: D2S_distance:0.102067199729
+#INFO :: 2020-12-22 22:50:24,798 :: k-mer:21
+#INFO :: 2020-12-22 22:52:37,730 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:53:03,289 :: kmerset1 VS. kmerset2 d2Score:6326222.68936
+#INFO :: 2020-12-22 22:53:03,290 :: k-mer:21
+#INFO :: 2020-12-22 22:55:42,359 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 22:56:00,232 :: kmerset1 VS. kmerset1 d2Score:6326222.68936
+#INFO :: 2020-12-22 22:56:00,266 :: k-mer:21
+#INFO :: 2020-12-22 22:58:35,320 :: kmerset2 VS. kmerset2 d2Score:6326222.68936
+#INFO :: 2020-12-22 22:58:35,320 :: D2S_distance:0.160334646316
+#INFO :: 2020-12-22 22:58:35,450 :: k-mer:21
+#INFO :: 2020-12-22 23:00:56,333 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:01:26,904 :: kmerset1 VS. kmerset2 d2Score:7177927.79603
+#INFO :: 2020-12-22 23:01:26,905 :: k-mer:21
+#INFO :: 2020-12-22 23:04:02,444 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:04:20,146 :: kmerset1 VS. kmerset1 d2Score:7177927.79603
+#INFO :: 2020-12-22 23:04:20,167 :: k-mer:21
+#INFO :: 2020-12-22 23:06:55,707 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:07:13,711 :: kmerset2 VS. kmerset2 d2Score:7177927.79603
+#INFO :: 2020-12-22 23:07:13,712 :: D2S_distance:0.100348965274
+#INFO :: 2020-12-22 23:07:13,801 :: k-mer:21
+#INFO :: 2020-12-22 23:09:34,117 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:10:03,920 :: kmerset1 VS. kmerset2 d2Score:7365838.70704
+#INFO :: 2020-12-22 23:10:03,921 :: k-mer:21
+#INFO :: 2020-12-22 23:12:36,241 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:12:53,438 :: kmerset1 VS. kmerset1 d2Score:7365838.70704
+#INFO :: 2020-12-22 23:12:53,492 :: k-mer:21
+#INFO :: 2020-12-22 23:15:26,255 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:15:46,793 :: kmerset2 VS. kmerset2 d2Score:7365838.70704
+#INFO :: 2020-12-22 23:15:46,793 :: D2S_distance:0.0852933790585
+#INFO :: 2020-12-22 23:15:46,952 :: k-mer:21
+#INFO :: 2020-12-22 23:18:09,214 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:18:39,650 :: kmerset1 VS. kmerset2 d2Score:7192582.80214
+#INFO :: 2020-12-22 23:18:39,651 :: k-mer:21
+#INFO :: 2020-12-22 23:21:16,692 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:21:34,336 :: kmerset1 VS. kmerset1 d2Score:7192582.80214
+#INFO :: 2020-12-22 23:21:34,390 :: k-mer:21
+#INFO :: 2020-12-22 23:24:12,267 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:24:30,241 :: kmerset2 VS. kmerset2 d2Score:7192582.80214
+#INFO :: 2020-12-22 23:24:30,241 :: D2S_distance:0.0978317649845
+#INFO :: 2020-12-22 23:24:30,406 :: k-mer:21
+#INFO :: 2020-12-22 23:26:43,665 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:27:09,984 :: kmerset1 VS. kmerset2 d2Score:6594089.42062
+#INFO :: 2020-12-22 23:27:09,986 :: k-mer:21
+#INFO :: 2020-12-22 23:29:48,679 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:30:06,765 :: kmerset1 VS. kmerset1 d2Score:6594089.42062
+#INFO :: 2020-12-22 23:30:06,818 :: k-mer:21
+#INFO :: 2020-12-22 23:32:42,980 :: kmerset2 VS. kmerset2 d2Score:6594089.42062
+#INFO :: 2020-12-22 23:32:42,980 :: D2S_distance:0.217857858857
+#INFO :: 2020-12-22 23:32:43,240 :: k-mer:21
+#INFO :: 2020-12-22 23:35:14,852 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:35:37,933 :: kmerset1 VS. kmerset2 d2Score:7612809.70924
+#INFO :: 2020-12-22 23:35:37,934 :: k-mer:21
+#INFO :: 2020-12-22 23:38:15,669 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:38:33,401 :: kmerset1 VS. kmerset1 d2Score:7612809.70924
+#INFO :: 2020-12-22 23:38:33,415 :: k-mer:21
+#INFO :: 2020-12-22 23:41:12,897 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:41:30,770 :: kmerset2 VS. kmerset2 d2Score:7612809.70924
+#INFO :: 2020-12-22 23:41:30,770 :: D2S_distance:0.0376453303175
+#INFO :: 2020-12-22 23:41:30,889 :: k-mer:21
+#INFO :: 2020-12-22 23:43:55,576 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:44:25,240 :: kmerset1 VS. kmerset2 d2Score:7333923.56055
+#INFO :: 2020-12-22 23:44:25,240 :: k-mer:21
+#INFO :: 2020-12-22 23:47:04,172 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:47:21,962 :: kmerset1 VS. kmerset1 d2Score:7333923.56055
+#INFO :: 2020-12-22 23:47:22,000 :: k-mer:21
+#INFO :: 2020-12-22 23:50:00,944 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:50:20,614 :: kmerset2 VS. kmerset2 d2Score:7333923.56055
+#INFO :: 2020-12-22 23:50:20,615 :: D2S_distance:0.0816775786785
+#INFO :: 2020-12-22 23:50:20,740 :: k-mer:21
+#INFO :: 2020-12-22 23:52:34,964 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:52:58,971 :: kmerset1 VS. kmerset2 d2Score:6168405.83632
+#INFO :: 2020-12-22 23:52:58,972 :: k-mer:21
+#INFO :: 2020-12-22 23:55:38,552 :: K-mer loop round 10000000
+#INFO :: 2020-12-22 23:55:56,464 :: kmerset1 VS. kmerset1 d2Score:6168405.83632
+#INFO :: 2020-12-22 23:55:56,501 :: k-mer:21
+#INFO :: 2020-12-22 23:58:26,324 :: kmerset2 VS. kmerset2 d2Score:6168405.83632
+#INFO :: 2020-12-22 23:58:26,324 :: D2S_distance:0.164418963648
+#INFO :: 2020-12-22 23:58:26,434 :: k-mer:21
+#INFO :: 2020-12-23 00:00:52,383 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:01:21,137 :: kmerset1 VS. kmerset2 d2Score:7430064.45459
+#INFO :: 2020-12-23 00:01:21,138 :: k-mer:21
+#INFO :: 2020-12-23 00:03:57,708 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:04:15,327 :: kmerset1 VS. kmerset1 d2Score:7430064.45459
+#INFO :: 2020-12-23 00:04:15,374 :: k-mer:21
+#INFO :: 2020-12-23 00:06:53,442 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:07:14,287 :: kmerset2 VS. kmerset2 d2Score:7430064.45459
+#INFO :: 2020-12-23 00:07:14,287 :: D2S_distance:0.071256338678
+#INFO :: 2020-12-23 00:07:14,431 :: k-mer:21
+#INFO :: 2020-12-23 00:09:23,981 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:09:47,613 :: kmerset1 VS. kmerset2 d2Score:6071480.84289
+#INFO :: 2020-12-23 00:09:47,613 :: k-mer:21
+#INFO :: 2020-12-23 00:12:24,111 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:12:41,470 :: kmerset1 VS. kmerset1 d2Score:6071480.84289
+#INFO :: 2020-12-23 00:12:41,483 :: k-mer:21
+#INFO :: 2020-12-23 00:15:00,670 :: kmerset2 VS. kmerset2 d2Score:6071480.84289
+#INFO :: 2020-12-23 00:15:00,670 :: D2S_distance:0.254018655122
+#INFO :: 2020-12-23 00:15:00,767 :: k-mer:21
+#INFO :: 2020-12-23 00:17:13,767 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:17:39,120 :: kmerset1 VS. kmerset2 d2Score:6655763.05179
+#INFO :: 2020-12-23 00:17:39,169 :: k-mer:21
+#INFO :: 2020-12-23 00:20:24,309 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:20:42,222 :: kmerset1 VS. kmerset1 d2Score:6655763.05179
+#INFO :: 2020-12-23 00:20:42,278 :: k-mer:21
+#INFO :: 2020-12-23 00:23:17,924 :: kmerset2 VS. kmerset2 d2Score:6655763.05179
+#INFO :: 2020-12-23 00:23:17,925 :: D2S_distance:0.21028552422
+#INFO :: 2020-12-23 00:23:18,145 :: k-mer:21
+#INFO :: 2020-12-23 00:25:37,632 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:26:08,246 :: kmerset1 VS. kmerset2 d2Score:7198078.49684
+#INFO :: 2020-12-23 00:26:08,247 :: k-mer:21
+#INFO :: 2020-12-23 00:28:43,794 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:29:01,208 :: kmerset1 VS. kmerset1 d2Score:7198078.49684
+#INFO :: 2020-12-23 00:29:01,224 :: k-mer:21
+#INFO :: 2020-12-23 00:31:37,912 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:31:56,570 :: kmerset2 VS. kmerset2 d2Score:7198078.49684
+#INFO :: 2020-12-23 00:31:56,570 :: D2S_distance:0.100159602298
+#INFO :: 2020-12-23 00:31:56,672 :: k-mer:21
+#INFO :: 2020-12-23 00:34:09,972 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:34:34,719 :: kmerset1 VS. kmerset2 d2Score:6627929.41168
+#INFO :: 2020-12-23 00:34:34,719 :: k-mer:21
+#INFO :: 2020-12-23 00:37:13,813 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:37:31,735 :: kmerset1 VS. kmerset1 d2Score:6627929.41168
+#INFO :: 2020-12-23 00:37:31,802 :: k-mer:21
+#INFO :: 2020-12-23 00:40:05,183 :: kmerset2 VS. kmerset2 d2Score:6627929.41168
+#INFO :: 2020-12-23 00:40:05,184 :: D2S_distance:0.217240638625
+#INFO :: 2020-12-23 00:40:05,336 :: k-mer:21
+#INFO :: 2020-12-23 00:42:30,329 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:43:01,565 :: kmerset1 VS. kmerset2 d2Score:7232889.34488
+#INFO :: 2020-12-23 00:43:01,566 :: k-mer:21
+#INFO :: 2020-12-23 00:45:43,299 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:46:01,500 :: kmerset1 VS. kmerset1 d2Score:7232889.34488
+#INFO :: 2020-12-23 00:46:01,544 :: k-mer:21
+#INFO :: 2020-12-23 00:48:43,157 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:49:02,795 :: kmerset2 VS. kmerset2 d2Score:7232889.34488
+#INFO :: 2020-12-23 00:49:02,795 :: D2S_distance:0.0937613881057
+#INFO :: 2020-12-23 00:49:02,955 :: k-mer:21
+#INFO :: 2020-12-23 00:51:21,169 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:51:54,902 :: kmerset1 VS. kmerset2 d2Score:7061985.22197
+#INFO :: 2020-12-23 00:51:54,909 :: k-mer:21
+#INFO :: 2020-12-23 00:54:38,267 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:54:56,590 :: kmerset1 VS. kmerset1 d2Score:7061985.22197
+#INFO :: 2020-12-23 00:54:56,652 :: k-mer:21
+#INFO :: 2020-12-23 00:57:37,425 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 00:57:56,416 :: kmerset2 VS. kmerset2 d2Score:7061985.22197
+#INFO :: 2020-12-23 00:57:56,416 :: D2S_distance:0.115977421111
+#INFO :: 2020-12-23 00:57:56,706 :: k-mer:21
+#INFO :: 2020-12-23 01:00:08,591 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:00:30,694 :: kmerset1 VS. kmerset2 d2Score:5814260.15982
+#INFO :: 2020-12-23 01:00:30,695 :: k-mer:21
+#INFO :: 2020-12-23 01:03:09,806 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:03:27,609 :: kmerset1 VS. kmerset1 d2Score:5814260.15982
+#INFO :: 2020-12-23 01:03:27,609 :: k-mer:21
+#INFO :: 2020-12-23 01:05:49,022 :: kmerset2 VS. kmerset2 d2Score:5814260.15982
+#INFO :: 2020-12-23 01:05:49,023 :: D2S_distance:0.188616875098
+#INFO :: 2020-12-23 01:05:49,134 :: k-mer:21
+#INFO :: 2020-12-23 01:07:53,595 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:08:16,659 :: kmerset1 VS. kmerset2 d2Score:5631951.94783
+#INFO :: 2020-12-23 01:08:16,661 :: k-mer:21
+#INFO :: 2020-12-23 01:10:58,251 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:11:16,412 :: kmerset1 VS. kmerset1 d2Score:5631951.94783
+#INFO :: 2020-12-23 01:11:16,434 :: k-mer:21
+#INFO :: 2020-12-23 01:13:33,008 :: kmerset2 VS. kmerset2 d2Score:5631951.94783
+#INFO :: 2020-12-23 01:13:33,008 :: D2S_distance:0.217831680408
+#INFO :: 2020-12-23 01:13:33,310 :: k-mer:21
+#INFO :: 2020-12-23 01:16:02,607 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:16:31,806 :: kmerset1 VS. kmerset2 d2Score:7444346.36919
+#INFO :: 2020-12-23 01:16:31,806 :: k-mer:21
+#INFO :: 2020-12-23 01:19:11,922 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:19:29,935 :: kmerset1 VS. kmerset1 d2Score:7444346.36919
+#INFO :: 2020-12-23 01:19:29,935 :: k-mer:21
+#INFO :: 2020-12-23 01:22:10,667 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:22:31,634 :: kmerset2 VS. kmerset2 d2Score:7444346.36919
+#INFO :: 2020-12-23 01:22:31,634 :: D2S_distance:0.0696317765205
+#INFO :: 2020-12-23 01:22:31,749 :: k-mer:21
+#INFO :: 2020-12-23 01:24:53,817 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:25:24,206 :: kmerset1 VS. kmerset2 d2Score:7165326.09832
+#INFO :: 2020-12-23 01:25:24,206 :: k-mer:21
+#INFO :: 2020-12-23 01:28:02,660 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:28:20,403 :: kmerset1 VS. kmerset1 d2Score:7165326.09832
+#INFO :: 2020-12-23 01:28:20,438 :: k-mer:21
+#INFO :: 2020-12-23 01:30:59,481 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:31:16,908 :: kmerset2 VS. kmerset2 d2Score:7165326.09832
+#INFO :: 2020-12-23 01:31:16,908 :: D2S_distance:0.0992536449861
+#INFO :: 2020-12-23 01:31:17,046 :: k-mer:21
+#INFO :: 2020-12-23 01:33:32,822 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:33:58,780 :: kmerset1 VS. kmerset2 d2Score:6737292.07376
+#INFO :: 2020-12-23 01:33:58,781 :: k-mer:21
+#INFO :: 2020-12-23 01:36:36,291 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:36:54,117 :: kmerset1 VS. kmerset1 d2Score:6737292.07376
+#INFO :: 2020-12-23 01:36:54,140 :: k-mer:21
+#INFO :: 2020-12-23 01:39:31,868 :: kmerset2 VS. kmerset2 d2Score:6737292.07376
+#INFO :: 2020-12-23 01:39:31,868 :: D2S_distance:0.190286656805
+#INFO :: 2020-12-23 01:39:31,974 :: k-mer:21
+#INFO :: 2020-12-23 01:42:03,200 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:42:26,200 :: kmerset1 VS. kmerset2 d2Score:7706977.4926
+#INFO :: 2020-12-23 01:42:26,201 :: k-mer:21
+#INFO :: 2020-12-23 01:45:03,285 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:45:21,197 :: kmerset1 VS. kmerset1 d2Score:7706977.4926
+#INFO :: 2020-12-23 01:45:21,240 :: k-mer:21
+#INFO :: 2020-12-23 01:47:59,904 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:48:19,202 :: kmerset2 VS. kmerset2 d2Score:7706977.4926
+#INFO :: 2020-12-23 01:48:19,202 :: D2S_distance:0.0306650007384
+#INFO :: 2020-12-23 01:48:19,308 :: k-mer:21
+#INFO :: 2020-12-23 01:50:43,332 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:51:14,056 :: kmerset1 VS. kmerset2 d2Score:7211912.0816
+#INFO :: 2020-12-23 01:51:14,057 :: k-mer:21
+#INFO :: 2020-12-23 01:53:53,412 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:54:11,622 :: kmerset1 VS. kmerset1 d2Score:7211912.0816
+#INFO :: 2020-12-23 01:54:11,642 :: k-mer:21
+#INFO :: 2020-12-23 01:56:54,687 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:57:13,537 :: kmerset2 VS. kmerset2 d2Score:7211912.0816
+#INFO :: 2020-12-23 01:57:13,537 :: D2S_distance:0.0968682234717
+#INFO :: 2020-12-23 01:57:13,654 :: k-mer:21
+#INFO :: 2020-12-23 01:58:14,077 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 01:59:13,858 :: K-mer loop round 20000000
+#INFO :: 2020-12-23 01:59:20,795 :: kmerset1 VS. kmerset2 d2Score:884565.447155
+#INFO :: 2020-12-23 01:59:20,796 :: k-mer:21
+#INFO :: 2020-12-23 02:01:55,524 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:02:13,008 :: kmerset1 VS. kmerset1 d2Score:884565.447155
+#INFO :: 2020-12-23 02:02:13,039 :: k-mer:21
+#INFO :: 2020-12-23 02:04:47,145 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:05:07,592 :: kmerset2 VS. kmerset2 d2Score:884565.447155
+#INFO :: 2020-12-23 02:05:07,592 :: D2S_distance:2.20450532431
+#INFO :: 2020-12-23 02:05:07,703 :: k-mer:21
+#INFO :: 2020-12-23 02:07:37,366 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:08:00,280 :: kmerset1 VS. kmerset2 d2Score:7645596.01425
+#INFO :: 2020-12-23 02:08:00,281 :: k-mer:21
+#INFO :: 2020-12-23 02:10:34,401 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:10:51,727 :: kmerset1 VS. kmerset1 d2Score:7645596.01425
+#INFO :: 2020-12-23 02:10:51,763 :: k-mer:21
+#INFO :: 2020-12-23 02:13:26,208 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:13:44,285 :: kmerset2 VS. kmerset2 d2Score:7645596.01425
+#INFO :: 2020-12-23 02:13:44,286 :: D2S_distance:0.0361177966791
+#INFO :: 2020-12-23 02:13:44,381 :: k-mer:21
+#INFO :: 2020-12-23 02:16:03,023 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:16:32,555 :: kmerset1 VS. kmerset2 d2Score:7155899.94622
+#INFO :: 2020-12-23 02:16:32,573 :: k-mer:21
+#INFO :: 2020-12-23 02:19:06,056 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:19:23,309 :: kmerset1 VS. kmerset1 d2Score:7155899.94622
+#INFO :: 2020-12-23 02:19:23,335 :: k-mer:21
+#INFO :: 2020-12-23 02:21:59,620 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:22:16,918 :: kmerset2 VS. kmerset2 d2Score:7155899.94622
+#INFO :: 2020-12-23 02:22:16,918 :: D2S_distance:0.100796004063
+#INFO :: 2020-12-23 02:22:17,035 :: k-mer:21
+#INFO :: 2020-12-23 02:24:41,387 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:25:13,707 :: kmerset1 VS. kmerset2 d2Score:7284761.54628
+#INFO :: 2020-12-23 02:25:13,708 :: k-mer:21
+#INFO :: 2020-12-23 02:27:54,070 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:28:12,161 :: kmerset1 VS. kmerset1 d2Score:7284761.54628
+#INFO :: 2020-12-23 02:28:12,203 :: k-mer:21
+#INFO :: 2020-12-23 02:30:53,089 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:31:14,346 :: kmerset2 VS. kmerset2 d2Score:7284761.54628
+#INFO :: 2020-12-23 02:31:14,347 :: D2S_distance:0.0997070224313
+#INFO :: 2020-12-23 02:31:14,452 :: k-mer:21
+#INFO :: 2020-12-23 02:33:40,879 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:34:09,076 :: kmerset1 VS. kmerset2 d2Score:7401199.75292
+#INFO :: 2020-12-23 02:34:09,076 :: k-mer:21
+#INFO :: 2020-12-23 02:36:47,325 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:37:05,530 :: kmerset1 VS. kmerset1 d2Score:7401199.75292
+#INFO :: 2020-12-23 02:37:05,564 :: k-mer:21
+#INFO :: 2020-12-23 02:39:44,379 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:40:04,200 :: kmerset2 VS. kmerset2 d2Score:7401199.75292
+#INFO :: 2020-12-23 02:40:04,200 :: D2S_distance:0.0710173415273
+#INFO :: 2020-12-23 02:40:04,443 :: k-mer:21
+#INFO :: 2020-12-23 02:42:30,745 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:43:01,547 :: kmerset1 VS. kmerset2 d2Score:7126138.10662
+#INFO :: 2020-12-23 02:43:01,547 :: k-mer:21
+#INFO :: 2020-12-23 02:45:42,397 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:46:00,466 :: kmerset1 VS. kmerset1 d2Score:7126138.10662
+#INFO :: 2020-12-23 02:46:00,485 :: k-mer:21
+#INFO :: 2020-12-23 02:48:41,327 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:48:58,273 :: kmerset2 VS. kmerset2 d2Score:7126138.10662
+#INFO :: 2020-12-23 02:48:58,273 :: D2S_distance:0.100781514348
+#INFO :: 2020-12-23 02:48:58,396 :: k-mer:21
+#INFO :: 2020-12-23 02:51:23,183 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:51:53,772 :: kmerset1 VS. kmerset2 d2Score:7230576.00015
+#INFO :: 2020-12-23 02:51:53,773 :: k-mer:21
+#INFO :: 2020-12-23 02:54:33,545 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:54:51,556 :: kmerset1 VS. kmerset1 d2Score:7230576.00015
+#INFO :: 2020-12-23 02:54:51,556 :: k-mer:21
+#INFO :: 2020-12-23 02:57:31,355 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 02:57:49,671 :: kmerset2 VS. kmerset2 d2Score:7230576.00015
+#INFO :: 2020-12-23 02:57:49,671 :: D2S_distance:0.0943472245883
+#INFO :: 2020-12-23 02:57:49,830 :: k-mer:21
+#INFO :: 2020-12-23 03:00:15,816 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:00:47,976 :: kmerset1 VS. kmerset2 d2Score:7303260.87301
+#INFO :: 2020-12-23 03:00:47,977 :: k-mer:21
+#INFO :: 2020-12-23 03:03:26,765 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:03:44,319 :: kmerset1 VS. kmerset1 d2Score:7303260.87301
+#INFO :: 2020-12-23 03:03:44,324 :: k-mer:21
+#INFO :: 2020-12-23 03:06:22,018 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:06:42,929 :: kmerset2 VS. kmerset2 d2Score:7303260.87301
+#INFO :: 2020-12-23 03:06:42,929 :: D2S_distance:0.0918937078569
+#INFO :: 2020-12-23 03:06:43,055 :: k-mer:21
+#INFO :: 2020-12-23 03:08:38,368 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:09:00,755 :: kmerset1 VS. kmerset2 d2Score:5047287.61891
+#INFO :: 2020-12-23 03:09:00,756 :: k-mer:21
+#INFO :: 2020-12-23 03:11:37,000 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:11:54,460 :: kmerset1 VS. kmerset1 d2Score:5047287.61891
+#INFO :: 2020-12-23 03:11:54,461 :: k-mer:21
+#INFO :: 2020-12-23 03:13:57,797 :: kmerset2 VS. kmerset2 d2Score:5047287.61891
+#INFO :: 2020-12-23 03:13:57,797 :: D2S_distance:0.280743220816
+#INFO :: 2020-12-23 03:13:57,901 :: k-mer:21
+#INFO :: 2020-12-23 03:16:22,990 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:16:53,834 :: kmerset1 VS. kmerset2 d2Score:7215547.05096
+#INFO :: 2020-12-23 03:16:53,862 :: k-mer:21
+#INFO :: 2020-12-23 03:19:33,991 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:19:51,928 :: kmerset1 VS. kmerset1 d2Score:7215547.05096
+#INFO :: 2020-12-23 03:19:51,960 :: k-mer:21
+#INFO :: 2020-12-23 03:22:32,843 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:22:51,253 :: kmerset2 VS. kmerset2 d2Score:7215547.05096
+#INFO :: 2020-12-23 03:22:51,253 :: D2S_distance:0.0956419191449
+#INFO :: 2020-12-23 03:22:51,369 :: k-mer:21
+#INFO :: 2020-12-23 03:25:14,891 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:25:45,506 :: kmerset1 VS. kmerset2 d2Score:7213401.51708
+#INFO :: 2020-12-23 03:25:45,520 :: k-mer:21
+#INFO :: 2020-12-23 03:28:23,965 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:28:42,016 :: kmerset1 VS. kmerset1 d2Score:7213401.51708
+#INFO :: 2020-12-23 03:28:42,050 :: k-mer:21
+#INFO :: 2020-12-23 03:31:28,041 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:31:46,245 :: kmerset2 VS. kmerset2 d2Score:7213401.51708
+#INFO :: 2020-12-23 03:31:46,246 :: D2S_distance:0.0967512867454
+#INFO :: 2020-12-23 03:31:46,465 :: k-mer:21
+#INFO :: 2020-12-23 03:34:12,106 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:34:43,791 :: kmerset1 VS. kmerset2 d2Score:7170706.53287
+#INFO :: 2020-12-23 03:34:43,802 :: k-mer:21
+#INFO :: 2020-12-23 03:37:25,697 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:37:43,649 :: kmerset1 VS. kmerset1 d2Score:7170706.53287
+#INFO :: 2020-12-23 03:37:43,676 :: k-mer:21
+#INFO :: 2020-12-23 03:40:27,027 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:40:45,465 :: kmerset2 VS. kmerset2 d2Score:7170706.53287
+#INFO :: 2020-12-23 03:40:45,465 :: D2S_distance:0.098946501543
+#INFO :: 2020-12-23 03:40:45,699 :: k-mer:21
+#INFO :: 2020-12-23 03:43:11,129 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:43:43,241 :: kmerset1 VS. kmerset2 d2Score:7218853.23521
+#INFO :: 2020-12-23 03:43:43,275 :: k-mer:21
+#INFO :: 2020-12-23 03:46:22,879 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:46:40,762 :: kmerset1 VS. kmerset1 d2Score:7218853.23521
+#INFO :: 2020-12-23 03:46:40,784 :: k-mer:21
+#INFO :: 2020-12-23 03:49:30,896 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:49:50,857 :: kmerset2 VS. kmerset2 d2Score:7218853.23521
+#INFO :: 2020-12-23 03:49:50,857 :: D2S_distance:0.10116968164
+#INFO :: 2020-12-23 03:49:50,930 :: k-mer:21
+#INFO :: 2020-12-23 03:52:57,016 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:53:19,973 :: kmerset1 VS. kmerset2 d2Score:7658756.14416
+#INFO :: 2020-12-23 03:53:19,989 :: k-mer:21
+#INFO :: 2020-12-23 03:56:19,685 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:56:37,455 :: kmerset1 VS. kmerset1 d2Score:7658756.14416
+#INFO :: 2020-12-23 03:56:37,471 :: k-mer:21
+#INFO :: 2020-12-23 03:59:17,758 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 03:59:36,042 :: kmerset2 VS. kmerset2 d2Score:7658756.14416
+#INFO :: 2020-12-23 03:59:36,042 :: D2S_distance:0.0323040567538
+#INFO :: 2020-12-23 03:59:36,142 :: k-mer:21
+#INFO :: 2020-12-23 04:02:27,355 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:03:03,513 :: kmerset1 VS. kmerset2 d2Score:7573656.20237
+#INFO :: 2020-12-23 04:03:03,513 :: k-mer:21
+#INFO :: 2020-12-23 04:06:01,558 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:06:29,530 :: kmerset1 VS. kmerset1 d2Score:7573656.20237
+#INFO :: 2020-12-23 04:06:29,548 :: k-mer:21
+#INFO :: 2020-12-23 04:09:09,049 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:09:28,974 :: kmerset2 VS. kmerset2 d2Score:7573656.20237
+#INFO :: 2020-12-23 04:09:28,974 :: D2S_distance:0.0500274645996
+#INFO :: 2020-12-23 04:09:29,076 :: k-mer:21
+#INFO :: 2020-12-23 04:10:28,683 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:11:39,026 :: K-mer loop round 20000000
+#INFO :: 2020-12-23 04:11:47,712 :: kmerset1 VS. kmerset2 d2Score:748293.392089
+#INFO :: 2020-12-23 04:11:47,712 :: k-mer:21
+#INFO :: 2020-12-23 04:14:59,650 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:15:17,728 :: kmerset1 VS. kmerset1 d2Score:748293.392089
+#INFO :: 2020-12-23 04:15:17,745 :: k-mer:21
+#INFO :: 2020-12-23 04:18:19,352 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:18:40,999 :: kmerset2 VS. kmerset2 d2Score:748293.392089
+#INFO :: 2020-12-23 04:18:40,999 :: D2S_distance:2.37134036762
+#INFO :: 2020-12-23 04:18:41,114 :: k-mer:21
+#INFO :: 2020-12-23 04:21:09,467 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:21:38,688 :: kmerset1 VS. kmerset2 d2Score:7428260.48228
+#INFO :: 2020-12-23 04:21:38,689 :: k-mer:21
+#INFO :: 2020-12-23 04:24:49,725 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:25:07,837 :: kmerset1 VS. kmerset1 d2Score:7428260.48228
+#INFO :: 2020-12-23 04:25:07,883 :: k-mer:21
+#INFO :: 2020-12-23 04:28:19,696 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:28:40,516 :: kmerset2 VS. kmerset2 d2Score:7428260.48228
+#INFO :: 2020-12-23 04:28:40,517 :: D2S_distance:0.0715437157975
+#INFO :: 2020-12-23 04:28:40,631 :: k-mer:21
+#INFO :: 2020-12-23 04:31:10,258 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:31:34,493 :: kmerset1 VS. kmerset2 d2Score:7560489.97059
+#INFO :: 2020-12-23 04:31:34,493 :: k-mer:21
+#INFO :: 2020-12-23 04:34:20,861 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:34:48,630 :: kmerset1 VS. kmerset1 d2Score:7560489.97059
+#INFO :: 2020-12-23 04:34:48,631 :: k-mer:21
+#INFO :: 2020-12-23 04:37:46,152 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:38:14,413 :: kmerset2 VS. kmerset2 d2Score:7560489.97059
+#INFO :: 2020-12-23 04:38:14,413 :: D2S_distance:0.0455200834593
+#INFO :: 2020-12-23 04:38:14,518 :: k-mer:21
+#INFO :: 2020-12-23 04:40:34,340 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:41:11,169 :: kmerset1 VS. kmerset2 d2Score:6695080.43662
+#INFO :: 2020-12-23 04:41:11,170 :: k-mer:21
+#INFO :: 2020-12-23 04:43:46,478 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:44:03,857 :: kmerset1 VS. kmerset1 d2Score:6695080.43662
+#INFO :: 2020-12-23 04:44:03,858 :: k-mer:21
+#INFO :: 2020-12-23 04:47:11,177 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:47:29,260 :: kmerset2 VS. kmerset2 d2Score:6695080.43662
+#INFO :: 2020-12-23 04:47:29,260 :: D2S_distance:0.167973180484
+#INFO :: 2020-12-23 04:47:29,604 :: k-mer:21
+#INFO :: 2020-12-23 04:50:27,677 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:50:58,232 :: kmerset1 VS. kmerset2 d2Score:7332571.2239
+#INFO :: 2020-12-23 04:50:58,243 :: k-mer:21
+#INFO :: 2020-12-23 04:53:37,432 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:53:55,235 :: kmerset1 VS. kmerset1 d2Score:7332571.2239
+#INFO :: 2020-12-23 04:53:55,250 :: k-mer:21
+#INFO :: 2020-12-23 04:56:55,183 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 04:57:15,287 :: kmerset2 VS. kmerset2 d2Score:7332571.2239
+#INFO :: 2020-12-23 04:57:15,287 :: D2S_distance:0.0855315055775
+#INFO :: 2020-12-23 04:57:15,377 :: k-mer:21
+#INFO :: 2020-12-23 05:00:11,559 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:00:43,039 :: kmerset1 VS. kmerset2 d2Score:7184728.67848
+#INFO :: 2020-12-23 05:00:43,040 :: k-mer:21
+#INFO :: 2020-12-23 05:03:33,883 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:03:51,943 :: kmerset1 VS. kmerset1 d2Score:7184728.67848
+#INFO :: 2020-12-23 05:03:51,943 :: k-mer:21
+#INFO :: 2020-12-23 05:06:42,526 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:07:00,734 :: kmerset2 VS. kmerset2 d2Score:7184728.67848
+#INFO :: 2020-12-23 05:07:00,734 :: D2S_distance:0.0991437942783
+#INFO :: 2020-12-23 05:07:01,132 :: k-mer:21
+#INFO :: 2020-12-23 05:09:46,875 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:10:25,286 :: kmerset1 VS. kmerset2 d2Score:7398325.90798
+#INFO :: 2020-12-23 05:10:25,287 :: k-mer:21
+#INFO :: 2020-12-23 05:13:21,060 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:13:38,414 :: kmerset1 VS. kmerset1 d2Score:7398325.90798
+#INFO :: 2020-12-23 05:13:38,468 :: k-mer:21
+#INFO :: 2020-12-23 05:16:15,201 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:16:34,321 :: kmerset2 VS. kmerset2 d2Score:7398325.90798
+#INFO :: 2020-12-23 05:16:34,321 :: D2S_distance:0.0750488244515
+#INFO :: 2020-12-23 05:16:34,550 :: k-mer:21
+#INFO :: 2020-12-23 05:19:09,897 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:19:58,818 :: kmerset1 VS. kmerset2 d2Score:6699308.30632
+#INFO :: 2020-12-23 05:19:58,819 :: k-mer:21
+#INFO :: 2020-12-23 05:22:59,997 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:23:28,174 :: kmerset1 VS. kmerset1 d2Score:6699308.30632
+#INFO :: 2020-12-23 05:23:28,186 :: k-mer:21
+#INFO :: 2020-12-23 05:26:08,221 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:26:26,680 :: kmerset2 VS. kmerset2 d2Score:6699308.30632
+#INFO :: 2020-12-23 05:26:26,680 :: D2S_distance:0.167019029774
+#INFO :: 2020-12-23 05:26:26,801 :: k-mer:21
+#INFO :: 2020-12-23 05:29:00,016 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:29:31,401 :: kmerset1 VS. kmerset2 d2Score:7175158.12555
+#INFO :: 2020-12-23 05:29:31,402 :: k-mer:21
+#INFO :: 2020-12-23 05:32:44,280 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:33:02,596 :: kmerset1 VS. kmerset1 d2Score:7175158.12555
+#INFO :: 2020-12-23 05:33:02,647 :: k-mer:21
+#INFO :: 2020-12-23 05:36:03,176 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:36:21,347 :: kmerset2 VS. kmerset2 d2Score:7175158.12555
+#INFO :: 2020-12-23 05:36:21,347 :: D2S_distance:0.101421077565
+#INFO :: 2020-12-23 05:36:21,637 :: k-mer:21
+#INFO :: 2020-12-23 05:38:45,790 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:39:16,619 :: kmerset1 VS. kmerset2 d2Score:7210891.89111
+#INFO :: 2020-12-23 05:39:16,620 :: k-mer:21
+#INFO :: 2020-12-23 05:42:27,336 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:42:45,217 :: kmerset1 VS. kmerset1 d2Score:7210891.89111
+#INFO :: 2020-12-23 05:42:45,233 :: k-mer:21
+#INFO :: 2020-12-23 05:45:56,817 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:46:15,450 :: kmerset2 VS. kmerset2 d2Score:7210891.89111
+#INFO :: 2020-12-23 05:46:15,450 :: D2S_distance:0.0965336035907
+#INFO :: 2020-12-23 05:46:15,613 :: k-mer:21
+#INFO :: 2020-12-23 05:48:37,621 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:49:08,103 :: kmerset1 VS. kmerset2 d2Score:7208919.35324
+#INFO :: 2020-12-23 05:49:08,103 :: k-mer:21
+#INFO :: 2020-12-23 05:52:06,093 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:52:23,920 :: kmerset1 VS. kmerset1 d2Score:7208919.35324
+#INFO :: 2020-12-23 05:52:23,951 :: k-mer:21
+#INFO :: 2020-12-23 05:55:32,016 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:55:50,342 :: kmerset2 VS. kmerset2 d2Score:7208919.35324
+#INFO :: 2020-12-23 05:55:50,342 :: D2S_distance:0.0968455585711
+#INFO :: 2020-12-23 05:55:50,825 :: k-mer:21
+#INFO :: 2020-12-23 05:58:22,263 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 05:58:55,565 :: kmerset1 VS. kmerset2 d2Score:7056254.17119
+#INFO :: 2020-12-23 05:58:55,566 :: k-mer:21
+#INFO :: 2020-12-23 06:01:45,557 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:02:03,583 :: kmerset1 VS. kmerset1 d2Score:7056254.17119
+#INFO :: 2020-12-23 06:02:03,609 :: k-mer:21
+#INFO :: 2020-12-23 06:05:14,114 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:05:33,028 :: kmerset2 VS. kmerset2 d2Score:7056254.17119
+#INFO :: 2020-12-23 06:05:33,028 :: D2S_distance:0.116720511483
+#INFO :: 2020-12-23 06:05:33,150 :: k-mer:21
+#INFO :: 2020-12-23 06:08:22,584 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:08:49,646 :: kmerset1 VS. kmerset2 d2Score:7476774.19778
+#INFO :: 2020-12-23 06:08:49,669 :: k-mer:21
+#INFO :: 2020-12-23 06:11:26,289 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:11:43,796 :: kmerset1 VS. kmerset1 d2Score:7476774.19778
+#INFO :: 2020-12-23 06:11:43,835 :: k-mer:21
+#INFO :: 2020-12-23 06:14:44,657 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:15:13,931 :: kmerset2 VS. kmerset2 d2Score:7476774.19778
+#INFO :: 2020-12-23 06:15:13,932 :: D2S_distance:0.0597013719104
+#INFO :: 2020-12-23 06:15:14,029 :: k-mer:21
+#INFO :: 2020-12-23 06:17:57,618 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:18:37,199 :: kmerset1 VS. kmerset2 d2Score:7200997.84471
+#INFO :: 2020-12-23 06:18:37,200 :: k-mer:21
+#INFO :: 2020-12-23 06:21:12,755 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:21:29,921 :: kmerset1 VS. kmerset1 d2Score:7200997.84471
+#INFO :: 2020-12-23 06:21:29,938 :: k-mer:21
+#INFO :: 2020-12-23 06:24:17,612 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:24:35,480 :: kmerset2 VS. kmerset2 d2Score:7200997.84471
+#INFO :: 2020-12-23 06:24:35,480 :: D2S_distance:0.0939961692698
+#INFO :: 2020-12-23 06:24:35,630 :: k-mer:21
+#INFO :: 2020-12-23 06:27:23,560 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:28:02,996 :: kmerset1 VS. kmerset2 d2Score:6672824.30065
+#INFO :: 2020-12-23 06:28:03,007 :: k-mer:21
+#INFO :: 2020-12-23 06:31:06,719 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:31:24,894 :: kmerset1 VS. kmerset1 d2Score:6672824.30065
+#INFO :: 2020-12-23 06:31:24,909 :: k-mer:21
+#INFO :: 2020-12-23 06:34:06,204 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:34:24,201 :: kmerset2 VS. kmerset2 d2Score:6672824.30065
+#INFO :: 2020-12-23 06:34:24,202 :: D2S_distance:0.168532340035
+#INFO :: 2020-12-23 06:34:24,284 :: k-mer:21
+#INFO :: 2020-12-23 06:37:24,207 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:37:53,057 :: kmerset1 VS. kmerset2 d2Score:7413948.914
+#INFO :: 2020-12-23 06:37:53,058 :: k-mer:21
+#INFO :: 2020-12-23 06:41:03,701 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:41:21,629 :: kmerset1 VS. kmerset1 d2Score:7413948.914
+#INFO :: 2020-12-23 06:41:21,656 :: k-mer:21
+#INFO :: 2020-12-23 06:44:01,407 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:44:21,798 :: kmerset2 VS. kmerset2 d2Score:7413948.914
+#INFO :: 2020-12-23 06:44:21,799 :: D2S_distance:0.073285314435
+#INFO :: 2020-12-23 06:44:21,915 :: k-mer:21
+#INFO :: 2020-12-23 06:46:39,704 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:47:14,078 :: kmerset1 VS. kmerset2 d2Score:6195058.42909
+#INFO :: 2020-12-23 06:47:14,078 :: k-mer:21
+#INFO :: 2020-12-23 06:50:20,872 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:50:38,437 :: kmerset1 VS. kmerset1 d2Score:6195058.42909
+#INFO :: 2020-12-23 06:50:38,467 :: k-mer:21
+#INFO :: 2020-12-23 06:53:12,275 :: kmerset2 VS. kmerset2 d2Score:6195058.42909
+#INFO :: 2020-12-23 06:53:12,276 :: D2S_distance:0.215537665117
+#INFO :: 2020-12-23 06:53:12,386 :: k-mer:21
+#INFO :: 2020-12-23 06:55:25,520 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:56:03,380 :: kmerset1 VS. kmerset2 d2Score:6685195.74259
+#INFO :: 2020-12-23 06:56:03,381 :: k-mer:21
+#INFO :: 2020-12-23 06:59:13,414 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 06:59:31,319 :: kmerset1 VS. kmerset1 d2Score:6685195.74259
+#INFO :: 2020-12-23 06:59:31,347 :: k-mer:21
+#INFO :: 2020-12-23 07:02:45,085 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:03:03,534 :: kmerset2 VS. kmerset2 d2Score:6685195.74259
+#INFO :: 2020-12-23 07:03:03,534 :: D2S_distance:0.167966038827
+#INFO :: 2020-12-23 07:03:03,692 :: k-mer:21
+#INFO :: 2020-12-23 07:05:33,232 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:06:04,792 :: kmerset1 VS. kmerset2 d2Score:7197001.39716
+#INFO :: 2020-12-23 07:06:04,793 :: k-mer:21
+#INFO :: 2020-12-23 07:09:10,469 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:09:29,092 :: kmerset1 VS. kmerset1 d2Score:7197001.39716
+#INFO :: 2020-12-23 07:09:29,134 :: k-mer:21
+#INFO :: 2020-12-23 07:12:42,388 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:13:00,535 :: kmerset2 VS. kmerset2 d2Score:7197001.39716
+#INFO :: 2020-12-23 07:13:00,536 :: D2S_distance:0.094242489264
+#INFO :: 2020-12-23 07:13:00,661 :: k-mer:21
+#INFO :: 2020-12-23 07:15:23,089 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:15:48,502 :: kmerset1 VS. kmerset2 d2Score:6470850.42506
+#INFO :: 2020-12-23 07:15:48,502 :: k-mer:21
+#INFO :: 2020-12-23 07:18:27,309 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:18:55,324 :: kmerset1 VS. kmerset1 d2Score:6470850.42506
+#INFO :: 2020-12-23 07:18:55,336 :: k-mer:21
+#INFO :: 2020-12-23 07:21:45,308 :: kmerset2 VS. kmerset2 d2Score:6470850.42506
+#INFO :: 2020-12-23 07:21:45,309 :: D2S_distance:0.235534966424
+#INFO :: 2020-12-23 07:21:45,403 :: k-mer:21
+#INFO :: 2020-12-23 07:24:48,423 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:25:15,531 :: kmerset1 VS. kmerset2 d2Score:7565683.69954
+#INFO :: 2020-12-23 07:25:15,532 :: k-mer:21
+#INFO :: 2020-12-23 07:27:56,806 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:28:14,767 :: kmerset1 VS. kmerset1 d2Score:7565683.69954
+#INFO :: 2020-12-23 07:28:14,832 :: k-mer:21
+#INFO :: 2020-12-23 07:31:18,673 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:31:39,451 :: kmerset2 VS. kmerset2 d2Score:7565683.69954
+#INFO :: 2020-12-23 07:31:39,452 :: D2S_distance:0.0516800364629
+#INFO :: 2020-12-23 07:31:39,641 :: k-mer:21
+#INFO :: 2020-12-23 07:34:27,223 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:34:53,036 :: kmerset1 VS. kmerset2 d2Score:6785624.5421
+#INFO :: 2020-12-23 07:34:53,052 :: k-mer:21
+#INFO :: 2020-12-23 07:37:40,287 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:37:58,023 :: kmerset1 VS. kmerset1 d2Score:6785624.5421
+#INFO :: 2020-12-23 07:37:58,023 :: k-mer:21
+#INFO :: 2020-12-23 07:40:45,510 :: kmerset2 VS. kmerset2 d2Score:6785624.5421
+#INFO :: 2020-12-23 07:40:45,510 :: D2S_distance:0.192827087849
+#INFO :: 2020-12-23 07:40:45,603 :: k-mer:21
+#INFO :: 2020-12-23 07:43:24,620 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:43:57,621 :: kmerset1 VS. kmerset2 d2Score:7247618.66644
+#INFO :: 2020-12-23 07:43:57,622 :: k-mer:21
+#INFO :: 2020-12-23 07:47:03,756 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:47:21,258 :: kmerset1 VS. kmerset1 d2Score:7247618.66644
+#INFO :: 2020-12-23 07:47:21,259 :: k-mer:21
+#INFO :: 2020-12-23 07:49:56,891 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:50:19,276 :: kmerset2 VS. kmerset2 d2Score:7247618.66644
+#INFO :: 2020-12-23 07:50:19,277 :: D2S_distance:0.108064613963
+#INFO :: 2020-12-23 07:50:19,387 :: k-mer:21
+#INFO :: 2020-12-23 07:53:00,869 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:53:34,529 :: kmerset1 VS. kmerset2 d2Score:7242217.02068
+#INFO :: 2020-12-23 07:53:34,529 :: k-mer:21
+#INFO :: 2020-12-23 07:56:44,385 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 07:57:02,391 :: kmerset1 VS. kmerset1 d2Score:7242217.02068
+#INFO :: 2020-12-23 07:57:02,402 :: k-mer:21
+#INFO :: 2020-12-23 07:59:53,525 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:00:18,141 :: kmerset2 VS. kmerset2 d2Score:7242217.02068
+#INFO :: 2020-12-23 08:00:18,142 :: D2S_distance:0.10754401585
+#INFO :: 2020-12-23 08:00:18,294 :: k-mer:21
+#INFO :: 2020-12-23 08:03:01,039 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:03:25,975 :: kmerset1 VS. kmerset2 d2Score:7562506.65306
+#INFO :: 2020-12-23 08:03:25,976 :: k-mer:21
+#INFO :: 2020-12-23 08:06:37,522 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:06:54,987 :: kmerset1 VS. kmerset1 d2Score:7562506.65306
+#INFO :: 2020-12-23 08:06:55,018 :: k-mer:21
+#INFO :: 2020-12-23 08:09:50,205 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:10:07,852 :: kmerset2 VS. kmerset2 d2Score:7562506.65306
+#INFO :: 2020-12-23 08:10:07,852 :: D2S_distance:0.044692669112
+#INFO :: 2020-12-23 08:10:07,948 :: k-mer:21
+#INFO :: 2020-12-23 08:12:23,282 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:12:57,383 :: kmerset1 VS. kmerset2 d2Score:7022723.9349
+#INFO :: 2020-12-23 08:12:57,384 :: k-mer:21
+#INFO :: 2020-12-23 08:15:54,706 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:16:22,504 :: kmerset1 VS. kmerset1 d2Score:7022723.9349
+#INFO :: 2020-12-23 08:16:22,520 :: k-mer:21
+#INFO :: 2020-12-23 08:19:18,302 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:19:48,053 :: kmerset2 VS. kmerset2 d2Score:7022723.9349
+#INFO :: 2020-12-23 08:19:48,053 :: D2S_distance:0.126903149169
+#INFO :: 2020-12-23 08:19:48,156 :: k-mer:21
+#INFO :: 2020-12-23 08:21:59,493 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:22:24,415 :: kmerset1 VS. kmerset2 d2Score:6394970.30656
+#INFO :: 2020-12-23 08:22:24,416 :: k-mer:21
+#INFO :: 2020-12-23 08:25:13,033 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:25:30,909 :: kmerset1 VS. kmerset1 d2Score:6394970.30656
+#INFO :: 2020-12-23 08:25:30,927 :: k-mer:21
+#INFO :: 2020-12-23 08:28:31,234 :: kmerset2 VS. kmerset2 d2Score:6394970.30656
+#INFO :: 2020-12-23 08:28:31,234 :: D2S_distance:0.230440511433
+#INFO :: 2020-12-23 08:28:31,412 :: k-mer:21
+#INFO :: 2020-12-23 08:31:16,965 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:31:49,572 :: kmerset1 VS. kmerset2 d2Score:7201722.78697
+#INFO :: 2020-12-23 08:31:49,598 :: k-mer:21
+#INFO :: 2020-12-23 08:34:31,147 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:34:49,128 :: kmerset1 VS. kmerset1 d2Score:7201722.78697
+#INFO :: 2020-12-23 08:34:49,144 :: k-mer:21
+#INFO :: 2020-12-23 08:37:49,934 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:38:19,796 :: kmerset2 VS. kmerset2 d2Score:7201722.78697
+#INFO :: 2020-12-23 08:38:19,797 :: D2S_distance:0.101568837066
+#INFO :: 2020-12-23 08:38:19,878 :: k-mer:21
+#INFO :: 2020-12-23 08:41:03,101 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:41:43,066 :: kmerset1 VS. kmerset2 d2Score:7198143.33119
+#INFO :: 2020-12-23 08:41:43,067 :: k-mer:21
+#INFO :: 2020-12-23 08:44:21,863 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:44:39,670 :: kmerset1 VS. kmerset1 d2Score:7198143.33119
+#INFO :: 2020-12-23 08:44:39,670 :: k-mer:21
+#INFO :: 2020-12-23 08:47:32,240 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:48:00,023 :: kmerset2 VS. kmerset2 d2Score:7198143.33119
+#INFO :: 2020-12-23 08:48:00,024 :: D2S_distance:0.0936359594274
+#INFO :: 2020-12-23 08:48:00,110 :: k-mer:21
+#INFO :: 2020-12-23 08:51:07,811 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:51:39,460 :: kmerset1 VS. kmerset2 d2Score:7134206.87701
+#INFO :: 2020-12-23 08:51:39,461 :: k-mer:21
+#INFO :: 2020-12-23 08:54:30,293 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:54:47,901 :: kmerset1 VS. kmerset1 d2Score:7134206.87701
+#INFO :: 2020-12-23 08:54:47,947 :: k-mer:21
+#INFO :: 2020-12-23 08:57:38,622 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 08:57:57,350 :: kmerset2 VS. kmerset2 d2Score:7134206.87701
+#INFO :: 2020-12-23 08:57:57,351 :: D2S_distance:0.105656466979
+#INFO :: 2020-12-23 08:57:57,508 :: k-mer:21
+#INFO :: 2020-12-23 09:00:45,868 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:01:10,394 :: kmerset1 VS. kmerset2 d2Score:6597758.49941
+#INFO :: 2020-12-23 09:01:10,394 :: k-mer:21
+#INFO :: 2020-12-23 09:04:09,909 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:04:27,716 :: kmerset1 VS. kmerset1 d2Score:6597758.49941
+#INFO :: 2020-12-23 09:04:27,743 :: k-mer:21
+#INFO :: 2020-12-23 09:07:00,171 :: kmerset2 VS. kmerset2 d2Score:6597758.49941
+#INFO :: 2020-12-23 09:07:00,171 :: D2S_distance:0.189361575332
+#INFO :: 2020-12-23 09:07:00,264 :: k-mer:21
+#INFO :: 2020-12-23 09:09:44,394 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:10:26,048 :: kmerset1 VS. kmerset2 d2Score:7237517.79691
+#INFO :: 2020-12-23 09:10:26,049 :: k-mer:21
+#INFO :: 2020-12-23 09:13:26,720 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:13:44,685 :: kmerset1 VS. kmerset1 d2Score:7237517.79691
+#INFO :: 2020-12-23 09:13:44,685 :: k-mer:21
+#INFO :: 2020-12-23 09:16:34,844 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:16:54,571 :: kmerset2 VS. kmerset2 d2Score:7237517.79691
+#INFO :: 2020-12-23 09:16:54,571 :: D2S_distance:0.0976165798815
+#INFO :: 2020-12-23 09:16:54,663 :: k-mer:21
+#INFO :: 2020-12-23 09:19:10,937 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:19:35,254 :: kmerset1 VS. kmerset2 d2Score:5974651.08341
+#INFO :: 2020-12-23 09:19:35,255 :: k-mer:21
+#INFO :: 2020-12-23 09:22:48,745 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:23:07,046 :: kmerset1 VS. kmerset1 d2Score:5974651.08341
+#INFO :: 2020-12-23 09:23:07,130 :: k-mer:21
+#INFO :: 2020-12-23 09:25:48,931 :: kmerset2 VS. kmerset2 d2Score:5974651.08341
+#INFO :: 2020-12-23 09:25:48,931 :: D2S_distance:0.261437930039
+#INFO :: 2020-12-23 09:25:49,099 :: k-mer:21
+#INFO :: 2020-12-23 09:28:15,350 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:28:43,433 :: kmerset1 VS. kmerset2 d2Score:7447864.92425
+#INFO :: 2020-12-23 09:28:43,433 :: k-mer:21
+#INFO :: 2020-12-23 09:31:19,930 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:31:37,480 :: kmerset1 VS. kmerset1 d2Score:7447864.92425
+#INFO :: 2020-12-23 09:31:37,480 :: k-mer:21
+#INFO :: 2020-12-23 09:34:13,714 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:34:33,833 :: kmerset2 VS. kmerset2 d2Score:7447864.92425
+#INFO :: 2020-12-23 09:34:33,833 :: D2S_distance:0.0693196669712
+#INFO :: 2020-12-23 09:34:33,928 :: k-mer:21
+#INFO :: 2020-12-23 09:36:51,912 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:37:21,710 :: kmerset1 VS. kmerset2 d2Score:7170866.1803
+#INFO :: 2020-12-23 09:37:21,711 :: k-mer:21
+#INFO :: 2020-12-23 09:39:55,247 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:40:12,577 :: kmerset1 VS. kmerset1 d2Score:7170866.1803
+#INFO :: 2020-12-23 09:40:12,577 :: k-mer:21
+#INFO :: 2020-12-23 09:42:46,910 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:43:04,051 :: kmerset2 VS. kmerset2 d2Score:7170866.1803
+#INFO :: 2020-12-23 09:43:04,051 :: D2S_distance:0.0995317898432
+#INFO :: 2020-12-23 09:43:04,284 :: k-mer:21
+#INFO :: 2020-12-23 09:45:26,361 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:45:56,324 :: kmerset1 VS. kmerset2 d2Score:7198447.681
+#INFO :: 2020-12-23 09:45:56,325 :: k-mer:21
+#INFO :: 2020-12-23 09:48:34,066 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:48:51,564 :: kmerset1 VS. kmerset1 d2Score:7198447.681
+#INFO :: 2020-12-23 09:48:51,600 :: k-mer:21
+#INFO :: 2020-12-23 09:51:31,126 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:51:48,996 :: kmerset2 VS. kmerset2 d2Score:7198447.681
+#INFO :: 2020-12-23 09:51:48,996 :: D2S_distance:0.0955625592367
+#INFO :: 2020-12-23 09:51:49,109 :: k-mer:21
+#INFO :: 2020-12-23 09:54:21,898 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:54:46,133 :: kmerset1 VS. kmerset2 d2Score:7553718.67494
+#INFO :: 2020-12-23 09:54:46,133 :: k-mer:21
+#INFO :: 2020-12-23 09:57:25,335 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 09:57:43,244 :: kmerset1 VS. kmerset1 d2Score:7553718.67494
+#INFO :: 2020-12-23 09:57:43,245 :: k-mer:21
+#INFO :: 2020-12-23 10:00:21,805 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:00:39,738 :: kmerset2 VS. kmerset2 d2Score:7553718.67494
+#INFO :: 2020-12-23 10:00:39,738 :: D2S_distance:0.0448492208163
+#INFO :: 2020-12-23 10:00:39,836 :: k-mer:21
+#INFO :: 2020-12-23 10:02:51,538 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:03:28,562 :: kmerset1 VS. kmerset2 d2Score:6660891.20928
+#INFO :: 2020-12-23 10:03:28,563 :: k-mer:21
+#INFO :: 2020-12-23 10:06:08,540 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:06:26,195 :: kmerset1 VS. kmerset1 d2Score:6660891.20928
+#INFO :: 2020-12-23 10:06:26,229 :: k-mer:21
+#INFO :: 2020-12-23 10:09:08,480 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:09:25,721 :: kmerset2 VS. kmerset2 d2Score:6660891.20928
+#INFO :: 2020-12-23 10:09:25,721 :: D2S_distance:0.168166236734
+#INFO :: 2020-12-23 10:09:25,838 :: k-mer:21
+#INFO :: 2020-12-23 10:11:45,926 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:12:16,378 :: kmerset1 VS. kmerset2 d2Score:7156296.63052
+#INFO :: 2020-12-23 10:12:16,379 :: k-mer:21
+#INFO :: 2020-12-23 10:14:50,865 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:15:08,308 :: kmerset1 VS. kmerset1 d2Score:7156296.63052
+#INFO :: 2020-12-23 10:15:08,309 :: k-mer:21
+#INFO :: 2020-12-23 10:17:42,707 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:18:00,244 :: kmerset2 VS. kmerset2 d2Score:7156296.63052
+#INFO :: 2020-12-23 10:18:00,244 :: D2S_distance:0.100953921293
+#INFO :: 2020-12-23 10:18:00,331 :: k-mer:21
+#INFO :: 2020-12-23 10:20:30,872 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:20:53,994 :: kmerset1 VS. kmerset2 d2Score:7632983.96304
+#INFO :: 2020-12-23 10:20:53,995 :: k-mer:21
+#INFO :: 2020-12-23 10:23:29,946 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:23:47,402 :: kmerset1 VS. kmerset1 d2Score:7632983.96304
+#INFO :: 2020-12-23 10:23:47,402 :: k-mer:21
+#INFO :: 2020-12-23 10:26:23,634 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:26:41,634 :: kmerset2 VS. kmerset2 d2Score:7632983.96304
+#INFO :: 2020-12-23 10:26:41,634 :: D2S_distance:0.0371711721947
+#INFO :: 2020-12-23 10:26:41,727 :: k-mer:21
+#INFO :: 2020-12-23 10:29:09,012 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:29:36,357 :: kmerset1 VS. kmerset2 d2Score:7440210.27672
+#INFO :: 2020-12-23 10:29:36,368 :: k-mer:21
+#INFO :: 2020-12-23 10:32:13,485 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:32:31,206 :: kmerset1 VS. kmerset1 d2Score:7440210.27672
+#INFO :: 2020-12-23 10:32:31,239 :: k-mer:21
+#INFO :: 2020-12-23 10:35:10,709 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:35:30,631 :: kmerset2 VS. kmerset2 d2Score:7440210.27672
+#INFO :: 2020-12-23 10:35:30,631 :: D2S_distance:0.0665322988336
+#INFO :: 2020-12-23 10:35:30,767 :: k-mer:21
+#INFO :: 2020-12-23 10:38:02,559 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:38:31,868 :: kmerset1 VS. kmerset2 d2Score:7432880.406
+#INFO :: 2020-12-23 10:38:31,869 :: k-mer:21
+#INFO :: 2020-12-23 10:41:11,546 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:41:29,557 :: kmerset1 VS. kmerset1 d2Score:7432880.406
+#INFO :: 2020-12-23 10:41:29,572 :: k-mer:21
+#INFO :: 2020-12-23 10:44:08,476 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:44:28,433 :: kmerset2 VS. kmerset2 d2Score:7432880.406
+#INFO :: 2020-12-23 10:44:28,433 :: D2S_distance:0.070865937957
+#INFO :: 2020-12-23 10:44:28,520 :: k-mer:21
+#INFO :: 2020-12-23 10:46:55,455 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:47:26,004 :: kmerset1 VS. kmerset2 d2Score:7418515.73482
+#INFO :: 2020-12-23 10:47:26,005 :: k-mer:21
+=>> PBS: job killed: walltime 84013 exceeded limit 84000
+########################### Job Execution History #############################
+JobId:508079.awonmgr2
+UserName:s4430291
+GroupName:qris-uq
+JobName:d2s_0
+SessionId:3729
+ResourcesRequested:mem=5gb,ncpus=2,place=free,walltime=23:20:00
+ResourcesUsed:cpupercent=94,cput=22:47:54,mem=11808kb,ncpus=2,vmem=384488kb,walltime=23:20:13
+QueueUsed:Short
+AccountString:NCMAS-d85
+ExitStatus:271
+###############################################################################

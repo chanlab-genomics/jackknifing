@@ -1,7 +1,5 @@
+#!/bin/bash
 # Load file.
-n=0
-while read fline
-do
-        n=$((n + 1))
-        filearray[$n]=$fline
-done < /home/s4430291/chanlab-genomics/jackknifing/jf_scripts/files2runH3H4.txt
+filearray=(/30days/s4430291/Genomes_for_AFphylogeny/**.fna)
+
+echo ${filearray[196]}

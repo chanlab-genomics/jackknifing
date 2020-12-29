@@ -1,0 +1,94 @@
+########################### Execution Started #############################
+JobId:508123.awonmgr2
+UserName:s4430291
+GroupName:qris-uq
+ExecutionHost:aw134
+###############################################################################
+(B[mtime started  23/12/2020 10:49
+------------------------------------------------------
+Job is running on the following nodes aw134.local
+------------------------------------------------------
+PBS: qsub is running on awoonga1.local
+PBS: originating queue is workq
+PBS: executing queue is Short
+PBS: working directory is /home/s4430291/chanlab-genomics/jackknifing
+PBS: execution mode is PBS_BATCH
+PBS: job identifier is 508123.awonmgr2
+PBS: job name is d2s_3
+PBS: node file is /var/spool/pbs/aux/508123.awonmgr2
+PBS: current home directory is /home/s4430291
+PBS: PATH = /gpfs1/sw7/Licensed/Intel/2018_2/bin:/gpfs1/sw7/Licensed/Intel/2018_2/debugger_2018/gdb/intel64/bin:/opt/python/bin:/gpfs1/homes/s4430291/.vscode-server/bin/ea3859d4ba2f3e577a159bc91e3074c5d85c0523/bin:/home/s4430291/.vscode-server/bin/ea3859d4ba2f3e577a159bc91e3074c5d85c0523/bin:/usr/local/bin:/usr/bin:/opt/ganglia/bin:/opt/ganglia/sbin:/usr/java/latest/bin:/opt/pbs/bin:/opt/rocks/bin:/opt/rocks/sbin:/usr/local/sbin:/usr/sbin:/opt/pbs/bin:/home/s4430291/.local/bin:/home/s4430291/bin:/opt/pbs/bin:/home/s4430291/.local/bin:/home/s4430291/bin
+------------------------------------------------------
+/home/s4430291/chanlab-genomics/jackknifing
+#INFO :: 2020-12-23 10:49:48,221 :: k-mer:21
+#INFO :: 2020-12-23 10:52:10,185 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:52:44,256 :: kmerset1 VS. kmerset2 d2Score:7252553.15585
+#INFO :: 2020-12-23 10:52:44,269 :: k-mer:21
+#INFO :: 2020-12-23 10:55:22,771 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:55:44,217 :: kmerset1 VS. kmerset1 d2Score:7252553.15585
+#INFO :: 2020-12-23 10:55:44,251 :: k-mer:21
+#INFO :: 2020-12-23 10:58:22,925 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 10:58:43,063 :: kmerset2 VS. kmerset2 d2Score:7252553.15585
+#INFO :: 2020-12-23 10:58:43,063 :: D2S_distance:0.108053890556
+#INFO :: 2020-12-23 10:58:43,183 :: k-mer:21
+#INFO :: 2020-12-23 11:00:54,008 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:01:25,848 :: kmerset1 VS. kmerset2 d2Score:6572604.5865
+#INFO :: 2020-12-23 11:01:25,849 :: k-mer:21
+#INFO :: 2020-12-23 11:04:04,964 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:04:26,437 :: kmerset1 VS. kmerset1 d2Score:6572604.5865
+#INFO :: 2020-12-23 11:04:26,459 :: k-mer:21
+#INFO :: 2020-12-23 11:07:04,436 :: kmerset2 VS. kmerset2 d2Score:6572604.5865
+#INFO :: 2020-12-23 11:07:04,436 :: D2S_distance:0.238827934696
+#INFO :: 2020-12-23 11:07:04,578 :: k-mer:21
+#INFO :: 2020-12-23 11:09:24,855 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:09:59,949 :: kmerset1 VS. kmerset2 d2Score:7345454.02045
+#INFO :: 2020-12-23 11:09:59,949 :: k-mer:21
+#INFO :: 2020-12-23 11:12:36,776 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:12:57,981 :: kmerset1 VS. kmerset1 d2Score:7345454.02045
+#INFO :: 2020-12-23 11:12:58,006 :: k-mer:21
+#INFO :: 2020-12-23 11:15:34,565 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:15:57,161 :: kmerset2 VS. kmerset2 d2Score:7345454.02045
+#INFO :: 2020-12-23 11:15:57,161 :: D2S_distance:0.10876064838
+#INFO :: 2020-12-23 11:15:57,360 :: k-mer:21
+#INFO :: 2020-12-23 11:18:20,479 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:18:56,213 :: kmerset1 VS. kmerset2 d2Score:7331325.89851
+#INFO :: 2020-12-23 11:18:56,214 :: k-mer:21
+#INFO :: 2020-12-23 11:21:36,835 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:21:58,423 :: kmerset1 VS. kmerset1 d2Score:7331325.89851
+#INFO :: 2020-12-23 11:21:58,434 :: k-mer:21
+#INFO :: 2020-12-23 11:24:40,006 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:25:03,135 :: kmerset2 VS. kmerset2 d2Score:7331325.89851
+#INFO :: 2020-12-23 11:25:03,135 :: D2S_distance:0.109419708158
+#INFO :: 2020-12-23 11:25:03,312 :: k-mer:21
+#INFO :: 2020-12-23 11:27:24,608 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:27:59,259 :: kmerset1 VS. kmerset2 d2Score:7163344.78889
+#INFO :: 2020-12-23 11:27:59,262 :: k-mer:21
+#INFO :: 2020-12-23 11:30:42,781 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:31:04,869 :: kmerset1 VS. kmerset1 d2Score:7163344.78889
+#INFO :: 2020-12-23 11:31:04,919 :: k-mer:21
+#INFO :: 2020-12-23 11:33:47,160 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:34:05,301 :: kmerset2 VS. kmerset2 d2Score:7163344.78889
+#INFO :: 2020-12-23 11:34:05,301 :: D2S_distance:0.113023051596
+#INFO :: 2020-12-23 11:34:05,533 :: k-mer:21
+#INFO :: 2020-12-23 11:36:23,034 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:37:00,614 :: kmerset1 VS. kmerset2 d2Score:7043920.92487
+#INFO :: 2020-12-23 11:37:00,615 :: k-mer:21
+#INFO :: 2020-12-23 11:39:39,590 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:40:00,997 :: kmerset1 VS. kmerset1 d2Score:7043920.92487
+#INFO :: 2020-12-23 11:40:01,021 :: k-mer:21
+#INFO :: 2020-12-23 11:42:46,155 :: K-mer loop round 10000000
+#INFO :: 2020-12-23 11:43:06,681 :: kmerset2 VS. kmerset2 d2Score:7043920.92487
+#INFO :: 2020-12-23 11:43:06,681 :: D2S_distance:0.137994052736
+#INFO :: 2020-12-23 11:43:07,141 :: k-mer:21
+########################### Job Execution History #############################
+JobId:508123.awonmgr2
+UserName:s4430291
+GroupName:qris-uq
+JobName:d2s_3
+SessionId:97095
+ResourcesRequested:mem=5gb,ncpus=2,place=free,walltime=23:20:00
+ResourcesUsed:cpupercent=94,cput=00:53:45,mem=11824kb,ncpus=2,vmem=384488kb,walltime=00:53:49
+QueueUsed:Short
+AccountString:NCMAS-d85
+ExitStatus:271
+###############################################################################
