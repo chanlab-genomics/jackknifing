@@ -35,7 +35,7 @@ Example usage:
 
 def unpack(target_func: Callable):
     """
-    A wrapper to automatically unpack arguments into a target function.
+    A wrapper to automatically unpack arguments into a target Callable object.
     """
 
     @wraps(target_func)
@@ -390,7 +390,7 @@ def remove_chunks2(fasta_dict, chunk_size, portion, seq_id, mutex):
     # portion
     num_chunks_rm = int(len(seq_array) * portion) // chunk_size
 
-    if chunk_size * num_chunks_rm == len(seq_array):
+    if chunk_size * num_chunks_rm >= len(seq_array):
 
         # The very unlikely event where the entire sequence should be removed.
         seq_array = ""
