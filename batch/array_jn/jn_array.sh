@@ -36,10 +36,10 @@ cd $PBS_O_WORKDIR
 pwd
 
 # Make a array of folders of the target directory
-ARRAY_TARGET=(/30days/s4430291/Genomes_for_AFphylogeny/*)
+ARRAY_TARGET=(/30days/s4430291/Genomes_for_AFphylogeny/*.fna)
 
 # Specify the output directory
-OUTPUT_DIR=/30days/s4430291/Genomes_for_AFphylogeny_red_40_$1
+# OUTPUT_DIR=/30days/s4430291/Genomes_for_AFphylogeny_red_40_$1
 echo OUTPUT_DIR: $OUTPUT_DIR
 
 if [ ! -d $OUTPUT_DIR ] 

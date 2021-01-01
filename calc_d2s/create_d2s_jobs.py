@@ -14,13 +14,14 @@ import argparse
 from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 from glob import glob
 from pprint import pprint
+from string import Formatter
 from datetime import timedelta
 
 """
 Example Usage:
     (Unix)
-python3 calc_d2s/create_d2s_jobs.py --data_input_path /30days/s4430291/Genomes_for_AFphylogeny_red_40 --data_output_path /30days/s4430291/Genomes_for_AFphylogeny_red_40_1_D2S --temp True
-python3 calc_d2s/create_d2s_jobs.py --data_input_path /30days/s4430291/Genomes_for_AFphylogeny --data_output_path /30days/s4430291/Genomes_for_AFphylogeny_D2S --temp F --submit F
+python3 calc_d2s/create_d2s_jobs.py --data_input_path /30days/s4430291/Genomes_for_AFphylogeny_red_40 --data_output_path /90days/s4430291/Genomes_for_AFphylogeny_red_40_1_D2S --temp True
+python3 calc_d2s/create_d2s_jobs.py --data_input_path /30days/s4430291/Genomes_for_AFphylogeny --data_output_path /90days/s4430291/Genomes_for_AFphylogeny_D2S --temp F --submit F
 """
 
 if sys.platform.startswith('win32'):
@@ -32,11 +33,11 @@ elif sys.platform.startswith('linux'):
         '/', 'home', 's4430291', 'chanlab-genomics', 'jackknifing')
 
 # Job time in minutes to run each python script
-JOB_TIME = 13
-JOB_MEM = "5GB"
+JOB_TIME = 10
+JOB_MEM = "10GB"
 JOB_NODES = 1
 JOB_NTASKS_PER_NODE = 1
-JOB_CPUS_PER_TASK = 2
+JOB_CPUS_PER_TASK = 4
 
 PYTHON_VERSION = "2.7"
 
@@ -103,11 +104,59 @@ def convert_bool_arg(arg_in):
     return True
 
 
+def strfdelta(tdelta, fmt='{H:02}:{M:02}:{S:02}', inputtype='timedelta'):
+    """Convert a datetime.timedelta object or a regular number to a custom-
+    formatted string, just like the stftime() method does for datetime.datetime
+    objects.
+
+    The fmt argument allows custom formatting to be specified.  Fields can 
+    include seconds, minutes, hours, days, and weeks.  Each field is optional.
+
+    Some examples:
+        '{D:02}d {H:02}h {M:02}m {S:02}s' --> '05d 08h 04m 02s' (default)
+        '{W}w {D}d {H}:{M:02}:{S:02}'     --> '4w 5d 8:04:02'
+        '{D:2}d {H:2}:{M:02}:{S:02}'      --> ' 5d  8:04:02'
+        '{H}h {S}s'                       --> '72h 800s'
+
+    The inputtype argument allows tdelta to be a regular number instead of the  
+    default, which is a datetime.timedelta object.  Valid inputtype strings: 
+        's', 'seconds', 
+        'm', 'minutes', 
+        'h', 'hours', 
+        'd', 'days', 
+        'w', 'weeks'
+    """
+
+    # Convert tdelta to integer seconds.
+    if inputtype == 'timedelta':
+        remainder = int(tdelta.total_seconds())
+    elif inputtype in ['s', 'seconds']:
+        remainder = int(tdelta)
+    elif inputtype in ['m', 'minutes']:
+        remainder = int(tdelta)*60
+    elif inputtype in ['h', 'hours']:
+        remainder = int(tdelta)*3600
+    elif inputtype in ['d', 'days']:
+        remainder = int(tdelta)*86400
+    elif inputtype in ['w', 'weeks']:
+        remainder = int(tdelta)*604800
+
+    f = Formatter()
+    desired_fields = [field_tuple[1] for field_tuple in f.parse(fmt)]
+    possible_fields = ('W', 'D', 'H', 'M', 'S')
+    constants = {'W': 604800, 'D': 86400, 'H': 3600, 'M': 60, 'S': 1}
+    values = {}
+    for field in possible_fields:
+        if field in desired_fields and field in constants:
+            values[field], remainder = divmod(remainder, constants[field])
+    return f.format(fmt, **values)
+
+
 class JobCreator:
     "Creates (and possibly runs) job scripts for creating annotated images."
 
     def __init__(self, slurm_dir: str, data_input_path: str, data_output_path: str,
-                 groups: int = 50, submit: bool = False, temp: bool = False, dry_run: bool = False):
+                 groups: int = 50, index: int = 0, submit: bool = False, temp: bool = False, dry_run: bool = False):
         """
         Initializes a job creator.
 
@@ -133,7 +182,8 @@ class JobCreator:
         self.data_output_path = data_output_path
 
         # How many distance calculations should be run in a single batch script
-        self.groups = groups
+        self.groups: int = groups
+        self.index: int = index
 
         if not os.path.exists(self.data_output_path):
             os.makedirs(self.data_output_path)
@@ -254,19 +304,19 @@ class JobCreator:
             # corresponding parameter values.
             d2s_cmd: str = '\n'.join(d2s_cmd)
 
-            file_name: str = f"d2s_{param_id}"
+            file_name: str = f"d2s_{self.index}_{param_id}"
 
             stdout_path = os.path.join(
-                self.slurm_out, f"{file_name}_out.txt")
+                self.slurm_out, f"{file_name}_out_{self.index}.txt")
             stderr_path = os.path.join(
-                self.slurm_err, f"{file_name}_err.txt")
+                self.slurm_err, f"{file_name}_err_{self.index}.txt")
 
             FORMATTED_TEMPLATE = JOB_TEMPLATE.format(
                 file_name=file_name,
                 stdout_file=stdout_path,
                 stderr_file=stderr_path,
                 d2s_cmd=d2s_cmd,
-                job_time=str(job_time),
+                job_time=strfdelta(job_time),
                 job_mem=JOB_MEM,
                 job_nodes=JOB_NODES,
                 job_ntasks_per_node=JOB_NTASKS_PER_NODE,
@@ -327,8 +377,10 @@ def main():
                         help='A full path to the nkc.gz and CharFreq files.')
     parser.add_argument('--data_output_path', type=str, required=True,
                         help='An output folder for the d2s script.')
-    parser.add_argument('--group', type=int, required=False, default=2000,
+    parser.add_argument('--group', type=int, required=False, default=1000,
                         help='Indicates how many distance calculations are run in a single batch script.')
+    parser.add_argument('--index', type=int, required=False, default=1,
+                        help='Indicates index sample.')
 
     parser.add_argument('-s', '--submit', type=convert_bool_arg, default=False, const=True, nargs='?',
                         help='If True the created jobs will be immediately submitted.')
@@ -340,7 +392,7 @@ def main():
     args = parser.parse_args()
 
     JobCreator(args.slurm_dir, args.data_input_path, args.data_output_path,
-               groups=args.group, submit=args.submit, temp=args.temp, dry_run=args.dry_run)
+               index=args.index, groups=args.group, submit=args.submit, temp=args.temp, dry_run=args.dry_run)
 
 
 if __name__ == "__main__":
