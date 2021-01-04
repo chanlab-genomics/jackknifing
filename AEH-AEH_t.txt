@@ -1,0 +1,9 @@
+/30days/s4430291/Genomes_for_AFphylogeny_red_40_1/AEG.fna.21mer.nkc.gz;/30days/s4430291/Genomes_for_AFphylogeny_red_40_1/AEH.fna.21mer.nkc.gz;0.9694293371755724
+
+#INFO :: 2021-01-04 16:38:12,261 :: k-mer:21
+#INFO :: 2021-01-04 16:42:24,511 :: kmerset1 VS. kmerset2 d2Score:1449303.0731853861
+#INFO :: 2021-01-04 16:42:24,512 :: k-mer:21
+#INFO :: 2021-01-04 16:52:21,019 :: kmerset1 VS. kmerset1 d2Score:1449303.0731853861
+#INFO :: 2021-01-04 16:52:21,084 :: k-mer:21
+#INFO :: 2021-01-04 17:02:07,087 :: kmerset2 VS. kmerset2 d2Score:1449303.0731853861
+#INFO :: 2021-01-04 17:02:07,088 :: D2S_distance:0.9694293371755724

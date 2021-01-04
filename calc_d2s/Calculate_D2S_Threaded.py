@@ -56,7 +56,7 @@ def main():
     parser.add_argument('--threads', type=int, required=False, default=os.cpu_count(),
                         help='The number of threads used to run the jackknife algorithm. '
                         'If 0 threads are specified then it will default to os.cpu_count().')
-    parser.add_argument('--debug', action='store_true', required=False,
+    parser.add_argument('--debug', action='store_true', required=False, default=False,
                         help='Print DEBUG info (default: %(default)s)')
     args = parser.parse_args()
 
@@ -126,7 +126,8 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
     # Initiate the Kmer_set iterator so we can check the Kmer sizes in both sets
     Kmer_iter = iterate_Kmer_sets(KmerSet1_fh, KmerSet2_fh, logger,
                                   Both_KmerSets=True, KmerSet1_Only=False, KmerSet2_Only=False)
-    KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count = next(Kmer_iter)
+    KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count = next(
+        Kmer_iter)
 
     # Check if the kmer_seq's are the same size.
     if len(KmerSet1_seq) != len(KmerSet2_seq):
@@ -162,11 +163,24 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
     Kmer_iter = iterate_Kmer_sets(KmerSet1_fh, KmerSet2_fh, logger,
                                   Both_KmerSets=True, KmerSet1_Only=False, KmerSet2_Only=False)
 
+    thread_args = [
+        (KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count, kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger) for
+        (KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count), kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger in
+        zip(
+            Kmer_iter,
+            itertools.repeat(kmerset1_freq),
+            itertools.repeat(kmerset2_freq),
+            itertools.repeat(kmerset1_NumKmers),
+            itertools.repeat(kmerset2_NumKmers),
+            itertools.repeat(logger),
+        )
+    ]
+
     d2Score = 0.0
 
     with futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
 
-        submitted_results = executor.map(calculate_D2S_helper, Kmer_iter)
+        submitted_results = executor.map(calculate_D2S_helper, thread_args)
 
         for result in submitted_results:
             d2Score += result
@@ -181,7 +195,7 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
 
 
 @unpack
-def calculate_D2S_helper(KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count):
+def calculate_D2S_helper(KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count, kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger):
 
     # Probability of k-mer occurrence in seq 1.
     PwX = calculate_PropKmerOccurrence(KmerSet1_seq, kmerset1_freq)

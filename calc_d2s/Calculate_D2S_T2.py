@@ -5,6 +5,7 @@ import math
 import logging
 import argparse
 import sys
+import time
 DESCRIPTION = '''
 Calculate the D2S score between two Kmer sets.
 '''
@@ -90,10 +91,13 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
 
     # Open files. Best to do this here instead of as part of argparser as we need to operate on the same file
     # at the same time - will not work if we only have one file handle.
+    start = time.time()
     KmerSet1_fh = read_file_check_compression(KmerSet1_fileName)
     KmerSet2_fh = read_file_check_compression(KmerSet2_fileName)
     KmerSet1_freq_fh = read_file_check_compression(KmerSet1_freq_fileName)
     KmerSet2_freq_fh = read_file_check_compression(KmerSet2_freq_fileName)
+    end = time.time()
+    print("File read time: ", end - start)
 
     # Initiate the Kmer_set iterator so we can check the Kmer sizes in both sets
     Kmer_iter = iterate_Kmer_sets(KmerSet1_fh, KmerSet2_fh, logger,
@@ -111,8 +115,11 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
     logger.info('k-mer:%s', k)  # DEBUG
 
     # Load the frequencies for each dataset.
+    start = time.time()
     kmerset1_freq = load_Character_Frequency(KmerSet1_freq_fh, logger)
     kmerset2_freq = load_Character_Frequency(KmerSet2_freq_fh, logger)
+    end = time.time()
+    print("Load char time: ", end - start)
 
     # Get 'NUM_SEQUENCES' and 'NUM_CHARACTERS' from file and remove from dict.
     kmerset1_NumSeqs = kmerset1_freq.pop('NUM_SEQUENCES')
@@ -135,7 +142,7 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
                                   Both_KmerSets=True, KmerSet1_Only=False, KmerSet2_Only=False)
 
     d2Score = 0.0
-
+    start = time.time()
     for KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count in Kmer_iter:
 
         # Probability of k-mer occurrence in seq 1.
@@ -155,7 +162,8 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
 
         logger.debug('PwX:%s\tPwY:%s\tkmerScoreXBis:%s\tkmerScoreYBis:%s\td2Score:%s',
                      PwX, PwY, kmerScoreXBis, kmerScoreYBis, d2Score_tmp)  # DEBUG
-
+    end = time.time()
+    print("Compute dist time: ", end - start)
     # Close up
     KmerSet1_fh.close()
     KmerSet2_fh.close()
