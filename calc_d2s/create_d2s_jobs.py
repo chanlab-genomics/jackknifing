@@ -41,48 +41,94 @@ JOB_CPUS_PER_TASK = 4
 
 PYTHON_VERSION = "2.7"
 
-JOB_TEMPLATE = """#!/bin/bash
-#PBS -N {file_name}
-#PBS -j oe
-#PBS -o {stdout_file}
-#PBS -l select=1:ncpus={job_cpus_per_task}:mem={job_mem}
-#PBS -l walltime={job_time}
-#-#PBS -l nodes={job_nodes}
+if 'gadi' in socket.gethostname().lower():
+    JOB_TEMPLATE = """#!/bin/bash
+    #PBS -N {file_name}
+    #PBS -j oe
+    #PBS -o {stdout_file}
+    #PBS -l select=1:ncpus={job_cpus_per_task}:mem={job_mem}
+    #PBS -l walltime={job_time}
+    #-#PBS -l nodes={job_nodes}
 
-#CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
-#USE the groups command to find out your exact group name. 
-#PBS -A NCMAS-d85
-#PBS -l select=1
+    #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
+    #USE the groups command to find out your exact group name. 
+    #PBS -A NCMAS-d85
+    #PBS -l select=1
 
-export OMP_NUM_THREADS={job_cpus_per_task}
+    export OMP_NUM_THREADS={job_cpus_per_task}
 
-DATE=$(date +"%d/%m/%Y %H:%M")
-echo "time started  "$DATE
-echo ------------------------------------------------------
-echo -n 'Job is running on the following nodes '; cat $PBS_NODEFILE
-echo ------------------------------------------------------
-echo PBS: qsub is running on $PBS_O_HOST
-echo PBS: originating queue is $PBS_O_QUEUE
-echo PBS: executing queue is $PBS_QUEUE
-echo PBS: working directory is $PBS_O_WORKDIR
-echo PBS: execution mode is $PBS_ENVIRONMENT
-echo PBS: job identifier is $PBS_JOBID
-echo PBS: job name is $PBS_JOBNAME
-echo PBS: node file is $PBS_NODEFILE
-echo PBS: current home directory is $PBS_O_HOME
-echo PBS: PATH = $PBS_O_PATH
-echo ------------------------------------------------------
-export TIMEFORMAT="%E sec"
+    DATE=$(date +"%d/%m/%Y %H:%M")
+    echo "time started  "$DATE
+    echo ------------------------------------------------------
+    echo -n 'Job is running on the following nodes '; cat $PBS_NODEFILE
+    echo ------------------------------------------------------
+    echo PBS: qsub is running on $PBS_O_HOST
+    echo PBS: originating queue is $PBS_O_QUEUE
+    echo PBS: executing queue is $PBS_QUEUE
+    echo PBS: working directory is $PBS_O_WORKDIR
+    echo PBS: execution mode is $PBS_ENVIRONMENT
+    echo PBS: job identifier is $PBS_JOBID
+    echo PBS: job name is $PBS_JOBNAME
+    echo PBS: node file is $PBS_NODEFILE
+    echo PBS: current home directory is $PBS_O_HOME
+    echo PBS: PATH = $PBS_O_PATH
+    echo ------------------------------------------------------
+    export TIMEFORMAT="%E sec"
 
-cd $PBS_O_WORKDIR
-pwd
+    cd $PBS_O_WORKDIR
+    pwd
 
-module load python
-{d2s_cmd}
+    module load python
+    {d2s_cmd}
 
-DATE=$(date +"%d/%m/%Y %H:%M")
-echo "time finished "$DATE
-"""
+    DATE=$(date +"%d/%m/%Y %H:%M")
+    echo "time finished "$DATE
+    """
+else:
+    JOB_TEMPLATE = """#!/bin/bash
+    #PBS -N {file_name}
+    #PBS -j oe
+    #PBS -o {stdout_file}
+    #PBS -l select=1:ncpus={job_cpus_per_task}:mem={job_mem}
+    #PBS -l walltime={job_time}
+    #-#PBS -l nodes={job_nodes}
+
+    #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
+    #USE the groups command to find out your exact group name. 
+    #PBS -A NCMAS-d85
+    #PBS -l select=1
+
+    export OMP_NUM_THREADS={job_cpus_per_task}
+
+    DATE=$(date +"%d/%m/%Y %H:%M")
+    echo "time started  "$DATE
+    echo ------------------------------------------------------
+    echo -n 'Job is running on the following nodes '; cat $PBS_NODEFILE
+    echo ------------------------------------------------------
+    echo PBS: qsub is running on $PBS_O_HOST
+    echo PBS: originating queue is $PBS_O_QUEUE
+    echo PBS: executing queue is $PBS_QUEUE
+    echo PBS: working directory is $PBS_O_WORKDIR
+    echo PBS: execution mode is $PBS_ENVIRONMENT
+    echo PBS: job identifier is $PBS_JOBID
+    echo PBS: job name is $PBS_JOBNAME
+    echo PBS: node file is $PBS_NODEFILE
+    echo PBS: current home directory is $PBS_O_HOME
+    echo PBS: PATH = $PBS_O_PATH
+    echo ------------------------------------------------------
+    export TIMEFORMAT="%E sec"
+
+    cd $PBS_O_WORKDIR
+    pwd
+
+    module load python
+    {d2s_cmd}
+
+    DATE=$(date +"%d/%m/%Y %H:%M")
+    echo "time finished "$DATE
+    """
+
+JOB_TEMPLATE = '\n'.join(map(str.strip, JOB_TEMPLATE.split(sep='\n')))
 
 
 def convert_bool_arg(arg_in):
@@ -378,7 +424,7 @@ def main():
                         help='A full path to the nkc.gz and CharFreq files.')
     parser.add_argument('--data_output_path', type=str, required=True,
                         help='An output folder for the d2s script.')
-    parser.add_argument('--group', type=int, required=False, default=1000,
+    parser.add_argument('--group', type=int, required=False, default=750,
                         help='Indicates how many distance calculations are run in a single batch script.')
     parser.add_argument('--index', type=int, required=False, default=1,
                         help='Indicates index sample.')
