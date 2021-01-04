@@ -8,7 +8,6 @@ import argparse
 import sys
 import itertools
 from functools import wraps
-from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 
 import multiprocessing
 from concurrent import futures
@@ -19,13 +18,13 @@ Calculate the D2S score between two Kmer sets.
 # Pass arguments.
 
 
-def unpack(target_func: Callable):
+def unpack(target_func):
     """
     A wrapper to automatically unpack arguments into a target Callable object.
     """
 
     @wraps(target_func)
-    def wrapper(args: Optional[tuple] = None, kwargs: Optional[dict] = None):
+    def wrapper(args=None, kwargs=None):
 
         if args is None:
             args = tuple()
@@ -73,19 +72,19 @@ def main():
     logger.debug('%s', args)  # DEBUG
 
     d2Score_kmerset1_VS_kmerset2 = calculate_D2S(
-        args.kmerset1, args.kmerset1_freq, args.kmerset2, args.kmerset2_freq, logger)
+        args.kmerset1, args.kmerset1_freq, args.kmerset2, args.kmerset2_freq, logger, args.threads)
     logger.info('kmerset1 VS. kmerset2 d2Score:%s',
-                d2Score_kmerset1_VS_kmerset2, args.threads)  # INFO
+                d2Score_kmerset1_VS_kmerset2)  # INFO
 
     d2Score_kmerset1_VS_kmerset1 = calculate_D2S(
-        args.kmerset1, args.kmerset1_freq, args.kmerset1, args.kmerset1_freq, logger)
+        args.kmerset1, args.kmerset1_freq, args.kmerset1, args.kmerset1_freq, logger, args.threads)
     logger.info('kmerset1 VS. kmerset1 d2Score:%s',
-                d2Score_kmerset1_VS_kmerset2, args.threads)  # INFO
+                d2Score_kmerset1_VS_kmerset2)  # INFO
 
     d2Score_kmerset2_VS_kmerset2 = calculate_D2S(
-        args.kmerset2, args.kmerset2_freq, args.kmerset2, args.kmerset2_freq, logger)
+        args.kmerset2, args.kmerset2_freq, args.kmerset2, args.kmerset2_freq, logger, args.threads)
     logger.info('kmerset2 VS. kmerset2 d2Score:%s',
-                d2Score_kmerset1_VS_kmerset2, args.threads)  # INFO
+                d2Score_kmerset1_VS_kmerset2)  # INFO
 
     D2S_distance = d2ScoreNormalization(
         d2Score_kmerset1_VS_kmerset2, d2Score_kmerset1_VS_kmerset1, d2Score_kmerset2_VS_kmerset2)
@@ -115,7 +114,7 @@ def d2ScoreNormalization(d2Score_kmerset1_VS_kmerset2, d2Score_kmerset1_VS_kmers
     return D2S_distance
 
 
-def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, KmerSet2_freq_fileName, logger, num_threads: int):
+def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, KmerSet2_freq_fileName, logger, num_threads):
 
     # Open files. Best to do this here instead of as part of argparser as we need to operate on the same file
     # at the same time - will not work if we only have one file handle.
@@ -127,7 +126,7 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
     # Initiate the Kmer_set iterator so we can check the Kmer sizes in both sets
     Kmer_iter = iterate_Kmer_sets(KmerSet1_fh, KmerSet2_fh, logger,
                                   Both_KmerSets=True, KmerSet1_Only=False, KmerSet2_Only=False)
-    KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count = Kmer_iter.next()
+    KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count = next(Kmer_iter)
 
     # Check if the kmer_seq's are the same size.
     if len(KmerSet1_seq) != len(KmerSet2_seq):
