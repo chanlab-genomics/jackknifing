@@ -6,6 +6,8 @@ import logging
 import argparse
 import sys
 import time
+import itertools
+import multiprocessing
 DESCRIPTION = '''
 Calculate the D2S score between two Kmer sets.
 '''
@@ -137,38 +139,76 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
     logger.debug('kmerset1_NumKmers:%s\tkmerset2_NumKmers:%s',
                  kmerset1_NumKmers, kmerset2_NumKmers)  # DEBUG
 
+    start = time.time()
     # (Re-)Initiate the Kmer iterator. We are only interested in Kmers that are shared between both sets.
     Kmer_iter = iterate_Kmer_sets(KmerSet1_fh, KmerSet2_fh, logger,
                                   Both_KmerSets=True, KmerSet1_Only=False, KmerSet2_Only=False)
 
-    d2Score = 0.0
-    start = time.time()
-    for KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count in Kmer_iter:
+    my_queue = multiprocessing.Queue()
 
-        # Probability of k-mer occurrence in seq 1.
-        PwX = calculate_PropKmerOccurrence(KmerSet1_seq, kmerset1_freq)
-        # Probability of k-mer occurrence in seq 2.
-        PwY = calculate_PropKmerOccurrence(KmerSet2_seq, kmerset2_freq)
+    proc_args = [
+        (KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count, kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger, my_queue) for
+        (KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count), kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger, my_queue in
+        zip(
+            Kmer_iter,
+            itertools.repeat(kmerset1_freq),
+            itertools.repeat(kmerset2_freq),
+            itertools.repeat(kmerset1_NumKmers),
+            itertools.repeat(kmerset2_NumKmers),
+            itertools.repeat(logger),
+            itertools.repeat(my_queue),
+        )
+    ]
 
-        kmerScoreXBis = KmerSet1_count - (kmerset1_NumKmers*PwX)
-        kmerScoreYBis = KmerSet2_count - (kmerset2_NumKmers*PwY)
+    proc_ids = []
 
-        d2Score_tmp = (kmerScoreXBis*kmerScoreYBis) / \
-            math.sqrt(kmerScoreXBis*kmerScoreXBis +
-                      kmerScoreYBis*kmerScoreYBis)
-        d2Score += (kmerScoreXBis*kmerScoreYBis) / \
-            math.sqrt(kmerScoreXBis*kmerScoreXBis +
-                      kmerScoreYBis*kmerScoreYBis)
+    for arg_tup in proc_args:
+        new_proc = multiprocessing.Process(
+            target=calculate_D2S_helper, args=arg_tup)
 
-        logger.debug('PwX:%s\tPwY:%s\tkmerScoreXBis:%s\tkmerScoreYBis:%s\td2Score:%s',
-                     PwX, PwY, kmerScoreXBis, kmerScoreYBis, d2Score_tmp)  # DEBUG
+        proc_ids.append(new_proc)
+
+    for proc in proc_ids:
+        proc.start()
+
+    for proc in proc_ids:
+        proc.join()
+    
     end = time.time()
+
+    d2Score = [my_queue.get_nowait() for _ in range(my_queue.qsize())]
+
     print("Compute dist time: ", end - start)
     # Close up
     KmerSet1_fh.close()
     KmerSet2_fh.close()
     KmerSet1_freq_fh.close()
     KmerSet2_freq_fh.close()
+
+    return d2Score
+
+
+def calculate_D2S_helper(KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count, kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger, my_queue):
+
+    # Probability of k-mer occurrence in seq 1.
+    PwX = calculate_PropKmerOccurrence(KmerSet1_seq, kmerset1_freq)
+    # Probability of k-mer occurrence in seq 2.
+    PwY = calculate_PropKmerOccurrence(KmerSet2_seq, kmerset2_freq)
+
+    kmerScoreXBis = KmerSet1_count - (kmerset1_NumKmers*PwX)
+    kmerScoreYBis = KmerSet2_count - (kmerset2_NumKmers*PwY)
+
+    d2Score_tmp = (kmerScoreXBis*kmerScoreYBis) / \
+        math.sqrt(kmerScoreXBis*kmerScoreXBis +
+                  kmerScoreYBis*kmerScoreYBis)
+    d2Score = (kmerScoreXBis*kmerScoreYBis) / \
+        math.sqrt(kmerScoreXBis*kmerScoreXBis +
+                  kmerScoreYBis*kmerScoreYBis)
+
+    my_queue.put(d2Score)
+
+    logger.debug('PwX:%s\tPwY:%s\tkmerScoreXBis:%s\tkmerScoreYBis:%s\td2Score:%s',
+                 PwX, PwY, kmerScoreXBis, kmerScoreYBis, d2Score_tmp)  # DEBUG
 
     return d2Score
 
