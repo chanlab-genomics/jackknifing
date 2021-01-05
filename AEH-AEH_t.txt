@@ -1,0 +1,1 @@
+/30days/s4430291/Genomes_for_AFphylogeny_red_40_1/AEG.fna.21mer.nkc.gz;/30days/s4430291/Genomes_for_AFphylogeny_red_40_1/AEH.fna.21mer.nkc.gz;0.969429337182295
