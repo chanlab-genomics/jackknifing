@@ -1,0 +1,6 @@
+qsub -l nodes=1:ppn=4,mem=8gb,walltime=1:00:00 -I -A NCMAS-d85
+
+Calculate_D2S.py
+
+
+Calculate_D2S_T1
