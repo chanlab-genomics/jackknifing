@@ -1,10 +1,12 @@
 #!/bin/bash
 
-for SAMPLE_INDEX in `seq 26 1 27`;
+for SAMPLE_INDEX in `seq 27 1 50`;
 do
     if [[ "$HOSTNAME" == *"gadi"* ]]; then
-        qsub -N jn_ary_$i -P d85 -v -q normal -l wd SAMPLE_INDEX=$SAMPLE_INDEX ~/chanlab-genomics/jackknifing/batch/array_jn/jn_array.sh -o ~/chanlab-genomics/jackknifing/batch/jn_jobs/batch_out/jn_ary_$i.txt
+        qsub -N jn_ary_$SAMPLE_INDEX -P d85 -q normal -l wd -v SAMPLE_INDEX=$SAMPLE_INDEX -o ~/chanlab-genomics/jackknifing/batch/jn_jobs/batch_out/jn_ary_$SAMPLE_INDEX.txt ~/chanlab-genomics/jackknifing/batch/array_jn/jn_array.sh
     else
-        qsub -N jn_ary_$i -A NCMAS-d85 SAMPLE_INDEX=$SAMPLE_INDEX ~/chanlab-genomics/jackknifing/batch/array_jn/jn_array.sh -o ~/chanlab-genomics/jackknifing/batch/jn_jobs/batch_out/jn_ary_$i.txt
+        qsub -N jn_ary_$SAMPLE_INDEX -A NCMAS-d85 -v SAMPLE_INDEX=$SAMPLE_INDEX -o ~/chanlab-genomics/jackknifing/batch/jn_jobs/batch_out/jn_ary_$SAMPLE_INDEX.txt ~/chanlab-genomics/jackknifing/batch/array_jn/jn_array.sh
     fi
+
+    sleep 1
 done
