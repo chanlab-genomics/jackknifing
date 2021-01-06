@@ -36,8 +36,7 @@ elif sys.platform.startswith('linux'):
 JOB_TIME = 10
 JOB_MEM = "10GB"
 JOB_NODES = 1
-JOB_NTASKS_PER_NODE = 1
-JOB_CPUS_PER_TASK = 4
+NCPUS = 4
 
 PYTHON_VERSION = "2.7"
 
@@ -46,7 +45,7 @@ if 'gadi' in socket.gethostname().lower():
     #PBS -N {file_name}
     #PBS -j oe
     #PBS -o {stdout_file}
-    #PBS -l select=1:ncpus={job_cpus_per_task}:mem={job_mem}
+    #PBS -l select=1:ncpus={ncpus}:mem={job_mem}
     #PBS -l walltime={job_time}
     #-#PBS -l nodes={job_nodes}
 
@@ -55,7 +54,7 @@ if 'gadi' in socket.gethostname().lower():
     #PBS -A NCMAS-d85
     #PBS -l select=1
 
-    export OMP_NUM_THREADS={job_cpus_per_task}
+    export OMP_NUM_THREADS={ncpus}
 
     DATE=$(date +"%d/%m/%Y %H:%M")
     echo "time started  "$DATE
@@ -89,7 +88,7 @@ else:
     #PBS -N {file_name}
     #PBS -j oe
     #PBS -o {stdout_file}
-    #PBS -l select=1:ncpus={job_cpus_per_task}:mem={job_mem}
+    #PBS -l select=1:ncpus={ncpus}:mem={job_mem}
     #PBS -l walltime={job_time}
     #-#PBS -l nodes={job_nodes}
 
@@ -98,7 +97,7 @@ else:
     #PBS -A NCMAS-d85
     #PBS -l select=1
 
-    export OMP_NUM_THREADS={job_cpus_per_task}
+    export OMP_NUM_THREADS={ncpus}
 
     DATE=$(date +"%d/%m/%Y %H:%M")
     echo "time started  "$DATE
@@ -349,7 +348,11 @@ class JobCreator:
 
             # Create a string of all the parameter names with their
             # corresponding parameter values.
-            d2s_cmd: str = '\n'.join(d2s_cmd)
+            d2s_cmd: List[str] = [d2s_cmd[i:i + NCPUS]
+                                  for i in range(0, len(d2s_cmd), NCPUS)]
+            d2s_cmd = map(' & \n'.join, d2s_cmd)
+            d2s_cmd: str = ' & \nwait\n'.join(d2s_cmd)
+            d2s_cmd += ' & \nwait'
 
             file_name: str = f"d2s_{self.index}_{param_id}"
 
@@ -366,8 +369,7 @@ class JobCreator:
                 job_time=strfdelta(job_time),
                 job_mem=JOB_MEM,
                 job_nodes=JOB_NODES,
-                job_ntasks_per_node=JOB_NTASKS_PER_NODE,
-                job_cpus_per_task=JOB_CPUS_PER_TASK
+                ncpus=NCPUS
             )
 
             job_filename = f"{file_name}_job.sh"

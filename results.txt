@@ -1,0 +1,28 @@
+qsub -l nodes=1:ppn=4,mem=8gb,walltime=1:00:00 -I -A NCMAS-d85
+
+Calculate_D2S.py
+real    5m14.203s
+user    5m13.814s
+sys     0m0.373s
+
+Calculate_D2S_T3
+
+real    18m51.424s
+user    2m46.343s
+sys     34m34.236s
+(Not finished, too damn long)
+
+Calculate_D2S_T1
+real    10m8.936s
+user    9m19.061s
+sys     1m30.243s
+
+qsub -l nodes=1:ppn=1,mem=8gb,walltime=1:00:00 -I -A NCMAS-d85
+
+Calculate_D2S.py
+
+real    5m22.414s
+user    5m20.685s
+sys     0m0.488s
+
+Calculate_D2S_T1

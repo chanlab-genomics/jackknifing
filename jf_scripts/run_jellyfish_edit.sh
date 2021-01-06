@@ -32,11 +32,6 @@ filearray=(/30days/s4430291/Genomes_for_AFphylogeny_red_40_2/**.fna)
 
 s=10000000000
 
-# NOTE: I changed jellyfish dump -ct $file.$k.jf_0 to jellyfish dump -ct $file.$k.jf
-# in response to the following error in pbs output
-## File: /30days/s4430291/Genomes_for_AFphylogeny_red_40/AEG_40.fna
-# Failed to open input file '/30days/s4430291/Genomes_for_AFphylogeny_red_40/AEG_40.fna.21.jf_0'
-
 # Run a given line in the array
 file=${filearray[$PBS_ARRAY_INDEX]}
 echo "## File:" $file

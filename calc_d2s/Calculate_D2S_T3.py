@@ -1,15 +1,42 @@
 #!/usr/bin/python2
 from itertools import groupby
 from D2S_tools import *
+import os
 import math
 import logging
 import argparse
 import sys
+import time
+import itertools
+from functools import wraps
+
+import multiprocessing
+
+import numpy as np
 DESCRIPTION = '''
 Calculate the D2S score between two Kmer sets.
 '''
 
 # Pass arguments.
+
+
+def unpack(target_func):
+    """
+    A wrapper to automatically unpack arguments into a target Callable object.
+    """
+
+    @wraps(target_func)
+    def wrapper(args=None, kwargs=None):
+
+        if args is None:
+            args = tuple()
+
+        if kwargs is None:
+            kwargs = dict()
+
+        return target_func(*args, **kwargs)
+
+    return wrapper
 
 
 def main():
@@ -28,6 +55,9 @@ def main():
 
     parser.add_argument('--D2S_out', metavar='D2S.txt', type=lambda x: write_file_check_compression(
         x), required=False, default=sys.stdout, help='Output for D2S score (default: %(default)s)')
+    parser.add_argument('--threads', type=int, required=False, default=multiprocessing.cpu_count(),
+                        help='The number of threads used to run the jackknife algorithm. '
+                        'If 0 threads are specified then it will default to multiprocessing.cpu_count().')
     parser.add_argument('--debug', action='store_true', required=False, default=False,
                         help='Print DEBUG info (default: %(default)s)')
     args = parser.parse_args()
@@ -44,17 +74,17 @@ def main():
     logger.debug('%s', args)  # DEBUG
 
     d2Score_kmerset1_VS_kmerset2 = calculate_D2S(
-        args.kmerset1, args.kmerset1_freq, args.kmerset2, args.kmerset2_freq, logger)
+        args.kmerset1, args.kmerset1_freq, args.kmerset2, args.kmerset2_freq, logger, args.threads)
     logger.info('kmerset1 VS. kmerset2 d2Score:%s',
                 d2Score_kmerset1_VS_kmerset2)  # INFO
 
     d2Score_kmerset1_VS_kmerset1 = calculate_D2S(
-        args.kmerset1, args.kmerset1_freq, args.kmerset1, args.kmerset1_freq, logger)
+        args.kmerset1, args.kmerset1_freq, args.kmerset1, args.kmerset1_freq, logger, args.threads)
     logger.info('kmerset1 VS. kmerset1 d2Score:%s',
                 d2Score_kmerset1_VS_kmerset2)  # INFO
 
     d2Score_kmerset2_VS_kmerset2 = calculate_D2S(
-        args.kmerset2, args.kmerset2_freq, args.kmerset2, args.kmerset2_freq, logger)
+        args.kmerset2, args.kmerset2_freq, args.kmerset2, args.kmerset2_freq, logger, args.threads)
     logger.info('kmerset2 VS. kmerset2 d2Score:%s',
                 d2Score_kmerset1_VS_kmerset2)  # INFO
 
@@ -86,7 +116,13 @@ def d2ScoreNormalization(d2Score_kmerset1_VS_kmerset2, d2Score_kmerset1_VS_kmers
     return D2S_distance
 
 
-def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, KmerSet2_freq_fileName, logger):
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
+def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, KmerSet2_freq_fileName, logger, num_threads):
 
     # Open files. Best to do this here instead of as part of argparser as we need to operate on the same file
     # at the same time - will not work if we only have one file handle.
@@ -98,7 +134,8 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
     # Initiate the Kmer_set iterator so we can check the Kmer sizes in both sets
     Kmer_iter = iterate_Kmer_sets(KmerSet1_fh, KmerSet2_fh, logger,
                                   Both_KmerSets=True, KmerSet1_Only=False, KmerSet2_Only=False)
-    KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count = Kmer_iter.next()
+    KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count = next(
+        Kmer_iter)
 
     # Check if the kmer_seq's are the same size.
     if len(KmerSet1_seq) != len(KmerSet2_seq):
@@ -130,13 +167,61 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
     logger.debug('kmerset1_NumKmers:%s\tkmerset2_NumKmers:%s',
                  kmerset1_NumKmers, kmerset2_NumKmers)  # DEBUG
 
+    start = time.time()
     # (Re-)Initiate the Kmer iterator. We are only interested in Kmers that are shared between both sets.
     Kmer_iter = iterate_Kmer_sets(KmerSet1_fh, KmerSet2_fh, logger,
                                   Both_KmerSets=True, KmerSet1_Only=False, KmerSet2_Only=False)
 
+    Kmer_iter = list(chunks(list(Kmer_iter), num_threads))
+    my_queue = multiprocessing.Queue()
+
+    thread_args = [
+        (Kmer_iter_portion, kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger) for
+        Kmer_iter_portion, kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger in
+        zip(
+            Kmer_iter,
+            itertools.repeat(kmerset1_freq),
+            itertools.repeat(kmerset2_freq),
+            itertools.repeat(kmerset1_NumKmers),
+            itertools.repeat(kmerset2_NumKmers),
+            itertools.repeat(logger),
+        )
+    ]
+
     d2Score = 0.0
 
-    for KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count in Kmer_iter:
+    proc_ids = []
+
+    for arg_tup in thread_args:
+        new_proc = multiprocessing.Process(
+            target=calculate_D2S_helper, args=arg_tup)
+
+        proc_ids.append(new_proc)
+
+    for proc in proc_ids:
+        proc.start()
+
+    for proc in proc_ids:
+        proc.join()
+
+    d2Score = sum([my_queue.get_nowait() for _ in range(my_queue.qsize())])
+
+    end = time.time()
+    print("Compute dist time: ", end - start)
+    # Close up
+    KmerSet1_fh.close()
+    KmerSet2_fh.close()
+    KmerSet1_freq_fh.close()
+    KmerSet2_freq_fh.close()
+
+    return d2Score
+
+
+def calculate_D2S_helper(Kmer_iter_portion, kmerset1_freq, kmerset2_freq, kmerset1_NumKmers, kmerset2_NumKmers, logger):
+
+    d2Score = 0.0
+
+    for KmerSet1_seq, KmerSet1_count, KmerSet2_seq, KmerSet2_count in Kmer_iter_portion:
 
         # Probability of k-mer occurrence in seq 1.
         PwX = calculate_PropKmerOccurrence(KmerSet1_seq, kmerset1_freq)
@@ -155,12 +240,6 @@ def calculate_D2S(KmerSet1_fileName, KmerSet1_freq_fileName, KmerSet2_fileName, 
 
         logger.debug('PwX:%s\tPwY:%s\tkmerScoreXBis:%s\tkmerScoreYBis:%s\td2Score:%s',
                      PwX, PwY, kmerScoreXBis, kmerScoreYBis, d2Score_tmp)  # DEBUG
-
-    # Close up
-    KmerSet1_fh.close()
-    KmerSet2_fh.close()
-    KmerSet1_freq_fh.close()
-    KmerSet2_freq_fh.close()
 
     return d2Score
 
