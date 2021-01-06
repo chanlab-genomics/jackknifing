@@ -1,6 +1,10 @@
 #!/bin/bash
 
-for i in `seq 1 1 5`; 
+for SAMPLE_INDEX in `seq 26 1 27`;
 do
-    qsub -N jn_ary_$i -v OUTPUT_DIR=$(echo /30days/s4430291/Genomes_for_AFphylogeny_red_40_$i) /home/s4430291/chanlab-genomics/jackknifing/batch/array_jn/jn_array.sh
+    if [[ "$HOSTNAME" == *"gadi"* ]]; then
+        qsub -N jn_ary_$i -P d85 -v -q normal -l wd SAMPLE_INDEX=$SAMPLE_INDEX ~/chanlab-genomics/jackknifing/batch/array_jn/jn_array.sh -o ~/chanlab-genomics/jackknifing/batch/jn_jobs/batch_out/jn_ary_$i.txt
+    else
+        qsub -N jn_ary_$i -A NCMAS-d85 SAMPLE_INDEX=$SAMPLE_INDEX ~/chanlab-genomics/jackknifing/batch/array_jn/jn_array.sh -o ~/chanlab-genomics/jackknifing/batch/jn_jobs/batch_out/jn_ary_$i.txt
+    fi
 done

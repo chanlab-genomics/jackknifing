@@ -1,19 +1,10 @@
 #!/bin/bash
-#
-#-#PBS -l nodes=1
-#PBS -l select=1:ncpus=6:mem=30GB
-#PBS -l walltime=00:20:00
 
-# Make this a job array
-#PBS -J 0-196
+#PBS -l ncpus=8:mem=12GB
+#PBS -l walltime=01:20:00
 
 #PBS -j oe
 
-#CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
-#USE the groups command to find out your exact group name. 
-#PBS -A NCMAS-d85
-
-#PBS -l select=1
 DATE=$(date +"%d/%m/%Y %H:%M")
 echo "time started  "$DATE
 echo ------------------------------------------------------
@@ -35,18 +26,47 @@ export TIMEFORMAT="%E sec"
 cd $PBS_O_WORKDIR
 pwd
 
+# Check which machine we are on and adjust the directory to the yeast genome 
+# data accordingly
+if [[ "$HOSTNAME" == *"gadi"* ]]; then
+    DATA_DIR=/scratch/$PROJECT/$USER/Yeast
+    module load python3/3.7.4
+else
+    DATA_DIR=/30days/$USER
+    module load python
+fi
+
 # Make a array of folders of the target directory
-ARRAY_TARGET=($TARGET_DIR/*.fna)
-
+ARRAY_TARGET=($DATA_DIR/Genomes_for_AFphylogeny/*)
 # Specify the output directory
-echo OUTPUT_DIR: $OUTPUT_DIR
+OUTPUT_DIR=$DATA_DIR/Genomes_for_AFphylogeny_red_40_$SAMPLE_INDEX
 
+# Create the output directory if it hasn't already been created
 if [ ! -d $OUTPUT_DIR ] 
 then
     mkdir $OUTPUT_DIR
 fi
 
-module load python
-python3 ~/chanlab-genomics/jackknifing/jackknife.py --input_path ${ARRAY_TARGET[$PBS_ARRAY_INDEX]} --output_path $OUTPUT_DIR --portion=40 --chunk_size=100 --threads=$NCPUS
+let END=${#ARRAY_TARGET[@]}
+let CPUS_PER_TASK=2
+let GROUP=$NCPUS/$CPUS_PER_TASK
 
+for INDEX_OUTER in `seq 1 $GROUP $END`; 
+do
+    let INNER_END=$INDEX_OUTER+$GROUP-1
+    for INDEX_INNER in `seq $INDEX_OUTER 1 $INNER_END`; 
+    do
+        if [ $INDEX_INNER -le $END ]
+        then
+            # This is where the sample command would go
+            echo Starting ${ARRAY_TARGET[$INDEX_INNER]}
+            python3 ~/chanlab-genomics/jackknifing/jackknife.py --input_path ${ARRAY_TARGET[$INDEX_INNER]} --output_path $OUTPUT_DIR --portion=40 --chunk_size=100 --threads=$CPUS_PER_TASK
+        fi
+    done
+
+    # Wait after each grouping
+    wait
+done
+
+DATE=$(date +"%d/%m/%Y %H:%M")
 echo "time finished "$DATE
