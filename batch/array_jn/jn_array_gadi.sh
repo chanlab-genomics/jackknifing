@@ -1,7 +1,6 @@
 #!/bin/bash
 #
-#-#PBS -l nodes=1
-#PBS -l select=1:ncpus=6:mem=30GB
+#PBS -l select=1:ncpus=2:mem=20GB
 #PBS -l walltime=00:20:00
 
 # Make this a job array
@@ -11,9 +10,10 @@
 
 #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
 #USE the groups command to find out your exact group name. 
-#PBS -A NCMAS-d85
+#PBS -P d85
+#PBS -q normal
 
-#PBS -l select=1
+#PBS -l wd
 DATE=$(date +"%d/%m/%Y %H:%M")
 echo "time started  "$DATE
 echo ------------------------------------------------------
