@@ -150,7 +150,7 @@ def populate_all_results(phylip_df: pd.DataFrame, result_dir: str):
         poplate_single_result(phylip_df, target_file)
 
     if CORRUPT_FILES > 0:
-        print("[WARN] %d Corrupt files found (skipped)." % (CORRUPT_FILES), file=sys.stderr)
+        print("[WARN] %d corrupted files found (skipped)." % (CORRUPT_FILES), file=sys.stderr)
 
     return
 
