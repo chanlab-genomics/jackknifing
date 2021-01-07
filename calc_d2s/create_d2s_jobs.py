@@ -32,7 +32,7 @@ if sys.platform.startswith('win32'):
 elif sys.platform.startswith('linux'):
     ROOT_DIR = os.path.join(
         '/', 'home', 's4430291', 'chanlab-genomics', 'jackknifing')
-    
+
     if not os.path.exists(ROOT_DIR):
         ROOT_DIR = os.path.join(
             '/', 'home', '564', 'mc7636', 'chanlab-genomics', 'jackknifing')
@@ -124,8 +124,7 @@ else:
     cd $PBS_O_WORKDIR
     pwd
 
-    module load python3/3.7.4
-    module load python2
+    module load python
     {d2s_cmd}
 
     DATE=$(date +"%d/%m/%Y %H:%M")

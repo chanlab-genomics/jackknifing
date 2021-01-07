@@ -4,11 +4,14 @@ __author__ = 'Michael Ciccotosto-Camp'
 __version__ = ''
 
 import os
+import sys
 import pandas as pd
 from glob import glob
 from pprint import pprint
 
 from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
+
+CORRUPT_FILES: int = 0
 
 
 def get_names(target_dir: str) -> list:
@@ -84,6 +87,8 @@ def extract_result(result_path: str):
         Returns the distance value (as a float) from the specified result path.
     """
 
+    global CORRUPT_FILES
+
     with open(result_path, 'r') as result_file:
         result_str = result_file.read()
 
@@ -94,6 +99,8 @@ def extract_result(result_path: str):
     try:
         return float(value)
     except ValueError:
+        # print("Skipping", os.path.basename(result_path))
+        CORRUPT_FILES += 1
         #######################################################################
         # NOTE: Might want to change in the future!
         #######################################################################
@@ -142,6 +149,9 @@ def populate_all_results(phylip_df: pd.DataFrame, result_dir: str):
     for target_file in target_files:
         poplate_single_result(phylip_df, target_file)
 
+    if CORRUPT_FILES > 0:
+        print("[WARN] %d corrupted files found (skipped)." % (CORRUPT_FILES), file=sys.stderr)
+
     return
 
 
@@ -160,13 +170,16 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
     # Get the number of columns from this dataframe
     rows, _ = phylip_df.shape
 
+    # Left justify all of the indexes by 10
+    phylip_df.rename(index=lambda index_: index_.ljust(10), inplace=True)
+
     with open(output_path, 'w', newline='') as output_file:
 
         # Write the nukmber of rows/cols in the first line
         print('\t' + str(rows), end='\n', flush=True, file=output_file)
 
         # Write the remaining matrix, omit the column (header) names
-        phylip_df.to_csv(output_file, sep='\t', header=False,
+        phylip_df.to_csv(output_file, sep='\t', float_format="%.8f", header=False,
                          index=True, index_label=False)
 
     return
@@ -174,13 +187,17 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
 
 def main():
 
-    test_dir = os.path.join('/', '30days', 's4430291',
+    test_dir = os.path.join('/', '90days', 's4430291',
                             'Genomes_for_AFphylogeny_D2S')
     name_list = get_names(test_dir)
 
     blank_df = setup_df(name_list)
 
-    test_output_file = os.path.join(os.getcwd(), 'reference_mat.txt')
+    test_output_file = os.path.join(
+        os.getcwd(), 'reference_mat.txt')
+
+    # test_output_file = os.path.join(
+    #     '/', '90days', 's4430291', 'reference_mat.txt')
 
     populate_all_results(blank_df, test_dir)
 
