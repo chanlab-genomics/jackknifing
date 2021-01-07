@@ -62,8 +62,15 @@ def main():
         d2Score_kmerset1_VS_kmerset2, d2Score_kmerset1_VS_kmerset1, d2Score_kmerset2_VS_kmerset2)
     logger.info('D2S_distance:%s', D2S_distance)  # INFO
 
-    args.D2S_out.write(args.kmerset1 + ';' + args.kmerset2 +
-                       ';' + str(D2S_distance)+'\n')
+    write_string = args.kmerset1 + ';' + \
+        args.kmerset2 + ';' + str(D2S_distance)+'\n'
+
+    # args.D2S_out.write(args.kmerset1 + ';' + args.kmerset2 +
+    #                    ';' + str(D2S_distance)+'\n')
+
+    args.D2S_out.write(write_string)
+    args.D2S_out.flush()
+    args.D2S_out.close()
 
 
 def d2ScoreNormalization(d2Score_kmerset1_VS_kmerset2, d2Score_kmerset1_VS_kmerset1, d2Score_kmerset2_VS_kmerset2):

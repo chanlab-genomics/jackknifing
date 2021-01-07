@@ -4,12 +4,14 @@ __author__ = 'Michael Ciccotosto-Camp'
 __version__ = ''
 
 import os
-import csv
+import sys
 import pandas as pd
 from glob import glob
 from pprint import pprint
 
 from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
+
+CORRUPT_FILES: int = 0
 
 
 def get_names(target_dir: str) -> list:
@@ -85,6 +87,8 @@ def extract_result(result_path: str):
         Returns the distance value (as a float) from the specified result path.
     """
 
+    global CORRUPT_FILES
+
     with open(result_path, 'r') as result_file:
         result_str = result_file.read()
 
@@ -96,6 +100,7 @@ def extract_result(result_path: str):
         return float(value)
     except ValueError:
         # print("Skipping", os.path.basename(result_path))
+        CORRUPT_FILES += 1
         #######################################################################
         # NOTE: Might want to change in the future!
         #######################################################################
@@ -143,6 +148,9 @@ def populate_all_results(phylip_df: pd.DataFrame, result_dir: str):
 
     for target_file in target_files:
         poplate_single_result(phylip_df, target_file)
+
+    if CORRUPT_FILES > 0:
+        print("[WARN] %d Corrupt files found (skipped)." % (CORRUPT_FILES), file=sys.stderr)
 
     return
 
