@@ -426,6 +426,7 @@ def main():
                         help='A full path to the nkc.gz and CharFreq files.')
     parser.add_argument('--data_output_path', type=str, required=True,
                         help='An output folder for the d2s script.')
+    # Choose 750 or 1000
     parser.add_argument('--group', type=int, required=False, default=750,
                         help='Indicates how many distance calculations are run in a single batch script.')
     parser.add_argument('--index', type=int, required=False, default=1,

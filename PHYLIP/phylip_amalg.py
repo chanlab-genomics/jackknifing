@@ -94,6 +94,7 @@ def extract_result(result_path: str):
     try:
         return float(value)
     except ValueError:
+        # print("Skipping", os.path.basename(result_path))
         #######################################################################
         # NOTE: Might want to change in the future!
         #######################################################################
@@ -160,13 +161,16 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
     # Get the number of columns from this dataframe
     rows, _ = phylip_df.shape
 
+    # Left justify all of the indexes by 10
+    phylip_df.rename(index=lambda index_: index_.ljust(10))
+
     with open(output_path, 'w', newline='') as output_file:
 
         # Write the nukmber of rows/cols in the first line
         print('\t' + str(rows), end='\n', flush=True, file=output_file)
 
         # Write the remaining matrix, omit the column (header) names
-        phylip_df.to_csv(output_file, sep='\t', header=False,
+        phylip_df.to_csv(output_file, sep=' ', float_format="%.8f", header=False,
                          index=True, index_label=False)
 
     return
@@ -174,13 +178,17 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
 
 def main():
 
-    test_dir = os.path.join('/', '30days', 's4430291',
+    test_dir = os.path.join('/', '90days', 's4430291',
                             'Genomes_for_AFphylogeny_D2S')
     name_list = get_names(test_dir)
 
     blank_df = setup_df(name_list)
 
-    test_output_file = os.path.join(os.getcwd(), 'reference_mat.txt')
+    test_output_file = os.path.join(
+        os.getcwd(), 'reference_mat.txt')
+
+    # test_output_file = os.path.join(
+    #     '/', '90days', 's4430291', 'reference_mat.txt')
 
     populate_all_results(blank_df, test_dir)
 
