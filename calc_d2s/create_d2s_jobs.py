@@ -93,13 +93,12 @@ else:
     #PBS -N {file_name}
     #PBS -j oe
     #PBS -o {stdout_file}
-    #PBS -l ncpus={ncpus},mem={job_mem}
+    #PBS -l select=1:ncpus={ncpus}:mem={job_mem}
     #PBS -l walltime={job_time}
 
     #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
     #USE the groups command to find out your exact group name. 
     #PBS -A NCMAS-d85
-    #PBS -l select=1
 
     export OMP_NUM_THREADS={ncpus}
 
