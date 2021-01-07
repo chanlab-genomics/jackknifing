@@ -4,6 +4,7 @@ __author__ = 'Michael Ciccotosto-Camp'
 __version__ = ''
 
 import os
+import csv
 import pandas as pd
 from glob import glob
 from pprint import pprint
@@ -162,7 +163,7 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
     rows, _ = phylip_df.shape
 
     # Left justify all of the indexes by 10
-    phylip_df.rename(index=lambda index_: index_.ljust(10))
+    phylip_df.rename(index=lambda index_: index_.ljust(10), inplace=True)
 
     with open(output_path, 'w', newline='') as output_file:
 
@@ -170,7 +171,7 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
         print('\t' + str(rows), end='\n', flush=True, file=output_file)
 
         # Write the remaining matrix, omit the column (header) names
-        phylip_df.to_csv(output_file, sep=' ', float_format="%.8f", header=False,
+        phylip_df.to_csv(output_file, sep='\t', float_format="%.8f", header=False,
                          index=True, index_label=False)
 
     return

@@ -6,6 +6,7 @@ __version__ = ''
 import os
 import sys
 import csv
+import time
 import shutil
 import socket
 import itertools
@@ -31,12 +32,16 @@ if sys.platform.startswith('win32'):
 elif sys.platform.startswith('linux'):
     ROOT_DIR = os.path.join(
         '/', 'home', 's4430291', 'chanlab-genomics', 'jackknifing')
+    
+    if not os.path.exists(ROOT_DIR):
+        ROOT_DIR = os.path.join(
+            '/', 'home', '564', 'mc7636', 'chanlab-genomics', 'jackknifing')
 
 # Job time in minutes to run each python script
-JOB_TIME = 10
+JOB_TIME = 9
 JOB_MEM = "10GB"
 JOB_NODES = 1
-NCPUS = 4
+NCPUS = 8
 
 PYTHON_VERSION = "2.7"
 
@@ -88,9 +93,8 @@ else:
     #PBS -N {file_name}
     #PBS -j oe
     #PBS -o {stdout_file}
-    #PBS -l select=1:ncpus={ncpus}:mem={job_mem}
+    #PBS -l ncpus={ncpus},mem={job_mem}
     #PBS -l walltime={job_time}
-    #-#PBS -l nodes={job_nodes}
 
     #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
     #USE the groups command to find out your exact group name. 
@@ -120,7 +124,8 @@ else:
     cd $PBS_O_WORKDIR
     pwd
 
-    module load python
+    module load python3/3.7.4
+    module load python2
     {d2s_cmd}
 
     DATE=$(date +"%d/%m/%Y %H:%M")
@@ -402,6 +407,7 @@ class JobCreator:
                 print(f"[DRY RUN] qsub {job_file}")
             else:
                 os.system(f"qsub {job_file}")
+                time.sleep(0.5)
 
         return
 
