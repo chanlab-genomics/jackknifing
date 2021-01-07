@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l mem=180GB,walltime=12:00:00,ncpus=12
+#PBS -l mem=180GB,walltime=6:00:00,ncpus=12
 #PBS -l jobfs=20GB
 #PBS -k oe
 #PBS -j oe

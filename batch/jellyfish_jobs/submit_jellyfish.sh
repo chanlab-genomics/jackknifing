@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in `seq 3 1 25`; 
+for SAMPLE_INDEX in `seq 27 1 50`;
 do
 
     if [[ "$HOSTNAME" == *"gadi"* ]]; then
