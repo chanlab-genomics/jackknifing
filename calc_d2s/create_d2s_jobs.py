@@ -38,7 +38,7 @@ elif sys.platform.startswith('linux'):
             '/', 'home', '564', 'mc7636', 'chanlab-genomics', 'jackknifing')
 
 # Job time in minutes to run each python script
-JOB_TIME = 9
+JOB_TIME = 12
 JOB_MEM = "10GB"
 JOB_NODES = 1
 NCPUS = 8
@@ -93,13 +93,12 @@ else:
     #PBS -N {file_name}
     #PBS -j oe
     #PBS -o {stdout_file}
-    #PBS -l ncpus={ncpus},mem={job_mem}
+    #PBS -l select=1:ncpus={ncpus}:mem={job_mem}
     #PBS -l walltime={job_time}
 
     #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
     #USE the groups command to find out your exact group name. 
     #PBS -A NCMAS-d85
-    #PBS -l select=1
 
     export OMP_NUM_THREADS={ncpus}
 
