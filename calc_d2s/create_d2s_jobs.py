@@ -38,7 +38,7 @@ elif sys.platform.startswith('linux'):
             '/', 'home', '564', 'mc7636', 'chanlab-genomics', 'jackknifing')
 
 # Job time in minutes to run each python script
-JOB_TIME = 9
+JOB_TIME = 5
 JOB_MEM = "10GB"
 JOB_NODES = 1
 NCPUS = 8
@@ -50,14 +50,14 @@ if 'gadi' in socket.gethostname().lower():
     #PBS -N {file_name}
     #PBS -j oe
     #PBS -o {stdout_file}
-    #PBS -l select=1:ncpus={ncpus}:mem={job_mem}
+    #PBS -l ncpus={ncpus},mem={job_mem}
     #PBS -l walltime={job_time}
-    #-#PBS -l nodes={job_nodes}
 
     #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
     #USE the groups command to find out your exact group name. 
-    #PBS -A NCMAS-d85
-    #PBS -l select=1
+    #PBS -P d85 
+    #PBS -q normal
+    #PBS -l wd
 
     export OMP_NUM_THREADS={ncpus}
 
@@ -362,9 +362,9 @@ class JobCreator:
             file_name: str = f"d2s_{self.index}_{param_id}"
 
             stdout_path = os.path.join(
-                self.slurm_out, f"{file_name}_out_{self.index}.txt")
+                self.slurm_out, f"{file_name}_out.txt")
             stderr_path = os.path.join(
-                self.slurm_err, f"{file_name}_err_{self.index}.txt")
+                self.slurm_err, f"{file_name}_err.txt")
 
             FORMATTED_TEMPLATE = JOB_TEMPLATE.format(
                 file_name=file_name,
@@ -432,7 +432,7 @@ def main():
                         help='A full path to the nkc.gz and CharFreq files.')
     parser.add_argument('--data_output_path', type=str, required=True,
                         help='An output folder for the d2s script.')
-    parser.add_argument('--group', type=int, required=False, default=750,
+    parser.add_argument('--group', type=int, required=False, default=500,
                         help='Indicates how many distance calculations are run in a single batch script.')
     parser.add_argument('--index', type=int, required=False, default=1,
                         help='Indicates index sample.')
