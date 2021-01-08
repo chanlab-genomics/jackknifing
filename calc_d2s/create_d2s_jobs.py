@@ -38,10 +38,10 @@ elif sys.platform.startswith('linux'):
             '/', 'home', '564', 'mc7636', 'chanlab-genomics', 'jackknifing')
 
 # Job time in minutes to run each python script
-JOB_TIME = 5
+JOB_TIME = 0.5
 JOB_MEM = "10GB"
 JOB_NODES = 1
-NCPUS = 8
+NCPUS = 16
 
 PYTHON_VERSION = "2.7"
 
@@ -56,7 +56,7 @@ if 'gadi' in socket.gethostname().lower():
     #CHANGE THIS TO YOUR UQ-FACULTY-SCHOOL group name. 
     #USE the groups command to find out your exact group name. 
     #PBS -P d85 
-    #PBS -q normal
+    #PBS -q normalbw
     #PBS -l wd
 
     export OMP_NUM_THREADS={ncpus}

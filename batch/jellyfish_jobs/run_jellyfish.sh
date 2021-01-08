@@ -6,6 +6,8 @@
 
 #PBS -A NCMAS-d85
 
+# NOTE: Increase CPUS usage or decrease memory usage
+
 DATE=$(date +"%d/%m/%Y %H:%M")
 echo "time started  "$DATE
 echo ------------------------------------------------------
