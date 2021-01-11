@@ -5,14 +5,24 @@ __version__ = ''
 
 import os
 import sys
+import shutil
+import tarfile
 import pandas as pd
 from glob import glob
 from pprint import pprint
-
+from contextlib import contextmanager
 from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 
 CORRUPT_FILES: int = 0
 
+@contextmanager
+def change_dir(destination):
+    try:
+        cwd = os.getcwd()
+        os.chdir(destination)
+        yield
+    finally:
+        os.chdir(cwd)
 
 def get_names(target_dir: str) -> list:
     """
@@ -185,23 +195,44 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
     return
 
 
+def create_matrix(data_folder, output_file):
+    
+    zipped = data_folder.endswith(".tz.gz")
+    zipped_data_folder = None
+
+    if zipped:
+
+        zipped_data_folder = data_folder
+        data_folder = data_folder[:-len(".tz.gz")]
+
+        dirname = os.path.dirname(zipped_data_folder)
+        filename = os.path.basename(zipped_data_folder)
+
+        with change_dir(dirname):
+            tar = tarfile.open(filename, "r:gz")
+            tar.extractall()
+            tar.close()
+
+    name_list = get_names(data_folder)
+    blank_df = setup_df(name_list)
+    populate_all_results(blank_df, data_folder)
+    print_phylip(blank_df, output_file)
+
+    if zipped:
+        shutil.rmtree(data_folder)
+
+    return
+
 def main():
 
-    test_dir = os.path.join('/', '90days', 's4430291',
-                            'Genomes_for_AFphylogeny_D2S')
-    name_list = get_names(test_dir)
-
-    blank_df = setup_df(name_list)
+    test_dir = os.path.join('/', 'scratch', 'd85',
+                            'mc7636', 'Yeast', 'D2S_archive', 
+                            'Genomes_for_AFphylogeny_red_40_26_D2S_cp.tz.gz')
 
     test_output_file = os.path.join(
         os.getcwd(), 'reference_mat.txt')
-
-    # test_output_file = os.path.join(
-    #     '/', '90days', 's4430291', 'reference_mat.txt')
-
-    populate_all_results(blank_df, test_dir)
-
-    print_phylip(blank_df, test_output_file)
+    
+    create_matrix(test_dir, test_output_file)
 
 
 if __name__ == '__main__':
