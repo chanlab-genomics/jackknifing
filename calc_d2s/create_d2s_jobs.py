@@ -38,7 +38,7 @@ elif sys.platform.startswith('linux'):
             '/', 'home', '564', 'mc7636', 'chanlab-genomics', 'jackknifing')
 
 # Job time in minutes to run each python script
-JOB_TIME = 0.6
+JOB_TIME = 1.5
 JOB_MEM = "12GB"
 JOB_NODES = 1
 NCPUS = 14
