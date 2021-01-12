@@ -37,7 +37,7 @@ else
 fi
 
 # Make a array of folders of the target directory
-ARRAY_TARGET=($DATA_DIR/Genomes_for_AFphylogeny/*)
+ARRAY_TARGET=($DATA_DIR/Genomes_for_AFphylogeny/*.fna)
 # Specify the output directory
 OUTPUT_DIR=$DATA_DIR/Genomes_for_AFphylogeny_red_40_$SAMPLE_INDEX
 

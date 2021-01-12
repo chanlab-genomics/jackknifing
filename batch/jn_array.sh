@@ -2,7 +2,7 @@
 #
 #PBS -N jn_array
 #-#PBS -l nodes=1
-#PBS -l select=1:ncpus=6:mem=30GB
+#PBS -l select=1:ncpus=6:mem=25GB
 #PBS -l walltime=00:20:00
 
 # Make this a job array
