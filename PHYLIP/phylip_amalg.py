@@ -15,6 +15,7 @@ from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 
 CORRUPT_FILES: int = 0
 
+
 @contextmanager
 def change_dir(destination):
     try:
@@ -23,6 +24,7 @@ def change_dir(destination):
         yield
     finally:
         os.chdir(cwd)
+
 
 def get_names(target_dir: str) -> list:
     """
@@ -160,7 +162,8 @@ def populate_all_results(phylip_df: pd.DataFrame, result_dir: str):
         poplate_single_result(phylip_df, target_file)
 
     if CORRUPT_FILES > 0:
-        print("[WARN] %d corrupted files found (skipped)." % (CORRUPT_FILES), file=sys.stderr)
+        print("[WARN] %d corrupted files found (skipped)." %
+              (CORRUPT_FILES), file=sys.stderr)
 
     return
 
@@ -196,7 +199,7 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
 
 
 def create_matrix(data_folder, output_file):
-    
+
     zipped = data_folder.endswith(".tz.gz")
     zipped_data_folder = None
 
@@ -223,16 +226,20 @@ def create_matrix(data_folder, output_file):
 
     return
 
+
 def main():
 
     test_dir = os.path.join('/', 'scratch', 'd85',
-                            'mc7636', 'Yeast', 'D2S_archive', 
+                            'mc7636', 'Yeast', 'D2S_archive',
                             'Genomes_for_AFphylogeny_red_40_26_D2S_cp.tz.gz')
+
+    reference_dir = r"D:\2020_SS\BioInfo\Genomes_for_AFphylogeny_D2S"
+    output_dir = r"D:\2020_SS\BioInfo\PHYLIP_tree\michael_dist_matrix.txt"
 
     test_output_file = os.path.join(
         os.getcwd(), 'reference_mat.txt')
-    
-    create_matrix(test_dir, test_output_file)
+
+    create_matrix(reference_dir, output_dir)
 
 
 if __name__ == '__main__':
