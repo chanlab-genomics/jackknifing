@@ -9,10 +9,10 @@ else
 fi
 
 
-# for INDEX in `seq 61 1 61`;
-# do
-#     python3 calc_d2s/create_d2s_jobs.py --data_input_path $DATA_IN_DIR/Genomes_for_AFphylogeny_red_40_${INDEX} --data_output_path $DATA_OUT_DIR/Genomes_for_AFphylogeny_red_40_${INDEX}_D2S --temp T --submit T --dry_run F --index=${INDEX}
-# done
+for INDEX in `seq 60 1 62`;
+do
+    python3 calc_d2s/create_d2s_jobs.py --data_input_path $DATA_IN_DIR/Genomes_for_AFphylogeny_red_40_${INDEX} --data_output_path $DATA_OUT_DIR/Genomes_for_AFphylogeny_red_40_${INDEX}_D2S --temp T --submit T --dry_run F --index=${INDEX}
+done
 # echo $DATA_IN_DIR/Genomes_for_AFphylogeny
-let INDEX=0
-python3 calc_d2s/create_d2s_jobs.py --data_input_path $DATA_IN_DIR/Genomes_for_AFphylogeny --data_output_path $DATA_IN_DIR/Genomes_for_AFphylogeny_D2S --temp F --submit F --dry_run F --index=${INDEX}
+# let INDEX=0
+# python3 calc_d2s/create_d2s_jobs.py --data_input_path $DATA_IN_DIR/Genomes_for_AFphylogeny --data_output_path $DATA_IN_DIR/Genomes_for_AFphylogeny_D2S --temp F --submit F --dry_run F --index=${INDEX}

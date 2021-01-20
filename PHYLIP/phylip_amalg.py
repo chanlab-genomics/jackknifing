@@ -7,6 +7,7 @@ import os
 import sys
 import shutil
 import tarfile
+import argparse
 import pandas as pd
 from glob import glob
 from pprint import pprint
@@ -111,7 +112,6 @@ def extract_result(result_path: str):
     try:
         return float(value)
     except ValueError:
-        # print("Skipping", os.path.basename(result_path))
         CORRUPT_FILES += 1
         #######################################################################
         # NOTE: Might want to change in the future!
@@ -229,17 +229,17 @@ def create_matrix(data_folder, output_file):
 
 def main():
 
-    test_dir = os.path.join('/', 'scratch', 'd85',
-                            'mc7636', 'Yeast', 'D2S_archive',
-                            'Genomes_for_AFphylogeny_red_40_26_D2S_cp.tz.gz')
+    parser = argparse.ArgumentParser(
+        description="Creates a distance matrix from individual distance files.")
 
-    reference_dir = r"D:\2020_SS\BioInfo\Genomes_for_AFphylogeny_D2S"
-    output_dir = r"D:\2020_SS\BioInfo\PHYLIP_tree\michael_dist_matrix.txt"
+    parser.add_argument('--data', type=str, required=True,
+                        help='A path to a directory or tarball that has the individual distances.')
+    parser.add_argument('--matrix', type=str, required=True,
+                        help='A path to a text file to dump the contents of the matrix.')
 
-    test_output_file = os.path.join(
-        os.getcwd(), 'reference_mat.txt')
+    args = parser.parse_args()
 
-    create_matrix(reference_dir, output_dir)
+    create_matrix(args.data, args.matrix)
 
 
 if __name__ == '__main__':
