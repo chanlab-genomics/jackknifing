@@ -2,7 +2,7 @@ library(ape)
 library(phytools)
 library(Hmisc)
 
-ref_tree <- read.tree("/scratch/d85/mc7636/Yeast/michael_ref_tree.txt")
+ref_tree <- read.tree("D:/2020_SS/BioInfo/reference_tree/michael_ref_tree.txt")
 ref_tree <- makeNodeLabel(ref_tree,prefix="")
 #list_ref <- list()
 #for (i in ref_tree$tip){
@@ -11,7 +11,7 @@ ref_tree <- makeNodeLabel(ref_tree,prefix="")
 #}
 #list_ref
 
-path_pseudo = "/scratch/d85/mc7636/Yeast/jk_matrices"
+path_pseudo = "D:/2020_SS/BioInfo/reference_tree/jk_trees"
 list_files <- list.files(path_pseudo, full.names = TRUE)
 list_files
 trees <- list()
@@ -51,4 +51,4 @@ list = prop.clades(ref_tree,trees)
 list
 sum(list)/length(list) 
 plot(A,show.node.label=TRUE)
-write.tree(A, file="/scratch/d85/mc7636/Yeast/jk_tree_57.txt")
+write.tree(A, file="D:/2020_SS/BioInfo/reference_tree/jk_tree_57.txt")

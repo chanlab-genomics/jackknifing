@@ -16,6 +16,7 @@ from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 
 CORRUPT_FILES: int = 0
 
+
 @contextmanager
 def change_dir(destination):
     try:
@@ -24,6 +25,7 @@ def change_dir(destination):
         yield
     finally:
         os.chdir(cwd)
+
 
 def get_names(target_dir: str) -> list:
     """
@@ -196,7 +198,7 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
 
 
 def create_matrix(data_folder, output_file):
-    
+
     zipped = data_folder.endswith(".tz.gz")
     zipped_data_folder = None
 
@@ -223,9 +225,11 @@ def create_matrix(data_folder, output_file):
 
     return
 
+
 def main():
 
-    parser = argparse.ArgumentParser(description="Creates a distance matrix from individual distance files.")
+    parser = argparse.ArgumentParser(
+        description="Creates a distance matrix from individual distance files.")
 
     parser.add_argument('--data', type=str, required=True,
                         help='A path to a directory or tarball that has the individual distances.')
@@ -233,7 +237,7 @@ def main():
                         help='A path to a text file to dump the contents of the matrix.')
 
     args = parser.parse_args()
-    
+
     create_matrix(args.data, args.matrix)
 
 
