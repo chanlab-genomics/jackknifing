@@ -10,7 +10,7 @@ fi
 
 # let INDEX=26
 
-for INDEX in `seq 52 1 55`;
+for INDEX in `seq 1 1 5`;
 do
     # echo $INDEX
     python3 calc_d2s/create_d2s_jobs.py --data_input_path $DATA_IN_DIR/Genomes_for_AFphylogeny_red_40_${INDEX} --data_output_path $DATA_OUT_DIR/Genomes_for_AFphylogeny_red_40_${INDEX}_D2S --temp T --submit T --dry_run F --index=${INDEX}
