@@ -162,8 +162,7 @@ def populate_all_results(phylip_df: pd.DataFrame, result_dir: str):
         poplate_single_result(phylip_df, target_file)
 
     if CORRUPT_FILES > 0:
-        print("[WARN] %d corrupted files found (skipped)." %
-              (CORRUPT_FILES), file=sys.stderr)
+        print("[WARN] %d corrupted file/s found in %s (skipped)." % (CORRUPT_FILES, result_dir), file=sys.stderr)
 
     return
 
@@ -188,7 +187,7 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
 
     with open(output_path, 'w', newline='') as output_file:
 
-        # Write the nukmber of rows/cols in the first line
+        # Write the number of rows/cols in the first line
         print('\t' + str(rows), end='\n', flush=True, file=output_file)
 
         # Write the remaining matrix, omit the column (header) names
