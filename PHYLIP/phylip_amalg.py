@@ -7,6 +7,7 @@ import os
 import sys
 import shutil
 import tarfile
+import argparse
 import pandas as pd
 from glob import glob
 from pprint import pprint
@@ -14,6 +15,7 @@ from contextlib import contextmanager
 from typing import Callable, Dict, Iterable, List, Optional, Set, Tuple
 
 CORRUPT_FILES: int = 0
+
 
 @contextmanager
 def change_dir(destination):
@@ -23,6 +25,7 @@ def change_dir(destination):
         yield
     finally:
         os.chdir(cwd)
+
 
 def get_names(target_dir: str) -> list:
     """
@@ -109,7 +112,6 @@ def extract_result(result_path: str):
     try:
         return float(value)
     except ValueError:
-        # print("Skipping", os.path.basename(result_path))
         CORRUPT_FILES += 1
         #######################################################################
         # NOTE: Might want to change in the future!
@@ -160,7 +162,7 @@ def populate_all_results(phylip_df: pd.DataFrame, result_dir: str):
         poplate_single_result(phylip_df, target_file)
 
     if CORRUPT_FILES > 0:
-        print("[WARN] %d corrupted files found (skipped)." % (CORRUPT_FILES), file=sys.stderr)
+        print("[WARN] %d corrupted file/s found in %s (skipped)." % (CORRUPT_FILES, result_dir), file=sys.stderr)
 
     return
 
@@ -185,7 +187,7 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
 
     with open(output_path, 'w', newline='') as output_file:
 
-        # Write the nukmber of rows/cols in the first line
+        # Write the number of rows/cols in the first line
         print('\t' + str(rows), end='\n', flush=True, file=output_file)
 
         # Write the remaining matrix, omit the column (header) names
@@ -196,7 +198,7 @@ def print_phylip(phylip_df: pd.DataFrame, output_path: str):
 
 
 def create_matrix(data_folder, output_file):
-    
+
     zipped = data_folder.endswith(".tz.gz")
     zipped_data_folder = None
 
@@ -223,16 +225,20 @@ def create_matrix(data_folder, output_file):
 
     return
 
+
 def main():
 
-    test_dir = os.path.join('/', 'scratch', 'd85',
-                            'mc7636', 'Yeast', 'D2S_archive', 
-                            'Genomes_for_AFphylogeny_red_40_26_D2S_cp.tz.gz')
+    parser = argparse.ArgumentParser(
+        description="Creates a distance matrix from individual distance files.")
 
-    test_output_file = os.path.join(
-        os.getcwd(), 'reference_mat.txt')
-    
-    create_matrix(test_dir, test_output_file)
+    parser.add_argument('--data', type=str, required=True,
+                        help='A path to a directory or tarball that has the individual distances.')
+    parser.add_argument('--matrix', type=str, required=True,
+                        help='A path to a text file to dump the contents of the matrix.')
+
+    args = parser.parse_args()
+
+    create_matrix(args.data, args.matrix)
 
 
 if __name__ == '__main__':
