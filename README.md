@@ -126,7 +126,7 @@ optional arguments:
   --data DATA      A path to a directory or tarball that has the individual distances.
   --matrix MATRIX  A path to a text file to dump the contents of the matrix.
 ```
-Pretty self explanatory. Once you have your distance matrix you will need to convert this into a distance tree. You can do this using the `neighbour` program found in the PHYLIP suite (see: https://evolution.genetics.washington.edu/phylip/sourcecode.html). This can be a bit painful to use since the program will prompt you for arguments. Instead I've created a modified version of the PHYLIP's neighbor program where you only need to specify the important arguments as command line arguments, see the git hub page for my modified version: https://github.com/Michae1CC/PHYLIP-neighbor
+Pretty self explanatory. Once you have your distance matrix you will need to convert this into a distance tree. You can do this using the `neighbour` program found in the PHYLIP suite (see: https://evolution.genetics.washington.edu/phylip/getme-new1.html). This can be a bit painful to use since the program will prompt you for arguments. Instead I've created a modified version of the PHYLIP's neighbor program where you only need to specify the important arguments as command line arguments, see the git hub page for my modified version: https://github.com/Michae1CC/PHYLIP-neighbor
 
 The modified PHYLIP's neighbor program has the following invocation (and won't prompt you for any other arguments once running)
 ```
