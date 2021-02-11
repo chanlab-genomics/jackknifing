@@ -51,4 +51,4 @@ list = prop.clades(ref_tree,trees)
 list
 sum(list)/length(list) 
 plot(A,show.node.label=TRUE)
-write.tree(A, file="D:/2020_SS/BioInfo/reference_tree/jk_tree_57.txt")
+write.tree(A, file="D:/2020_SS/BioInfo/reference_tree/jk_tree_100.txt")
