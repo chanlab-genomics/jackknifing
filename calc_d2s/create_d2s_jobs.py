@@ -423,7 +423,7 @@ class JobCreator:
 def main():
 
     parser = argparse.ArgumentParser(description="Creates (and possibly runs) "
-                                     "job scripts for MLP parameter tunning.")
+                                     "job scripts for the jackknife workflow.")
 
     parser.add_argument('--slurm_dir', type=str, default=os.path.join(ROOT_DIR, "batch", "d2s_jobs"),
                         help='A full path to a directory to create slurm and batch files.')
@@ -434,14 +434,14 @@ def main():
     parser.add_argument('--group', type=int, required=False, default=500,
                         help='Indicates how many distance calculations are run in a single batch script.')
     parser.add_argument('--index', type=int, required=False, default=1,
-                        help='Indicates index sample.')
+                        help='Indicates the index sample.')
 
     parser.add_argument('-s', '--submit', type=convert_bool_arg, default=False, const=True, nargs='?',
                         help='If True the created jobs will be immediately submitted.')
     parser.add_argument('-t', '--temp', type=convert_bool_arg, default=False, const=True, nargs='?',
                         help='If True the created job folder will be deleted immediately after submitting the jobs.')
     parser.add_argument('-d', '--dry_run', type=convert_bool_arg, default=False, const=False, nargs='?',
-                        help='If True the program will simulate job submission output text.')
+                        help='If True the program will simulate job submission output text but will not submit the jobs.')
 
     args = parser.parse_args()
 
